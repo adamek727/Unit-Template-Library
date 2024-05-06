@@ -15,6 +15,8 @@ The library is successor of the [Robotic Template Library](https://github.com/Ro
 ### Code example
 
 ```
+#include <utl/utl.hpp>
+
 // Definition and unit conversion
 auto a = Area<float>(6543);
 std::cout << "Area: " << a.m2() << std::endl;
