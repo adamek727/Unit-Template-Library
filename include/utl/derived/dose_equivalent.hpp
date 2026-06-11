@@ -20,7 +20,7 @@ namespace utl {
 
         constexpr explicit DoseEquivalent(const AbsorbedDose<T> ad, const T radiation_weight_factor) : DoseEquivalentUnit<T>{ad.Gy() * radiation_weight_factor} {}
 
-        [[nodiscard]] constexpr auto Sv() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Sv() const -> T { return static_cast<T>(this->value()); }
 
         constexpr auto operator+(const DoseEquivalent &other) const -> DoseEquivalent {
             return DoseEquivalent(Sv() + other.Sv());

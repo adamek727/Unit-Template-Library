@@ -11,7 +11,7 @@ using namespace utl;
 TEST(t_thermodynamic_temperature_test, init) {
     auto td_temp_1 = ThermodynamicTemperature<float>(5.0);
     EXPECT_FLOAT_EQ(td_temp_1.K(), 5.0f);
-    EXPECT_FLOAT_EQ(td_temp_1.degC(), -268.15);
+    EXPECT_FLOAT_EQ(td_temp_1.degC(), -268.15f);
     EXPECT_FLOAT_EQ(td_temp_1.degF(), -450.67f);
 }
 

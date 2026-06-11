@@ -22,7 +22,7 @@ namespace utl {
         constexpr explicit CatalyticActivity(const AmountOfSubstance<T> &aos, const Time<T> &t) : CatalyticActivityUnit<T>{
                 aos.mol() / t.s()} {}
 
-        [[nodiscard]] constexpr auto katal() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto katal() const -> T { return static_cast<T>(this->value()); }
 
     };
 

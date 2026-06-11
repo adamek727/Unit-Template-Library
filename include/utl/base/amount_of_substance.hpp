@@ -18,13 +18,13 @@ namespace utl {
     public:
         constexpr explicit AmountOfSubstance(T amount_of_sub) : AmountOfSubstanceUnit<T>{amount_of_sub} {}
 
-        [[nodiscard]] constexpr auto mol() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto mol() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto mmol() const -> T { return mol() / MILLI; }
+        [[nodiscard]] constexpr auto mmol() const -> T { return static_cast<T>(mol() / MILLI); }
 
-        [[nodiscard]] constexpr auto umol() const -> T { return mol() / MICRO; }
+        [[nodiscard]] constexpr auto umol() const -> T { return static_cast<T>(mol() / MICRO); }
 
-        [[nodiscard]] constexpr auto nmol() const -> T { return mol() / NANO; }
+        [[nodiscard]] constexpr auto nmol() const -> T { return static_cast<T>(mol() / NANO); }
 
     };
 

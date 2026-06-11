@@ -20,9 +20,9 @@ namespace utl {
     public:
         constexpr explicit Length(T length) : LengthUnit<T>{length} {}
 
-        [[nodiscard]] constexpr auto km() const -> T { return m() / KILO; }
+        [[nodiscard]] constexpr auto km() const -> T { return static_cast<T>(m() / KILO); }
 
-        [[nodiscard]] constexpr auto m() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto m() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto mm() const -> T { return static_cast<T>(m() / MILLI); }
 
@@ -30,7 +30,7 @@ namespace utl {
 
         [[nodiscard]] constexpr auto nm() const -> T { return static_cast<T>(m() / NANO); }
 
-        [[nodiscard]] constexpr auto mi() const -> T { return km() * MILES_IN_KILOMETER; }
+        [[nodiscard]] constexpr auto mi() const -> T { return static_cast<T>(km() * MILES_IN_KILOMETER); }
 
     };
 

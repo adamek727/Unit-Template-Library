@@ -24,7 +24,7 @@ namespace utl {
         constexpr explicit MagneticFluxDensity(const MagneticFlux<T> &mf, const Area<T> &a) : MagneticFluxDensityUnit<T>{
                 mf.Wb() / a.m2()} {}
 
-        [[nodiscard]] constexpr auto Tesla() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Tesla() const -> T { return static_cast<T>(this->value()); }
 
     };
 

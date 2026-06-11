@@ -19,7 +19,7 @@ namespace utl {
 
         constexpr explicit SolidAngle(Area<T> a, Length<T> r) : Unit<T>{a.m2() / r.m() / r.m()} {};
 
-        [[nodiscard]] constexpr auto sr() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto sr() const -> T { return static_cast<T>(this->value()); }
 
         constexpr auto operator+(const SolidAngle &other) const -> SolidAngle {
             return SolidAngle(sr() + other.sr());

@@ -25,9 +25,9 @@ namespace utl {
 
         constexpr explicit Volume(const Area<T> a, const Length<T> l) : VolumeUnit<T>{a.m2() * l.m()} {}
 
-        [[nodiscard]] constexpr auto m3() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto m3() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto l() const -> T { return this->value() * LITERS_IN_M3; }
+        [[nodiscard]] constexpr auto l() const -> T { return static_cast<T>(this->value() * LITERS_IN_M3); }
 
     };
 

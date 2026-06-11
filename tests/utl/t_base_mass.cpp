@@ -41,7 +41,7 @@ TEST(t_mass_test, scalar_mul_div) {
 TEST(t_mass_test, inv) {
     auto mass_1 = Mass<float>(6.0);
     auto inv_mass = mass_1.inv();
-    EXPECT_FLOAT_EQ(inv_mass.value(), 1.0 / 6.0);
+    EXPECT_FLOAT_EQ(inv_mass.value(), 1.0f / 6.0f);
 }
 
 TEST(t_mass_test, dim) {

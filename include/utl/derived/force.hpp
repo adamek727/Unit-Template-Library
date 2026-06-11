@@ -21,9 +21,9 @@ namespace utl {
 
         constexpr explicit Force(const Mass<T> &m, const Acceleration<T> &acc) : ForceUnit<T>{m.kg() * acc.mps2()} {}
 
-        [[nodiscard]] constexpr auto kN() const -> T { return N() / KILO; }
+        [[nodiscard]] constexpr auto kN() const -> T { return static_cast<T>(N() / KILO); }
 
-        [[nodiscard]] constexpr auto N() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto N() const -> T { return static_cast<T>(this->value()); }
 
     };
 

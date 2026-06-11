@@ -19,17 +19,17 @@ namespace utl {
     public:
         constexpr explicit Time(T time) : TimeUnit<T>{time} {}
 
-        [[nodiscard]] constexpr auto h() const -> T { return s() / SECS_IN_MINUTE / MINUTES_IN_HOUR; }
+        [[nodiscard]] constexpr auto h() const -> T { return static_cast<T>(s() / SECS_IN_MINUTE / MINUTES_IN_HOUR); }
 
-        [[nodiscard]] constexpr auto min() const -> T { return s() / SECS_IN_MINUTE; }
+        [[nodiscard]] constexpr auto min() const -> T { return static_cast<T>(s() / SECS_IN_MINUTE); }
 
-        [[nodiscard]] constexpr auto s() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto s() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto ms() const -> T { return s() / MILLI; }
+        [[nodiscard]] constexpr auto ms() const -> T { return static_cast<T>(s() / MILLI); }
 
-        [[nodiscard]] constexpr auto us() const -> T { return s() / MICRO; }
+        [[nodiscard]] constexpr auto us() const -> T { return static_cast<T>(s() / MICRO); }
 
-        [[nodiscard]] constexpr auto ns() const -> T { return s() / NANO; }
+        [[nodiscard]] constexpr auto ns() const -> T { return static_cast<T>(s() / NANO); }
 
     };
 

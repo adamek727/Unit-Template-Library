@@ -18,9 +18,9 @@ namespace utl {
     public:
         constexpr explicit ElectricCurrent(T current) : ElectricCurrentUnit<T>{current} {}
 
-        [[nodiscard]] constexpr auto kA() const -> T { return A() / KILO; }
+        [[nodiscard]] constexpr auto kA() const -> T { return static_cast<T>(A() / KILO); }
 
-        [[nodiscard]] constexpr auto A() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto A() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto mA() const -> T { return static_cast<T>(A() / MILLI ); }
 

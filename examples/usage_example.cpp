@@ -22,7 +22,7 @@ int main(int, char*[]) {
     auto d = v * t;
     std::cout << "Distance: " << d.m() << "m" << std::endl;
 
-    auto g = Acceleration<float>(9.81);
+    auto g = Acceleration<float>(9.81f);
     auto tt = Time<float>(10);
     auto s = 0.5 * g * tt * tt;
     std::cout << "Free fall: " << s.m() << "m" << std::endl;
@@ -34,8 +34,8 @@ int main(int, char*[]) {
     std::cout << "Energy: " << e.J() << "J" << std::endl;
 
     // Precision selection
-    auto unit_f = Unit<float>(M_PI);
-    auto unit_d = Unit<double>(M_PI);
+    auto unit_f = Unit<float>(static_cast<float>(PI));
+    auto unit_d = Unit<double>(PI);
     std::cout << std::fixed << std::setprecision(18) << "float: " << unit_f.value() << " double: " << unit_d.value() << std::endl;
     std::cout.unsetf(std::ios::fixed);
     std::cout << std::setprecision(6);

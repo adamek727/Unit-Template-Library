@@ -21,11 +21,11 @@ namespace utl {
 
         constexpr explicit Pressure(const Force<T> &f, const Area<T> &a) : PressureUnit<T>{f.N() / a.m2()} {}
 
-        [[nodiscard]] constexpr auto kPa() const -> T { return Pa() / KILO; }
+        [[nodiscard]] constexpr auto kPa() const -> T { return static_cast<T>(Pa() / KILO); }
 
-        [[nodiscard]] constexpr auto hPa() const -> T { return Pa() / HECTO; }
+        [[nodiscard]] constexpr auto hPa() const -> T { return static_cast<T>(Pa() / HECTO); }
 
-        [[nodiscard]] constexpr auto Pa() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Pa() const -> T { return static_cast<T>(this->value()); }
 
     };
 

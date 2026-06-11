@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-test:
+  linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -18,7 +18,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libgtest-dev
 
       - name: Configure
-        run: cmake -B build -DENABLE_TESTS=1 -DENABLE_EXAMPLES=1 -DCMAKE_CXX_COMPILER=${{ matrix.compiler }}
+        run: cmake -B build -DENABLE_TESTS=1 -DENABLE_EXAMPLES=1 -DENABLE_WERROR=1 -DCMAKE_CXX_COMPILER=${{ matrix.compiler }}
 
       - name: Build
         run: cmake --build build -j
@@ -28,3 +28,40 @@ jobs:
 
       - name: Run example
         run: ./build/examples/usage_example
+
+  sanitizers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y libgtest-dev
+
+      - name: Configure
+        run: cmake -B build -DENABLE_TESTS=1 -DENABLE_EXAMPLES=1 -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=all -g"
+
+      - name: Build
+        run: cmake --build build -j
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Run example
+        run: ./build/examples/usage_example
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -B build -DENABLE_TESTS=1 -DENABLE_EXAMPLES=1 -DENABLE_WERROR=1
+
+      - name: Build
+        run: cmake --build build --config Debug -j
+
+      - name: Test
+        run: ctest --test-dir build -C Debug --output-on-failure
+
+      - name: Run example
+        run: ./build/examples/Debug/usage_example.exe
