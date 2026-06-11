@@ -45,8 +45,15 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `Voltage` | volt [V] |
 | `Volume` | [m³] |
 
-## Dimensionless quantities
+## Units sharing a dimension signature
 
-`Angle` and `SolidAngle` are both dimensionless in the seven-exponent SI
-system. The generic `type()` mapping for dimensionless results resolves to
-`Angle`; construct `SolidAngle` explicitly when needed.
+Several SI units share the same dimension exponents, so automatic
+result-type mapping has to pick one winner; construct the other
+explicitly when needed:
+
+| Dimensions | Mapped result | Construct explicitly |
+|---|---|---|
+| 1/s | `Frequency` | `Activity` |
+| m²/s² | `AbsorbedDose` | `DoseEquivalent` |
+| cd | `LuminousIntensity` | `LuminousFlux` |
+| dimensionless | raw `Unit` | `Angle`, `SolidAngle` |
