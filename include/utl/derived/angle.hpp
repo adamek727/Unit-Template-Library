@@ -16,16 +16,19 @@ namespace utl {
             DEG,
         };
 
-        constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD) {
+    private:
+        static constexpr auto to_rad(T angle, const TYPE &type) -> T {
             switch (type) {
                 case TYPE::DEG:
-                    this->set_value(static_cast<T>(angle / 180 * PI));
-                    break;
+                    return static_cast<T>(angle / 180 * PI);
                 default:
-                    this->set_value(angle);
-                    break;
+                    return angle;
             }
         }
+
+    public:
+        constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD)
+            : Unit<T>{to_rad(angle, type)} {}
 
         constexpr explicit Angle(Length<T> s, Length<T> r) : Unit<T>{s.m() / r.m()} {};
 

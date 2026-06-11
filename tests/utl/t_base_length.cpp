@@ -58,6 +58,9 @@ TEST(t_length_test, imperial_conversions) {
     EXPECT_FLOAT_EQ(Length<float>(1609.344f).mi(), 1.0f);
 }
 
+static_assert(!std::is_default_constructible_v<Length<float>>,
+              "a physical quantity is never undefined");
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

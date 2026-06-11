@@ -10,6 +10,26 @@ For technical feedback, bug reporting, feature proposition etc. please use the G
 
 The library is successor of the [Robotic Template Library](https://github.com/Robotics-BUT/Robotic-Template-Library).
 
+## Design Principles
+
+### A physical quantity is never undefined
+
+Every unit must be constructed with an explicit value; default construction
+is deleted on `BaseUnit` and therefore on every named unit:
+
+```
+Length<float> a;            // does not compile
+auto b = Length<float>(2);  // ok: 2 meters
+```
+
+A default-constructed quantity would have to pick a value out of thin air
+(zero, garbage, NaN) and silently flow through computations. That is the same
+class of bug the dimensional type system exists to prevent, just on the value
+axis instead of the dimension axis. Holding units in containers therefore
+requires explicit initialization: use `std::map::insert_or_assign` instead of
+`operator[]`, fill `std::array` elements explicitly, and give struct members
+an initial value where the struct itself is default-constructed.
+
 ## Usage Example
 
 ### Code example
