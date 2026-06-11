@@ -14,7 +14,7 @@ TEST(t_energy_test, init) {
     EXPECT_FLOAT_EQ(energy_1.kJ(), 10.0f);
     EXPECT_FLOAT_EQ(energy_1.mJ(), 10000000.0f);
     EXPECT_FLOAT_EQ(energy_1.kWh(), 0.0027777778f);
-    EXPECT_FLOAT_EQ(energy_1.eV(), 6.241509343260179e+22);
+    EXPECT_FLOAT_EQ(energy_1.eV(), 6.241509343260179e+22f);
 
     auto energy_2 = Energy<float>(Force<float>(5), Length<float>(2));
     EXPECT_FLOAT_EQ(energy_2.J(), 10.0f);

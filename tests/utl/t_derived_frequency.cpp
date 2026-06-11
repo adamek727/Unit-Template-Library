@@ -40,7 +40,7 @@ TEST(t_frequency_test, scalar_mul_div) {
 TEST(t_frequency_test, inversion) {
     auto freq_1 = Frequency<float>(5.0);
     auto time_1 = freq_1.inv().type();
-    EXPECT_FLOAT_EQ(time_1.s(), 0.2);
+    EXPECT_FLOAT_EQ(time_1.s(), 0.2f);
 }
 
 TEST(t_frequency_test, dim) {

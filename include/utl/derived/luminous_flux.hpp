@@ -28,7 +28,7 @@ namespace utl {
                 : LuminousFluxUnit<T>{
                 lum_int.cd() * solid_angle.sr()} {}
 
-        [[nodiscard]] constexpr auto lm() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto lm() const -> T { return static_cast<T>(this->value()); }
 
         constexpr auto operator+(const LuminousFlux &other) const -> LuminousFlux {
             return LuminousFlux(lm() + other.lm());

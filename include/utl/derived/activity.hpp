@@ -18,7 +18,7 @@ namespace utl {
     public:
         constexpr explicit Activity(T activity) : ActivityUnit<T>{activity} {}
 
-        [[nodiscard]] constexpr auto Bq() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Bq() const -> T { return static_cast<T>(this->value()); }
 
         constexpr auto operator+(const Activity &other) const -> Activity {
             return Activity(Bq() + other.Bq());

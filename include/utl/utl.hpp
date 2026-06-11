@@ -18,25 +18,25 @@ namespace utl {
     // Constants
 
     constexpr Frequency<double> cesium_hyperfine_freq_d(CAESIUM_HYPERFINE_FREQ_VALUE);
-    constexpr Frequency<float> cesium_hyperfine_freq_f(CAESIUM_HYPERFINE_FREQ_VALUE);
+    constexpr Frequency<float> cesium_hyperfine_freq_f(static_cast<float>(CAESIUM_HYPERFINE_FREQ_VALUE));
 
     constexpr Velocity<double> speed_of_light_d(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
-    constexpr Velocity<float> speed_of_light_f(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
+    constexpr Velocity<float> speed_of_light_f(static_cast<float>(SPEED_OF_LIGHT_IN_VACUUM_VALUE));
 
-    constexpr ElectricCharge<float> elementary_charge_f(ELEMENTARY_CHARGE_VALUE);
+    constexpr ElectricCharge<float> elementary_charge_f(static_cast<float>(ELEMENTARY_CHARGE_VALUE));
     constexpr ElectricCharge<double> elementary_charge_d(ELEMENTARY_CHARGE_VALUE);
 
-    constexpr MulBaseUnits<float, Energy<float>, Time<float>> planc_constant_f(PLANCK_CONSTANT_VALUE);
+    constexpr MulBaseUnits<float, Energy<float>, Time<float>> planc_constant_f(static_cast<float>(PLANCK_CONSTANT_VALUE));
     constexpr MulBaseUnits<double, Energy<double>, Time<double>> planc_constant_d(PLANCK_CONSTANT_VALUE);
 
-    constexpr DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(BOLTZMANN_CONSTANT_VALUE);
+    constexpr DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(static_cast<float>(BOLTZMANN_CONSTANT_VALUE));
     constexpr DivBaseUnits<double, Energy<double>, ThermodynamicTemperature<double>> boltzmann_constant_d(
             BOLTZMANN_CONSTANT_VALUE);
 
-    constexpr InvBaseUnit<float, AmountOfSubstance<float>> avogadro_constant_f(AVOGADRO_CONSTANT_VALUE);
+    constexpr InvBaseUnit<float, AmountOfSubstance<float>> avogadro_constant_f(static_cast<float>(AVOGADRO_CONSTANT_VALUE));
     constexpr InvBaseUnit<double, AmountOfSubstance<double>> avogadro_constant_d(AVOGADRO_CONSTANT_VALUE);
 
-    constexpr DivBaseUnits<float, LuminousFlux<float>, Power<float>> luminous_efficacy_f(LUMINOUS_EFFICACY_VALUE);
+    constexpr DivBaseUnits<float, LuminousFlux<float>, Power<float>> luminous_efficacy_f(static_cast<float>(LUMINOUS_EFFICACY_VALUE));
     constexpr DivBaseUnits<double, LuminousFlux<double>, Power<double>> luminous_efficacy_d(LUMINOUS_EFFICACY_VALUE);
 
 

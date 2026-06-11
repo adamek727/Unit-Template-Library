@@ -49,7 +49,7 @@ TEST(t_resistance_test, mul) {
 
 TEST(t_resistance_test, inv) {
     auto resistance_1 = Resistance<float>(6.0);
-    EXPECT_FLOAT_EQ(resistance_1.inv().type().S(), 1.0 / 6.0);
+    EXPECT_FLOAT_EQ(resistance_1.inv().type().S(), 1.0f / 6.0f);
 }
 
 TEST(t_mass_test, dim) {

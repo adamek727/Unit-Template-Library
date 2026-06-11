@@ -20,19 +20,19 @@ namespace utl {
 
         constexpr explicit Area(const Length<T> l1, const Length<T> l2) : AreaUnit<T>{l1.m() * l2.m()} {}
 
-        [[nodiscard]] constexpr auto km2() const -> T { return m2() / KILO / KILO; }
+        [[nodiscard]] constexpr auto km2() const -> T { return static_cast<T>(m2() / KILO / KILO); }
 
-        [[nodiscard]] constexpr auto ha() const -> T { return a() / HECTO; }
+        [[nodiscard]] constexpr auto ha() const -> T { return static_cast<T>(a() / HECTO); }
 
-        [[nodiscard]] constexpr auto a() const -> T { return m2() / HECTO; }
+        [[nodiscard]] constexpr auto a() const -> T { return static_cast<T>(m2() / HECTO); }
 
-        [[nodiscard]] constexpr auto m2() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto m2() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto mm2() const -> T { return m2() / MILLI / MILLI; }
+        [[nodiscard]] constexpr auto mm2() const -> T { return static_cast<T>(m2() / MILLI / MILLI); }
 
-        [[nodiscard]] constexpr auto um2() const -> T { return m2() / MICRO / MICRO; }
+        [[nodiscard]] constexpr auto um2() const -> T { return static_cast<T>(m2() / MICRO / MICRO); }
 
-        [[nodiscard]] constexpr auto nm2() const -> T { return m2() / NANO / NANO; }
+        [[nodiscard]] constexpr auto nm2() const -> T { return static_cast<T>(m2() / NANO / NANO); }
 
     };
 

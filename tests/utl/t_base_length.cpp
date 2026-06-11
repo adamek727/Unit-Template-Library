@@ -12,7 +12,7 @@ TEST(t_length_test, init) {
     auto length_1 = Length<float>(5.0);
     EXPECT_FLOAT_EQ(length_1.m(), 5.0f);
     EXPECT_FLOAT_EQ(length_1.km(), 0.005f);
-    EXPECT_FLOAT_EQ(length_1.mi(), 0.003106856);
+    EXPECT_FLOAT_EQ(length_1.mi(), 0.003106856f);
     EXPECT_FLOAT_EQ(length_1.mm(), 5000.0f);
     EXPECT_FLOAT_EQ(length_1.um(), 5000000.0f);
     EXPECT_FLOAT_EQ(length_1.nm(), 5000000000.0f);

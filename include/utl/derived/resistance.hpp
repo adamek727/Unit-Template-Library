@@ -21,13 +21,13 @@ namespace utl {
 
         constexpr explicit Resistance(const Voltage<T> &v, const ElectricCurrent<T> &ec) : ResistanceUnit<T>{v.V() / ec.A()} {}
 
-        [[nodiscard]] constexpr auto MOhm() const -> T { return this->value() / MEGA; }
+        [[nodiscard]] constexpr auto MOhm() const -> T { return static_cast<T>(this->value() / MEGA); }
 
-        [[nodiscard]] constexpr auto kOhm() const -> T { return this->value() / KILO; }
+        [[nodiscard]] constexpr auto kOhm() const -> T { return static_cast<T>(this->value() / KILO); }
 
-        [[nodiscard]] constexpr auto Ohm() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Ohm() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto mOhm() const -> T { return this->value() / MILLI; }
+        [[nodiscard]] constexpr auto mOhm() const -> T { return static_cast<T>(this->value() / MILLI); }
 
     };
 

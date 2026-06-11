@@ -44,7 +44,7 @@ TEST(t_conductance_test, mul) {
 }
 
 TEST(t_conductance_test, inv) {
-    auto conductance_1 = Conductance<float>(1.0 / 6.0);
+    auto conductance_1 = Conductance<float>(1.0f / 6.0f);
     EXPECT_FLOAT_EQ(conductance_1.inv().type().Ohm(), 6.0);
 }
 

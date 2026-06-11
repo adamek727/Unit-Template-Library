@@ -18,15 +18,15 @@ namespace utl {
     public:
         constexpr explicit Capacitance(T cap) : CapacitanceUnit<T>{cap} {}
 
-        [[nodiscard]] constexpr auto F() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto F() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto mF() const -> T { return F() / MILLI; }
+        [[nodiscard]] constexpr auto mF() const -> T { return static_cast<T>(F() / MILLI); }
 
-        [[nodiscard]] constexpr auto uF() const -> T { return F() / MICRO; }
+        [[nodiscard]] constexpr auto uF() const -> T { return static_cast<T>(F() / MICRO); }
 
-        [[nodiscard]] constexpr auto nF() const -> T { return F() / NANO; }
+        [[nodiscard]] constexpr auto nF() const -> T { return static_cast<T>(F() / NANO); }
 
-        [[nodiscard]] constexpr auto pF() const -> T { return F() / PICO; }
+        [[nodiscard]] constexpr auto pF() const -> T { return static_cast<T>(F() / PICO); }
 
     };
 

@@ -9,12 +9,12 @@
 using namespace utl;
 
 TEST(t_derived_angle_test, init) {
-    auto angle_1 = Angle<float>(M_PI / 2);
-    EXPECT_FLOAT_EQ(angle_1.rad(), M_PI / 2);
+    auto angle_1 = Angle<float>(static_cast<float>(PI / 2));
+    EXPECT_FLOAT_EQ(angle_1.rad(), static_cast<float>(PI / 2));
     EXPECT_FLOAT_EQ(angle_1.deg(), 90);
 
     auto angle_2 = Angle<float>(-270, Angle<float>::TYPE::DEG);
-    EXPECT_FLOAT_EQ(angle_2.rad(), -3 * M_PI / 2);
+    EXPECT_FLOAT_EQ(angle_2.rad(), static_cast<float>(-3 * PI / 2));
     EXPECT_FLOAT_EQ(angle_2.deg(), -270);
 }
 
