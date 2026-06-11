@@ -16,15 +16,15 @@ namespace utl {
     template<typename T>
     class AmountOfSubstance : public AmountOfSubstanceUnit<T> {
     public:
-        explicit AmountOfSubstance(T amount_of_sub) : AmountOfSubstanceUnit<T>{amount_of_sub} {}
+        constexpr explicit AmountOfSubstance(T amount_of_sub) : AmountOfSubstanceUnit<T>{amount_of_sub} {}
 
-        [[nodiscard]] auto mol() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto mol() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mmol() const -> T { return mol() / MILLI; }
+        [[nodiscard]] constexpr auto mmol() const -> T { return mol() / MILLI; }
 
-        [[nodiscard]] auto umol() const -> T { return mol() / MICRO; }
+        [[nodiscard]] constexpr auto umol() const -> T { return mol() / MICRO; }
 
-        [[nodiscard]] auto nmol() const -> T { return mol() / NANO; }
+        [[nodiscard]] constexpr auto nmol() const -> T { return mol() / NANO; }
 
     };
 

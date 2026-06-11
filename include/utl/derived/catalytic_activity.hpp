@@ -17,12 +17,12 @@ namespace utl {
     template<typename T>
     class CatalyticActivity : public BaseUnit<T, -1, 0, 0, 0, 0, 1, 0> {
     public:
-        explicit CatalyticActivity(T catalytic_activity) : CatalyticActivityUnit<T>{catalytic_activity} {}
+        constexpr explicit CatalyticActivity(T catalytic_activity) : CatalyticActivityUnit<T>{catalytic_activity} {}
 
-        explicit CatalyticActivity(const AmountOfSubstance<T> &aos, const Time<T> &t) : CatalyticActivityUnit<T>{
+        constexpr explicit CatalyticActivity(const AmountOfSubstance<T> &aos, const Time<T> &t) : CatalyticActivityUnit<T>{
                 aos.mol() / t.s()} {}
 
-        [[nodiscard]] auto katal() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto katal() const -> T { return this->value(); }
 
     };
 

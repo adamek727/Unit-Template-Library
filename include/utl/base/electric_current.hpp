@@ -16,17 +16,17 @@ namespace utl {
     template<typename T>
     class ElectricCurrent : public ElectricCurrentUnit<T> {
     public:
-        explicit ElectricCurrent(T current) : ElectricCurrentUnit<T>{current} {}
+        constexpr explicit ElectricCurrent(T current) : ElectricCurrentUnit<T>{current} {}
 
-        [[nodiscard]] auto kA() const -> T { return A() / KILO; }
+        [[nodiscard]] constexpr auto kA() const -> T { return A() / KILO; }
 
-        [[nodiscard]] auto A() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto A() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mA() const -> T { return static_cast<T>(A() / MILLI ); }
+        [[nodiscard]] constexpr auto mA() const -> T { return static_cast<T>(A() / MILLI ); }
 
-        [[nodiscard]] auto uA() const -> T { return static_cast<T>(A() / MICRO); }
+        [[nodiscard]] constexpr auto uA() const -> T { return static_cast<T>(A() / MICRO); }
 
-        [[nodiscard]] auto nA() const -> T { return static_cast<T>(A() / NANO); }
+        [[nodiscard]] constexpr auto nA() const -> T { return static_cast<T>(A() / NANO); }
 
     };
 

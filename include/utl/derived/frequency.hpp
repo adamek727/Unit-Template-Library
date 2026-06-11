@@ -16,17 +16,17 @@ namespace utl {
     class Frequency : public FrequencyUnit<T> {
 
     public:
-        explicit Frequency(T freq) : FrequencyUnit<T>{freq} {}
+        constexpr explicit Frequency(T freq) : FrequencyUnit<T>{freq} {}
 
-        [[nodiscard]] auto THz() const -> T { return Hz() / TERA; }
+        [[nodiscard]] constexpr auto THz() const -> T { return Hz() / TERA; }
 
-        [[nodiscard]] auto GHz() const -> T { return Hz() / GIGA; }
+        [[nodiscard]] constexpr auto GHz() const -> T { return Hz() / GIGA; }
 
-        [[nodiscard]] auto MHz() const -> T { return Hz() / MEGA; }
+        [[nodiscard]] constexpr auto MHz() const -> T { return Hz() / MEGA; }
 
-        [[nodiscard]] auto kHz() const -> T { return Hz() / KILO; }
+        [[nodiscard]] constexpr auto kHz() const -> T { return Hz() / KILO; }
 
-        [[nodiscard]] auto Hz() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Hz() const -> T { return this->value(); }
 
     };
 

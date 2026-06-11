@@ -36,7 +36,7 @@ namespace utl {
     public:
         BaseUnit() = default;
 
-        explicit BaseUnit(const T &value) : value_{value} {};
+        constexpr explicit BaseUnit(const T &value) : value_{value} {};
 
         [[nodiscard]] static constexpr std::array<int8_t, 7> dim() {
             return {TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT};
@@ -50,84 +50,84 @@ namespace utl {
         static constexpr int8_t AmOfSubDim() { return AM_OF_SUB; };
         static constexpr int8_t LumIntDim() { return LUM_INT; };
 
-        inline auto value() const -> const T & {
+        constexpr auto value() const -> const T & {
             return value_;
         }
 
-        void set_value(const T &val) {
+        constexpr void set_value(const T &val) {
             value_ = val;
         }
 
-        auto raw() const -> Self {
+        constexpr auto raw() const -> Self {
             return *this;
         }
 
-        auto inv() const -> SelfInv {
+        constexpr auto inv() const -> SelfInv {
             return SelfInv {
                     static_cast<T>(1.0) / value_
             };
         }
 
         template<typename UnitType = Self>
-        typename UnitMapper<UnitType>::type type() const {
+        constexpr typename UnitMapper<UnitType>::type type() const {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        auto operator+(const BaseUnit &other) const -> mapped_unit_t<Self> {
+        constexpr auto operator+(const BaseUnit &other) const -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(value_ + other.value_);
         }
 
-        auto operator-(const BaseUnit &other) const -> mapped_unit_t<Self> {
+        constexpr auto operator-(const BaseUnit &other) const -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(value_ - other.value_);
         }
 
-        auto operator*(T scalar) const -> mapped_unit_t<Self> {
+        constexpr auto operator*(T scalar) const -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(value() * scalar);
         }
 
-        auto operator/(T scalar) const -> mapped_unit_t<Self> {
+        constexpr auto operator/(T scalar) const -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(value() / scalar);
         }
 
-        friend auto operator*(T lhs, const Self& rhs) -> mapped_unit_t<Self> {
+        friend constexpr auto operator*(T lhs, const Self& rhs) -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(rhs.value() * lhs);
         }
 
-        auto operator-() const -> mapped_unit_t<Self> {
+        constexpr auto operator-() const -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(-value_);
         }
 
-        auto operator+=(const BaseUnit &other) -> BaseUnit & {
+        constexpr auto operator+=(const BaseUnit &other) -> BaseUnit & {
             value_ += other.value_;
             return *this;
         }
 
-        auto operator-=(const BaseUnit &other) -> BaseUnit & {
+        constexpr auto operator-=(const BaseUnit &other) -> BaseUnit & {
             value_ -= other.value_;
             return *this;
         }
 
-        auto operator*=(T scalar) -> BaseUnit & {
+        constexpr auto operator*=(T scalar) -> BaseUnit & {
             value_ *= scalar;
             return *this;
         }
 
-        auto operator/=(T scalar) -> BaseUnit & {
+        constexpr auto operator/=(T scalar) -> BaseUnit & {
             value_ /= scalar;
             return *this;
         }
 
-        auto operator==(const BaseUnit &other) const -> bool { return value_ == other.value_; }
+        constexpr auto operator==(const BaseUnit &other) const -> bool { return value_ == other.value_; }
 
-        auto operator!=(const BaseUnit &other) const -> bool { return value_ != other.value_; }
+        constexpr auto operator!=(const BaseUnit &other) const -> bool { return value_ != other.value_; }
 
-        auto operator<(const BaseUnit &other) const -> bool { return value_ < other.value_; }
+        constexpr auto operator<(const BaseUnit &other) const -> bool { return value_ < other.value_; }
 
-        auto operator<=(const BaseUnit &other) const -> bool { return value_ <= other.value_; }
+        constexpr auto operator<=(const BaseUnit &other) const -> bool { return value_ <= other.value_; }
 
-        auto operator>(const BaseUnit &other) const -> bool { return value_ > other.value_; }
+        constexpr auto operator>(const BaseUnit &other) const -> bool { return value_ > other.value_; }
 
-        auto operator>=(const BaseUnit &other) const -> bool { return value_ >= other.value_; }
+        constexpr auto operator>=(const BaseUnit &other) const -> bool { return value_ >= other.value_; }
 
     private:
         T value_ = 0;

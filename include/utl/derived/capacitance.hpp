@@ -16,17 +16,17 @@ namespace utl {
     template<typename T>
     class Capacitance : public CapacitanceUnit<T> {
     public:
-        explicit Capacitance(T cap) : CapacitanceUnit<T>{cap} {}
+        constexpr explicit Capacitance(T cap) : CapacitanceUnit<T>{cap} {}
 
-        [[nodiscard]] auto F() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto F() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mF() const -> T { return F() / MILLI; }
+        [[nodiscard]] constexpr auto mF() const -> T { return F() / MILLI; }
 
-        [[nodiscard]] auto uF() const -> T { return F() / MICRO; }
+        [[nodiscard]] constexpr auto uF() const -> T { return F() / MICRO; }
 
-        [[nodiscard]] auto nF() const -> T { return F() / NANO; }
+        [[nodiscard]] constexpr auto nF() const -> T { return F() / NANO; }
 
-        [[nodiscard]] auto pF() const -> T { return F() / PICO; }
+        [[nodiscard]] constexpr auto pF() const -> T { return F() / PICO; }
 
     };
 

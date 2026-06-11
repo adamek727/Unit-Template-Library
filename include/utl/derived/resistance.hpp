@@ -17,17 +17,17 @@ namespace utl {
     template<typename T>
     class Resistance : public ResistanceUnit<T> {
     public:
-        explicit Resistance(T res) : ResistanceUnit<T>{res} {}
+        constexpr explicit Resistance(T res) : ResistanceUnit<T>{res} {}
 
-        explicit Resistance(const Voltage<T> &v, const ElectricCurrent<T> &ec) : ResistanceUnit<T>{v.V() / ec.A()} {}
+        constexpr explicit Resistance(const Voltage<T> &v, const ElectricCurrent<T> &ec) : ResistanceUnit<T>{v.V() / ec.A()} {}
 
-        [[nodiscard]] auto MOhm() const -> T { return this->value() / MEGA; }
+        [[nodiscard]] constexpr auto MOhm() const -> T { return this->value() / MEGA; }
 
-        [[nodiscard]] auto kOhm() const -> T { return this->value() / KILO; }
+        [[nodiscard]] constexpr auto kOhm() const -> T { return this->value() / KILO; }
 
-        [[nodiscard]] auto Ohm() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Ohm() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mOhm() const -> T { return this->value() / MILLI; }
+        [[nodiscard]] constexpr auto mOhm() const -> T { return this->value() / MILLI; }
 
     };
 

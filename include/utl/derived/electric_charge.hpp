@@ -16,12 +16,12 @@ namespace utl {
     template<typename T>
     class ElectricCharge : public ElectricChargeUnit<T> {
     public:
-        explicit ElectricCharge(const T &charge) : ElectricChargeUnit<T>{charge} {}
+        constexpr explicit ElectricCharge(const T &charge) : ElectricChargeUnit<T>{charge} {}
 
-        explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChargeUnit<T>{
+        constexpr explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChargeUnit<T>{
                 ec.A() * t.s()} {}
 
-        [[nodiscard]] auto C() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto C() const -> T { return this->value(); }
 
     };
 

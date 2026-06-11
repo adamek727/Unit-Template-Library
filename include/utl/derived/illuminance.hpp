@@ -16,17 +16,17 @@ namespace utl {
     template<typename T>
     class Illuminance : public IlluminanceUnit<T> {
     public:
-        explicit Illuminance(T illuminance) : IlluminanceUnit<T>{
+        constexpr explicit Illuminance(T illuminance) : IlluminanceUnit<T>{
                 illuminance} {}
 
-        explicit Illuminance(const LuminousFlux<T> &lf, const Area<T> &a) : IlluminanceUnit<T>{
+        constexpr explicit Illuminance(const LuminousFlux<T> &lf, const Area<T> &a) : IlluminanceUnit<T>{
                 lf.lm() / a.m2()} {}
 
-        [[nodiscard]] auto lux() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto lux() const -> T { return this->value(); }
 
         using IlluminanceUnit<T>::operator*;
 
-        auto operator*(const Area<T> &other) const -> LuminousFlux<T> {
+        constexpr auto operator*(const Area<T> &other) const -> LuminousFlux<T> {
             return LuminousFlux<T>(lux() * other.m2());
         }
     };

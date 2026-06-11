@@ -17,13 +17,13 @@ namespace utl {
     class Force : public ForceUnit<T> {
 
     public:
-        explicit Force(T force) : ForceUnit<T>{force} {}
+        constexpr explicit Force(T force) : ForceUnit<T>{force} {}
 
-        explicit Force(const Mass<T> &m, const Acceleration<T> &acc) : ForceUnit<T>{m.kg() * acc.mps2()} {}
+        constexpr explicit Force(const Mass<T> &m, const Acceleration<T> &acc) : ForceUnit<T>{m.kg() * acc.mps2()} {}
 
-        [[nodiscard]] auto kN() const -> T { return N() / KILO; }
+        [[nodiscard]] constexpr auto kN() const -> T { return N() / KILO; }
 
-        [[nodiscard]] auto N() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto N() const -> T { return this->value(); }
 
     };
 
