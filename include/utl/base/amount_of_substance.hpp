@@ -26,25 +26,6 @@ namespace utl {
 
         [[nodiscard]] auto nmol() const -> T { return mol() / NANO; }
 
-        auto operator+(const AmountOfSubstance &other) const -> AmountOfSubstance {
-            return AmountOfSubstance(mol() + other.mol());
-        }
-
-        auto operator-(const AmountOfSubstance &other) const -> AmountOfSubstance {
-            return AmountOfSubstance(mol() - other.mol());
-        }
-
-        auto operator*(T scalar) const -> AmountOfSubstance {
-            return AmountOfSubstance(mol() * scalar);
-        }
-
-        auto operator/(T scalar) const -> AmountOfSubstance {
-            return AmountOfSubstance(mol() / scalar);
-        }
-
-        friend auto operator*(T lhs, const AmountOfSubstance<T>& rhs) -> AmountOfSubstance<T> {
-            return AmountOfSubstance<T>(rhs.mol() * lhs);
-        }
     };
 
     template<typename T>

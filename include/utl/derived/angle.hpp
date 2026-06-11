@@ -55,8 +55,4 @@ namespace utl {
         }
     };
 
-    template<typename T>
-    struct UnitMapper<Unit<T>> {
-        using type = Angle<T>;
-    };
 }

@@ -28,25 +28,6 @@ namespace utl {
 
         [[nodiscard]] auto nA() const -> T { return static_cast<T>(A() / NANO); }
 
-        auto operator+(const ElectricCurrent &other) const -> ElectricCurrent {
-            return ElectricCurrent(A() + other.A());
-        }
-
-        auto operator-(const ElectricCurrent &other) const -> ElectricCurrent {
-            return ElectricCurrent(A() - other.A());
-        }
-
-        auto operator*(T scalar) const -> ElectricCurrent {
-            return ElectricCurrent(A() * scalar);
-        }
-
-        auto operator/(T scalar) const -> ElectricCurrent {
-            return ElectricCurrent(A() / scalar);
-        }
-
-        friend auto operator*(T lhs, const ElectricCurrent<T>& rhs) -> ElectricCurrent<T> {
-            return ElectricCurrent<T>(rhs.A() * lhs);
-        }
     };
 
     template<typename T>

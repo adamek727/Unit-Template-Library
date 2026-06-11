@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using PressureUnit = DivBaseUnits<T, Force<T>, Area<T>>;
+    using PressureUnit = BaseUnit<T, -2, -1, 1, 0, 0, 0, 0>;
 
     template<typename T>
     class Pressure : public PressureUnit<T> {
@@ -27,29 +27,6 @@ namespace utl {
 
         [[nodiscard]] auto Pa() const -> T { return this->value(); }
 
-        auto operator+(const Pressure &other) const -> Pressure {
-            return Pressure(Pa() + other.Pa());
-        }
-
-        auto operator-(const Pressure &other) const -> Pressure {
-            return Pressure(Pa() - other.Pa());
-        }
-
-        auto operator*(const T scalar) const -> Pressure<T> {
-            return Pressure(Pa() * scalar);
-        }
-
-        auto operator/(const T scalar) const -> Pressure<T> {
-            return Pressure(Pa() / scalar);
-        }
-
-        auto operator*(const Area<T> &a) const -> Force<T> {
-            return Force<T>(Pa() * a.m2());
-        }
-
-        friend auto operator*(T lhs, const Pressure<T>& rhs) -> Pressure<T> {
-            return Pressure<T>(rhs.Pa() * lhs);
-        }
     };
 
     template<typename T>

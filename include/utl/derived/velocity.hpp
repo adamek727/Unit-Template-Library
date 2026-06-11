@@ -10,10 +10,7 @@
 namespace utl {
 
     template<typename T>
-    class Acceleration;
-
-    template<typename T>
-    using VelocityUnit = DivBaseUnits<T, Length<T>, Time<T>>;
+    using VelocityUnit = BaseUnit<T, -1, 1, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class Velocity : public VelocityUnit<T> {
@@ -27,33 +24,6 @@ namespace utl {
 
         [[nodiscard]] auto kmph() const -> T { return this->value() * 3.6; }
 
-        auto operator+(const Velocity &other) const -> Velocity {
-            return Velocity(mps() + other.mps());
-        }
-
-        auto operator-(const Velocity &other) const -> Velocity {
-            return Velocity(mps() - other.mps());
-        }
-
-        auto operator*(T scalar) const -> Velocity {
-            return Velocity(mps() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Velocity {
-            return Velocity(mps() / scalar);
-        }
-
-        auto operator*(const Time<T> &other) const -> Length<T> {
-            return Length<T>(mps() * other.s());
-        }
-
-        auto operator/(const Time<T> &other) const -> Acceleration<T> {
-            return Acceleration<T>(mps() / other.s());
-        }
-
-        friend auto operator*(T lhs, const Velocity<T>& rhs) -> Velocity<T> {
-            return Velocity<T>(rhs.mps() * lhs);
-        }
     };
 
     template<typename T>

@@ -10,7 +10,7 @@
 namespace utl {
 
     template<typename T>
-    using ActivityUnit = InvBaseUnit<T, Time<T>>;
+    using ActivityUnit = BaseUnit<T, -1, 0, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class Activity : public ActivityUnit<T> {
@@ -36,7 +36,7 @@ namespace utl {
             return Activity(Bq() / scalar);
         }
 
-        friend auto operator*(T lhs, const Activity<T>& rhs) -> Activity<T> {
+        friend auto operator*(T lhs, const Activity<T> &rhs) -> Activity<T> {
             return Activity<T>(rhs.Bq() * lhs);
         }
     };

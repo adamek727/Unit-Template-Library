@@ -4,8 +4,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/resistance.hpp"
-#include "utl/derived/conductance.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

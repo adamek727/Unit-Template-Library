@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using AccelerationUnit = DivBaseUnits<T, Velocity<T>, Time<T>>;
+    using AccelerationUnit = BaseUnit<T, -2, 1, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class Acceleration : public AccelerationUnit<T> {
@@ -23,29 +23,6 @@ namespace utl {
 
         [[nodiscard]] auto mps2() const -> T { return this->value(); }
 
-        auto operator+(const Acceleration &other) const -> Acceleration {
-            return Acceleration(mps2() + other.mps2());
-        }
-
-        auto operator-(const Acceleration &other) const -> Acceleration {
-            return Acceleration(mps2() - other.mps2());
-        }
-
-        auto operator*(T scalar) const -> Acceleration {
-            return Acceleration(mps2() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Acceleration {
-            return Acceleration(mps2() / scalar);
-        }
-
-        auto operator*(const Time<T> &other) const -> Velocity<T> {
-            return Velocity<T>(mps2() * other.s());
-        }
-
-        friend auto operator*(T lhs, const Acceleration<T>& rhs) -> Acceleration<T> {
-            return Acceleration<T>(rhs.mps2() * lhs);
-        }
     };
 
     template<typename T>

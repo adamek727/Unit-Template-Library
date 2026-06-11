@@ -1,5 +1,3 @@
-include_directories(../include)
-
 find_package(GTest REQUIRED)
 
 macro(make_units_test name)
@@ -44,6 +42,9 @@ make_units_test(t_derived_velocity)
 make_units_test(t_derived_voltage)
 make_units_test(t_derived_volume)
 
+make_units_test(t_operators)
+
 add_executable(t_odr utl/t_odr_main.cpp utl/t_odr_second.cpp)
-target_link_libraries(t_odr GTest::GTest)
+target_link_libraries(t_odr utl::utl GTest::GTest)
+target_compile_options(t_odr PRIVATE $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra>)
 add_test(NAME t_odr COMMAND t_odr)

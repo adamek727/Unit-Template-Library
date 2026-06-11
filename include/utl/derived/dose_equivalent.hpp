@@ -10,7 +10,7 @@
 namespace utl {
 
     template<typename T>
-    using DoseEquivalentUnit = DivBaseUnits<T, Energy<T>, Mass<T>>;
+    using DoseEquivalentUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class DoseEquivalent : public DoseEquivalentUnit<T> {
@@ -38,8 +38,8 @@ namespace utl {
             return DoseEquivalent(Sv() / scalar);
         }
 
-        auto operator*(const Mass<T> &other) const -> Energy<T> {
-            return EnerSv(Sv() * other.kg());
+        friend auto operator*(T lhs, const DoseEquivalent<T> &rhs) -> DoseEquivalent<T> {
+            return DoseEquivalent<T>(rhs.Sv() * lhs);
         }
     };
 }

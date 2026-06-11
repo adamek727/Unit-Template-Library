@@ -4,8 +4,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/luminous_flux.hpp"
-#include "utl/derived/illuminance.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

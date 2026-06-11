@@ -4,8 +4,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/velocity.hpp"
-#include "utl/derived/acceleration.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

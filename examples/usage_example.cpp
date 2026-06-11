@@ -26,10 +26,10 @@ int main(int, char*[]) {
     auto s = 0.5 * g * tt * tt;
     std::cout << "Free fall: " << s.m() << "m" << std::endl;
 
-    // Operations without predefined operators.
+    // Any dimensionally valid expression maps back to its named unit.
     auto m = Mass<float>(1);
     auto &c = speed_of_light_f;
-    auto e = (m.raw() * c.raw() * c.raw()).type();
+    auto e = m * c * c;
     std::cout << "Energy: " << e.J() << "J" << std::endl;
 
     // Precision selection

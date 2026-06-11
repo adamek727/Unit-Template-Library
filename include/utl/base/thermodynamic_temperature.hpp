@@ -48,25 +48,6 @@ namespace utl {
 
         [[nodiscard]] auto degF() const -> T { return degC() * C2F_K + C2F_Q; }
 
-        auto operator+(const ThermodynamicTemperature &other) const -> ThermodynamicTemperature {
-            return ThermodynamicTemperature(K() + other.K());
-        }
-
-        auto operator-(const ThermodynamicTemperature &other) const -> ThermodynamicTemperature {
-            return ThermodynamicTemperature(K() - other.K());
-        }
-
-        auto operator*(T scalar) const -> ThermodynamicTemperature {
-            return ThermodynamicTemperature(K() * scalar);
-        }
-
-        auto operator/(T scalar) const -> ThermodynamicTemperature {
-            return ThermodynamicTemperature(K() / scalar);
-        }
-
-        friend auto operator*(T lhs, const ThermodynamicTemperature<T>& rhs) -> ThermodynamicTemperature<T> {
-            return ThermodynamicTemperature<T>(rhs.K() * lhs);
-        }
     };
 
     template<typename T>

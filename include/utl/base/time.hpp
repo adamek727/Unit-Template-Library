@@ -11,10 +11,6 @@
 namespace utl {
 
     template<typename T>
-    class Frequency;
-
-
-    template<typename T>
     using TimeUnit = BaseUnit<T, 1, 0, 0, 0, 0, 0, 0>;
 
     template<typename T>
@@ -35,25 +31,6 @@ namespace utl {
 
         [[nodiscard]] auto ns() const -> T { return s() / NANO; }
 
-        auto operator+(const Time &other) const -> Time {
-            return Time(s() + other.s());
-        }
-
-        auto operator-(const Time &other) const -> Time {
-            return Time(s() - other.s());
-        }
-
-        auto operator*(T scalar) const -> Time {
-            return Time(s() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Time {
-            return Time(s() / scalar);
-        }
-
-        friend auto operator*(T lhs, const Time<T>& rhs) -> Time<T> {
-            return Time<T>(rhs.s() * lhs);
-        }
     };
 
     template<typename T>

@@ -4,8 +4,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/base/mass.hpp"
-#include "utl/derived/force.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 
