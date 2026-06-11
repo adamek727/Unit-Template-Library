@@ -47,7 +47,7 @@ namespace utl {
             return *this;
         }
 
-        virtual auto inv() const -> SelfInv {
+        auto inv() const -> SelfInv {
             return SelfInv {
                     static_cast<T>(1.0) / value_
             };

@@ -74,6 +74,11 @@ TEST(t_unit_test, div) {
     EXPECT_EQ(unit_t_3.LumIntDim(), 0);
 }
 
+TEST(t_unit_test, zero_overhead) {
+    EXPECT_EQ(sizeof(TestUnit), sizeof(float));
+    EXPECT_EQ(sizeof(BaseUnit<double, 0, 1, 0, 0, 0, 0, 0>), sizeof(double));
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
