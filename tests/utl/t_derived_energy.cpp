@@ -59,6 +59,11 @@ TEST(t_energy_test, dim) {
     EXPECT_EQ(Energy<float>::LumIntDim(), 0);
 }
 
+TEST(t_energy_test, watt_hours_and_calories) {
+    EXPECT_FLOAT_EQ(Energy<float>(3600.0).Wh(), 1.0f);
+    EXPECT_FLOAT_EQ(Energy<float>(4.184).cal(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

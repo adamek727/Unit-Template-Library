@@ -17,6 +17,8 @@ namespace utl {
     template<typename T>
     class Power : public PowerUnit<T> {
 
+        static constexpr double WATTS_IN_HORSEPOWER = 745.6998715822702;
+
     public:
         constexpr explicit Power(T power) : PowerUnit<T>{power} {}
 
@@ -25,6 +27,8 @@ namespace utl {
         [[nodiscard]] constexpr auto kW() const -> T { return static_cast<T>(W() / KILO); }
 
         [[nodiscard]] constexpr auto W() const -> T { return static_cast<T>(this->value()); }
+
+        [[nodiscard]] constexpr auto hp() const -> T { return static_cast<T>(W() / WATTS_IN_HORSEPOWER); }
 
     };
 

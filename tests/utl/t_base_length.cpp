@@ -50,6 +50,14 @@ TEST(t_length_test, dim) {
     EXPECT_EQ(Length<float>::LumIntDim(), 0);
 }
 
+TEST(t_length_test, imperial_conversions) {
+    auto one_meter = Length<float>(1.0);
+    EXPECT_FLOAT_EQ(one_meter.ft(), 3.2808399f);
+    EXPECT_FLOAT_EQ(one_meter.in(), 39.370079f);
+    EXPECT_FLOAT_EQ(one_meter.yd(), 1.0936133f);
+    EXPECT_FLOAT_EQ(Length<float>(1609.344).mi(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

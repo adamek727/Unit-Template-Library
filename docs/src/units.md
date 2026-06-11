@@ -8,9 +8,9 @@ every unit, e.g. `Length_f`, `Length_d`.
 
 | Unit | SI unit | Example accessors |
 |---|---|---|
-| `Time` | second [s] | `s()`, `ms()`, `us()`, `ns()`, `min()`, `h()` |
-| `Length` | meter [m] | `m()`, `km()`, `mm()`, `um()`, `nm()`, `mi()` |
-| `Mass` | kilogram [kg] | `kg()`, `g()`, `mg()`, `ug()`, `tonne()` |
+| `Time` | second [s] | `s()`, `ms()`, `us()`, `ns()`, `min()`, `h()`, `day()` |
+| `Length` | meter [m] | `m()`, `km()`, `mm()`, `um()`, `nm()`, `mi()`, `yd()`, `ft()`, `in()` |
+| `Mass` | kilogram [kg] | `kg()`, `g()`, `mg()`, `ug()`, `tonne()`, `lb()`, `oz()` |
 | `ElectricCurrent` | ampere [A] | `A()` |
 | `ThermodynamicTemperature` | kelvin [K] | `K()`, `degC()`, `degF()` |
 | `AmountOfSubstance` | mole [mol] | `mol()` |
@@ -57,3 +57,6 @@ explicitly when needed:
 | m²/s² | `AbsorbedDose` | `DoseEquivalent` |
 | cd | `LuminousIntensity` | `LuminousFlux` |
 | dimensionless | raw `Unit` | `Angle`, `SolidAngle` |
+
+This is also why there is no `Torque` class: torque (N·m) has exactly
+the dimensions of energy, so `Force * Length` maps to `Energy`.
