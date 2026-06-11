@@ -1,0 +1,11 @@
+# Build directories
+build/
+cmake-build-*/
+
+# IDE
+.idea/
+.vscode/
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
