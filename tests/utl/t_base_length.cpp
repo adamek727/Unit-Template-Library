@@ -55,7 +55,7 @@ TEST(t_length_test, imperial_conversions) {
     EXPECT_FLOAT_EQ(one_meter.ft(), 3.2808399f);
     EXPECT_FLOAT_EQ(one_meter.in(), 39.370079f);
     EXPECT_FLOAT_EQ(one_meter.yd(), 1.0936133f);
-    EXPECT_FLOAT_EQ(Length<float>(1609.344).mi(), 1.0f);
+    EXPECT_FLOAT_EQ(Length<float>(1609.344f).mi(), 1.0f);
 }
 
 int main(int argc, char **argv) {
