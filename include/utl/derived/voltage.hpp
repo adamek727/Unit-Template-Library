@@ -16,15 +16,15 @@ namespace utl {
     template<typename T>
     class Voltage : public VoltageUnit<T> {
     public:
-        explicit Voltage(T voltage) : VoltageUnit<T>{voltage} {}
+        constexpr explicit Voltage(T voltage) : VoltageUnit<T>{voltage} {}
 
-        explicit Voltage(const Power<T> &p, const ElectricCurrent<T> &ec = 1) : VoltageUnit<T>{p.W() / ec.A()} {}
+        constexpr explicit Voltage(const Power<T> &p, const ElectricCurrent<T> &ec = 1) : VoltageUnit<T>{p.W() / ec.A()} {}
 
-        [[nodiscard]] auto V() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto V() const -> T { return this->value(); }
 
-        [[nodiscard]] auto kV() const -> T { return V() / KILO; }
+        [[nodiscard]] constexpr auto kV() const -> T { return V() / KILO; }
 
-        [[nodiscard]] auto mV() const -> T { return V() / MILLI; }
+        [[nodiscard]] constexpr auto mV() const -> T { return V() / MILLI; }
 
     };
 

@@ -9,10 +9,10 @@
 #include "utl/derived/all.hpp"
 
 #define UTL_DEFINE_LITERAL(suffix, UnitType, FACTOR) \
-    inline auto operator"" suffix(long double value) -> UnitType<double> { \
+    constexpr auto operator"" suffix(long double value) -> UnitType<double> { \
         return UnitType<double>(static_cast<double>(value) * (FACTOR)); \
     } \
-    inline auto operator"" suffix(unsigned long long value) -> UnitType<double> { \
+    constexpr auto operator"" suffix(unsigned long long value) -> UnitType<double> { \
         return UnitType<double>(static_cast<double>(value) * (FACTOR)); \
     }
 

@@ -20,15 +20,15 @@ namespace utl {
     template<typename T>
     class MagneticFlux : public MagneticFluxUnit<T> {
     public:
-        explicit MagneticFlux(T illuminance) : MagneticFluxUnit<T>{illuminance} {}
+        constexpr explicit MagneticFlux(T illuminance) : MagneticFluxUnit<T>{illuminance} {}
 
-        explicit MagneticFlux(const Voltage<T> &v, const Time<T> &t) : MagneticFluxUnit<T>{
+        constexpr explicit MagneticFlux(const Voltage<T> &v, const Time<T> &t) : MagneticFluxUnit<T>{
                 v.V() * t.s()} {}
 
-        explicit MagneticFlux(const MagneticFluxDensity<T> &mfd, const Area<T> &a) : MagneticFluxUnit<T>{
+        constexpr explicit MagneticFlux(const MagneticFluxDensity<T> &mfd, const Area<T> &a) : MagneticFluxUnit<T>{
                 mfd.Tesla() * a.m2()} {}
 
-        [[nodiscard]] auto Wb() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Wb() const -> T { return this->value(); }
 
     };
 

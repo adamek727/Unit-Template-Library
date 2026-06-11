@@ -18,19 +18,19 @@ namespace utl {
         static constexpr double MILES_IN_KILOMETER = 0.6213711922;
 
     public:
-        explicit Length(T length) : LengthUnit<T>{length} {}
+        constexpr explicit Length(T length) : LengthUnit<T>{length} {}
 
-        [[nodiscard]] auto km() const -> T { return m() / KILO; }
+        [[nodiscard]] constexpr auto km() const -> T { return m() / KILO; }
 
-        [[nodiscard]] auto m() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto m() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mm() const -> T { return static_cast<T>(m() / MILLI); }
+        [[nodiscard]] constexpr auto mm() const -> T { return static_cast<T>(m() / MILLI); }
 
-        [[nodiscard]] auto um() const -> T { return static_cast<T>(m() / MICRO); }
+        [[nodiscard]] constexpr auto um() const -> T { return static_cast<T>(m() / MICRO); }
 
-        [[nodiscard]] auto nm() const -> T { return static_cast<T>(m() / NANO); }
+        [[nodiscard]] constexpr auto nm() const -> T { return static_cast<T>(m() / NANO); }
 
-        [[nodiscard]] auto mi() const -> T { return km() * MILES_IN_KILOMETER; }
+        [[nodiscard]] constexpr auto mi() const -> T { return km() * MILES_IN_KILOMETER; }
 
     };
 

@@ -16,13 +16,13 @@ namespace utl {
     class Velocity : public VelocityUnit<T> {
 
     public:
-        explicit Velocity(T speed) : VelocityUnit<T>{speed} {}
+        constexpr explicit Velocity(T speed) : VelocityUnit<T>{speed} {}
 
-        explicit Velocity(const Length<T> l, const Time<T> t) : VelocityUnit<T>{l.m() / t.s()} {}
+        constexpr explicit Velocity(const Length<T> l, const Time<T> t) : VelocityUnit<T>{l.m() / t.s()} {}
 
-        [[nodiscard]] auto mps() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto mps() const -> T { return this->value(); }
 
-        [[nodiscard]] auto kmph() const -> T { return this->value() * 3.6; }
+        [[nodiscard]] constexpr auto kmph() const -> T { return this->value() * 3.6; }
 
     };
 

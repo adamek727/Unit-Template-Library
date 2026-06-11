@@ -16,23 +16,23 @@ namespace utl {
     class Area : public AreaUnit<T> {
 
     public:
-        explicit Area(T area) : AreaUnit<T>{area} {}
+        constexpr explicit Area(T area) : AreaUnit<T>{area} {}
 
-        explicit Area(const Length<T> l1, const Length<T> l2) : AreaUnit<T>{l1.m() * l2.m()} {}
+        constexpr explicit Area(const Length<T> l1, const Length<T> l2) : AreaUnit<T>{l1.m() * l2.m()} {}
 
-        [[nodiscard]] auto km2() const -> T { return m2() / KILO / KILO; }
+        [[nodiscard]] constexpr auto km2() const -> T { return m2() / KILO / KILO; }
 
-        [[nodiscard]] auto ha() const -> T { return a() / HECTO; }
+        [[nodiscard]] constexpr auto ha() const -> T { return a() / HECTO; }
 
-        [[nodiscard]] auto a() const -> T { return m2() / HECTO; }
+        [[nodiscard]] constexpr auto a() const -> T { return m2() / HECTO; }
 
-        [[nodiscard]] auto m2() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto m2() const -> T { return this->value(); }
 
-        [[nodiscard]] auto mm2() const -> T { return m2() / MILLI / MILLI; }
+        [[nodiscard]] constexpr auto mm2() const -> T { return m2() / MILLI / MILLI; }
 
-        [[nodiscard]] auto um2() const -> T { return m2() / MICRO / MICRO; }
+        [[nodiscard]] constexpr auto um2() const -> T { return m2() / MICRO / MICRO; }
 
-        [[nodiscard]] auto nm2() const -> T { return m2() / NANO / NANO; }
+        [[nodiscard]] constexpr auto nm2() const -> T { return m2() / NANO / NANO; }
 
     };
 

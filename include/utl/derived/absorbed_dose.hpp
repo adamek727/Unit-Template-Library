@@ -17,11 +17,11 @@ namespace utl {
     class AbsorbedDose : public AbsorbedDoseUnit<T> {
 
     public:
-        explicit AbsorbedDose(T abs_dose) : AbsorbedDoseUnit<T>{abs_dose} {}
+        constexpr explicit AbsorbedDose(T abs_dose) : AbsorbedDoseUnit<T>{abs_dose} {}
 
-        explicit AbsorbedDose(const Energy<T>& e, const Mass<T>& m) : AbsorbedDoseUnit<T>{e.J() / m.kg()} {}
+        constexpr explicit AbsorbedDose(const Energy<T>& e, const Mass<T>& m) : AbsorbedDoseUnit<T>{e.J() / m.kg()} {}
 
-        [[nodiscard]] auto Gy() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Gy() const -> T { return this->value(); }
 
     };
 

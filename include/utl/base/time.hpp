@@ -17,19 +17,19 @@ namespace utl {
     class Time : public TimeUnit<T> {
 
     public:
-        explicit Time(T time) : TimeUnit<T>{time} {}
+        constexpr explicit Time(T time) : TimeUnit<T>{time} {}
 
-        [[nodiscard]] auto h() const -> T { return s() / SECS_IN_MINUTE / MINUTES_IN_HOUR; }
+        [[nodiscard]] constexpr auto h() const -> T { return s() / SECS_IN_MINUTE / MINUTES_IN_HOUR; }
 
-        [[nodiscard]] auto min() const -> T { return s() / SECS_IN_MINUTE; }
+        [[nodiscard]] constexpr auto min() const -> T { return s() / SECS_IN_MINUTE; }
 
-        [[nodiscard]] auto s() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto s() const -> T { return this->value(); }
 
-        [[nodiscard]] auto ms() const -> T { return s() / MILLI; }
+        [[nodiscard]] constexpr auto ms() const -> T { return s() / MILLI; }
 
-        [[nodiscard]] auto us() const -> T { return s() / MICRO; }
+        [[nodiscard]] constexpr auto us() const -> T { return s() / MICRO; }
 
-        [[nodiscard]] auto ns() const -> T { return s() / NANO; }
+        [[nodiscard]] constexpr auto ns() const -> T { return s() / NANO; }
 
     };
 

@@ -17,15 +17,15 @@ namespace utl {
     class Pressure : public PressureUnit<T> {
 
     public:
-        explicit Pressure(T pressure) : PressureUnit<T>{pressure} {}
+        constexpr explicit Pressure(T pressure) : PressureUnit<T>{pressure} {}
 
-        explicit Pressure(const Force<T> &f, const Area<T> &a) : PressureUnit<T>{f.N() / a.m2()} {}
+        constexpr explicit Pressure(const Force<T> &f, const Area<T> &a) : PressureUnit<T>{f.N() / a.m2()} {}
 
-        [[nodiscard]] auto kPa() const -> T { return Pa() / KILO; }
+        [[nodiscard]] constexpr auto kPa() const -> T { return Pa() / KILO; }
 
-        [[nodiscard]] auto hPa() const -> T { return Pa() / HECTO; }
+        [[nodiscard]] constexpr auto hPa() const -> T { return Pa() / HECTO; }
 
-        [[nodiscard]] auto Pa() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Pa() const -> T { return this->value(); }
 
     };
 

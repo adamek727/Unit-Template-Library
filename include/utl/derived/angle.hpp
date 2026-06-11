@@ -17,7 +17,7 @@ namespace utl {
             DEG,
         };
 
-        explicit Angle(T angle, const TYPE &type = TYPE::RAD) {
+        constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD) {
             switch (type) {
                 case TYPE::DEG:
                     this->set_value(angle / 180 * M_PI);
@@ -28,29 +28,29 @@ namespace utl {
             }
         }
 
-        explicit Angle(Length<T> s, Length<T> r) : Unit<T>{s.m() / r.m()} {};
+        constexpr explicit Angle(Length<T> s, Length<T> r) : Unit<T>{s.m() / r.m()} {};
 
-        [[nodiscard]] auto rad() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto rad() const -> T { return this->value(); }
 
-        [[nodiscard]] auto deg() const -> T { return rad() / M_PI * 180.0; }
+        [[nodiscard]] constexpr auto deg() const -> T { return rad() / M_PI * 180.0; }
 
-        auto operator+(const Angle &other) const -> Angle {
+        constexpr auto operator+(const Angle &other) const -> Angle {
             return Angle(rad() + other.rad());
         }
 
-        auto operator-(const Angle &other) const -> Angle {
+        constexpr auto operator-(const Angle &other) const -> Angle {
             return Angle(rad() - other.rad());
         }
 
-        auto operator*(T scalar) const -> Angle {
+        constexpr auto operator*(T scalar) const -> Angle {
             return Angle(rad() * scalar);
         }
 
-        auto operator/(T scalar) const -> Angle {
+        constexpr auto operator/(T scalar) const -> Angle {
             return Angle(rad() / scalar);
         }
 
-        friend auto operator*(T lhs, const Angle<T>& rhs) -> Angle<T>{
+        friend constexpr auto operator*(T lhs, const Angle<T>& rhs) -> Angle<T>{
             return Angle<T>(rhs.rad() * lhs);
         }
     };
