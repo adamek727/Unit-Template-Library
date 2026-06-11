@@ -54,6 +54,7 @@ make_units_test(t_derived_volume)
 make_units_test(t_operators)
 make_units_test(t_ux)
 make_units_test(t_constexpr)
+make_units_test(t_math)
 
 add_executable(t_odr utl/t_odr_main.cpp utl/t_odr_second.cpp)
 target_link_libraries(t_odr utl::utl GTest::GTest)
