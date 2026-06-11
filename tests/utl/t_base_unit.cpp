@@ -83,6 +83,11 @@ TEST(t_unit_test, add_sub_on_const_operands) {
     EXPECT_FLOAT_EQ((unit_t_1 / unit_t_2).value(), 0.5);
 }
 
+TEST(t_unit_test, metric_prefixes_and_time_constants) {
+    EXPECT_DOUBLE_EQ(FEMTO, 1e-15);
+    EXPECT_DOUBLE_EQ(DAYS_IN_YEAR, 365.0);
+}
+
 TEST(t_unit_test, zero_overhead) {
     EXPECT_EQ(sizeof(TestUnit), sizeof(float));
     EXPECT_EQ(sizeof(BaseUnit<double, 0, 1, 0, 0, 0, 0, 0>), sizeof(double));
