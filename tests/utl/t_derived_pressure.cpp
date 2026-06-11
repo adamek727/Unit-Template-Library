@@ -58,6 +58,12 @@ TEST(t_pressure_test, dim) {
     EXPECT_EQ(Pressure<float>::LumIntDim(), 0);
 }
 
+TEST(t_pressure_test, bar_atm_psi) {
+    EXPECT_FLOAT_EQ(Pressure<float>(1e5).bar(), 1.0f);
+    EXPECT_FLOAT_EQ(Pressure<float>(101325.0).atm(), 1.0f);
+    EXPECT_FLOAT_EQ(Pressure<float>(6894.7573f).psi(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

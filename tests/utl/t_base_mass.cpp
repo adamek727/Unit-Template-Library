@@ -63,6 +63,12 @@ TEST(t_mass_test, mass_times_acceleration_is_force) {
     EXPECT_FLOAT_EQ(force.N(), 6.0f);
 }
 
+TEST(t_mass_test, imperial_conversions) {
+    auto one_kg = Mass<float>(1.0);
+    EXPECT_FLOAT_EQ(one_kg.lb(), 2.2046226f);
+    EXPECT_FLOAT_EQ(one_kg.oz(), 35.273962f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

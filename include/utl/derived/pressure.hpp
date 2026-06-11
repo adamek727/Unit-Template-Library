@@ -16,6 +16,10 @@ namespace utl {
     template<typename T>
     class Pressure : public PressureUnit<T> {
 
+        static constexpr double PASCALS_IN_BAR = 1e5;
+        static constexpr double PASCALS_IN_ATMOSPHERE = 101325.0;
+        static constexpr double PASCALS_IN_PSI = 6894.757293168361;
+
     public:
         constexpr explicit Pressure(T pressure) : PressureUnit<T>{pressure} {}
 
@@ -26,6 +30,12 @@ namespace utl {
         [[nodiscard]] constexpr auto hPa() const -> T { return static_cast<T>(Pa() / HECTO); }
 
         [[nodiscard]] constexpr auto Pa() const -> T { return static_cast<T>(this->value()); }
+
+        [[nodiscard]] constexpr auto bar() const -> T { return static_cast<T>(Pa() / PASCALS_IN_BAR); }
+
+        [[nodiscard]] constexpr auto atm() const -> T { return static_cast<T>(Pa() / PASCALS_IN_ATMOSPHERE); }
+
+        [[nodiscard]] constexpr auto psi() const -> T { return static_cast<T>(Pa() / PASCALS_IN_PSI); }
 
     };
 

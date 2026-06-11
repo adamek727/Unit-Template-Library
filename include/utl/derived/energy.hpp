@@ -18,6 +18,8 @@ namespace utl {
 
         static constexpr double JOULES_IN_KILOWATHOUR = 3600000.0;
         static constexpr double EVS_IN_JOULE = 6.241509e18;
+        static constexpr double JOULES_IN_WATTHOUR = 3600.0;
+        static constexpr double JOULES_IN_CALORIE = 4.184;
 
     public:
         constexpr explicit Energy(T energy) : EnergyUnit<T>{energy} {}
@@ -33,6 +35,10 @@ namespace utl {
         [[nodiscard]] constexpr auto kWh() const -> T { return static_cast<T>(J() / JOULES_IN_KILOWATHOUR); }
 
         [[nodiscard]] constexpr auto eV() const -> T { return static_cast<T>(J() * EVS_IN_JOULE); }
+
+        [[nodiscard]] constexpr auto Wh() const -> T { return static_cast<T>(J() / JOULES_IN_WATTHOUR); }
+
+        [[nodiscard]] constexpr auto cal() const -> T { return static_cast<T>(J() / JOULES_IN_CALORIE); }
 
     };
 

@@ -57,6 +57,10 @@ TEST(t_time_test, dim) {
     EXPECT_EQ(Time<float>::LumIntDim(), 0);
 }
 
+TEST(t_time_test, day_conversion) {
+    EXPECT_FLOAT_EQ(Time<float>(86400.0).day(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
