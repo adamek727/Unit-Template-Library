@@ -34,7 +34,7 @@ namespace utl {
         using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>;
         using SelfInv = BaseUnit<T, -TIME, -LENGTH, -MASS, -EL_CURR, -TD_TEMP, -AM_OF_SUB, -LUM_INT>;
     public:
-        BaseUnit() = default;
+        BaseUnit() = delete;
 
         constexpr explicit BaseUnit(const T &value) : value_{value} {};
 
@@ -130,7 +130,7 @@ namespace utl {
         constexpr auto operator>=(const BaseUnit &other) const -> bool { return value_ >= other.value_; }
 
     private:
-        T value_ = 0;
+        T value_;
     };
 
     template<typename T>

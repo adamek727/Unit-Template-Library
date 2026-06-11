@@ -28,19 +28,22 @@ namespace utl {
             FAHRENHEIT,
         };
 
-        constexpr explicit ThermodynamicTemperature(T thermodyn_temp, const TYPE &type = TYPE::KELVIN) {
+    private:
+        static constexpr auto to_kelvin(T thermodyn_temp, const TYPE &type) -> T {
             switch (type) {
                 case TYPE::CELSIUS:
-                    this->set_value(static_cast<T>(thermodyn_temp - K2C));
-                    break;
+                    return static_cast<T>(thermodyn_temp - K2C);
                 case TYPE::FAHRENHEIT:
-                    this->set_value(static_cast<T>((thermodyn_temp - C2F_Q) / C2F_K));
-                    break;
+                    return static_cast<T>((thermodyn_temp - C2F_Q) / C2F_K);
                 default:
-                    this->set_value(thermodyn_temp);
-                    break;
+                    return thermodyn_temp;
             }
         }
+
+    public:
+
+        constexpr explicit ThermodynamicTemperature(T thermodyn_temp, const TYPE &type = TYPE::KELVIN)
+            : ThermodynamicTemperatureUnit<T>{to_kelvin(thermodyn_temp, type)} {}
 
         [[nodiscard]] constexpr auto K() const -> T { return static_cast<T>(this->value()); }
 
