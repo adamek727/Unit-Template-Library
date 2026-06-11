@@ -1,0 +1,8 @@
+[book]
+title = "Unit Template Library"
+authors = ["Adam Ligocki"]
+language = "en"
+src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/adamek727/Unit-Template-Library"
