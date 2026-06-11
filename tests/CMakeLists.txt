@@ -1,9 +1,18 @@
-find_package(GTest REQUIRED)
+find_package(GTest QUIET)
+if(NOT GTest_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(googletest
+            URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+    add_library(GTest::GTest ALIAS gtest)
+    add_library(GTest::Main ALIAS gtest_main)
+endif()
 
 macro(make_units_test name)
     add_executable(${name} utl/${name}.cpp)
     target_link_libraries(${name} utl::utl GTest::GTest GTest::Main)
-    target_compile_options(${name} PRIVATE $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra>)
+    utl_apply_warnings(${name})
     add_test(NAME ${name} COMMAND ${name})
 endmacro()
 
@@ -48,5 +57,5 @@ make_units_test(t_constexpr)
 
 add_executable(t_odr utl/t_odr_main.cpp utl/t_odr_second.cpp)
 target_link_libraries(t_odr utl::utl GTest::GTest)
-target_compile_options(t_odr PRIVATE $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra>)
+utl_apply_warnings(t_odr)
 add_test(NAME t_odr COMMAND t_odr)

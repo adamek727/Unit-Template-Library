@@ -39,8 +39,8 @@ auto e = m * c * c;
 std::cout << "Energy: " << e.J() << "J" << std::endl;
 
 // Precision selection
-auto unit_f = Unit<float>(M_PI);
-auto unit_d = Unit<double>(M_PI);
+auto unit_f = Unit<float>(PI);
+auto unit_d = Unit<double>(PI);
 std::cout << std::fixed << std::setprecision(18) << "float: " << unit_f.value() << " double: " << unit_d.value() << std::endl;
 
 // Unit literals (double precision)

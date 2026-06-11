@@ -18,15 +18,15 @@ namespace utl {
     public:
         constexpr explicit Frequency(T freq) : FrequencyUnit<T>{freq} {}
 
-        [[nodiscard]] constexpr auto THz() const -> T { return Hz() / TERA; }
+        [[nodiscard]] constexpr auto THz() const -> T { return static_cast<T>(Hz() / TERA); }
 
-        [[nodiscard]] constexpr auto GHz() const -> T { return Hz() / GIGA; }
+        [[nodiscard]] constexpr auto GHz() const -> T { return static_cast<T>(Hz() / GIGA); }
 
-        [[nodiscard]] constexpr auto MHz() const -> T { return Hz() / MEGA; }
+        [[nodiscard]] constexpr auto MHz() const -> T { return static_cast<T>(Hz() / MEGA); }
 
-        [[nodiscard]] constexpr auto kHz() const -> T { return Hz() / KILO; }
+        [[nodiscard]] constexpr auto kHz() const -> T { return static_cast<T>(Hz() / KILO); }
 
-        [[nodiscard]] constexpr auto Hz() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Hz() const -> T { return static_cast<T>(this->value()); }
 
     };
 

@@ -17,9 +17,9 @@ namespace utl {
     public:
         constexpr explicit Mass(T mass) : MassUnit<T>{mass} {}
 
-        [[nodiscard]] constexpr auto tonne() const -> T { return this->value() / KILO; }
+        [[nodiscard]] constexpr auto tonne() const -> T { return static_cast<T>(this->value() / KILO); }
 
-        [[nodiscard]] constexpr auto kg() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto kg() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto g() const -> T { return static_cast<T>(this->value() / MILLI ); }
 

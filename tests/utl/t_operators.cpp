@@ -39,7 +39,7 @@ TEST(t_operators_test, chained_expression_maps_to_named_unit) {
 }
 
 TEST(t_operators_test, scalar_operations_preserve_named_unit) {
-    auto g = Acceleration<float>(9.81);
+    auto g = Acceleration<float>(9.81f);
     auto tt = Time<float>(10);
     auto s = 0.5f * g * tt * tt;
     EXPECT_FLOAT_EQ(s.m(), 490.5f);

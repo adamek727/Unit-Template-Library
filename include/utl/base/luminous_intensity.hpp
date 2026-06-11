@@ -18,7 +18,7 @@ namespace utl {
         constexpr explicit LuminousIntensity(T luminous_intensity) : LuminousIntensityUnit<T>{
                 luminous_intensity} {}
 
-        [[nodiscard]] constexpr auto cd() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto cd() const -> T { return static_cast<T>(this->value()); }
 
     };
 

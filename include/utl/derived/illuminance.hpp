@@ -22,7 +22,7 @@ namespace utl {
         constexpr explicit Illuminance(const LuminousFlux<T> &lf, const Area<T> &a) : IlluminanceUnit<T>{
                 lf.lm() / a.m2()} {}
 
-        [[nodiscard]] constexpr auto lux() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto lux() const -> T { return static_cast<T>(this->value()); }
 
         using IlluminanceUnit<T>::operator*;
 

@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include <cmath>
 #include "utl/base/length.hpp"
 
 namespace utl {
@@ -20,7 +19,7 @@ namespace utl {
         constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD) {
             switch (type) {
                 case TYPE::DEG:
-                    this->set_value(angle / 180 * M_PI);
+                    this->set_value(static_cast<T>(angle / 180 * PI));
                     break;
                 default:
                     this->set_value(angle);
@@ -30,9 +29,9 @@ namespace utl {
 
         constexpr explicit Angle(Length<T> s, Length<T> r) : Unit<T>{s.m() / r.m()} {};
 
-        [[nodiscard]] constexpr auto rad() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto rad() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto deg() const -> T { return rad() / M_PI * 180.0; }
+        [[nodiscard]] constexpr auto deg() const -> T { return static_cast<T>(rad() / PI * 180.0); }
 
         constexpr auto operator+(const Angle &other) const -> Angle {
             return Angle(rad() + other.rad());

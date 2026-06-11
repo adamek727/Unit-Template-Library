@@ -22,9 +22,9 @@ namespace utl {
 
         constexpr explicit Power(const Energy<T> &e, const Time<T> &t) : PowerUnit<T>{e.J() / t.s()} {}
 
-        [[nodiscard]] constexpr auto kW() const -> T { return W() / KILO; }
+        [[nodiscard]] constexpr auto kW() const -> T { return static_cast<T>(W() / KILO); }
 
-        [[nodiscard]] constexpr auto W() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto W() const -> T { return static_cast<T>(this->value()); }
 
     };
 

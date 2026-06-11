@@ -20,9 +20,9 @@ namespace utl {
 
         constexpr explicit Velocity(const Length<T> l, const Time<T> t) : VelocityUnit<T>{l.m() / t.s()} {}
 
-        [[nodiscard]] constexpr auto mps() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto mps() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto kmph() const -> T { return this->value() * 3.6; }
+        [[nodiscard]] constexpr auto kmph() const -> T { return static_cast<T>(this->value() * 3.6); }
 
     };
 

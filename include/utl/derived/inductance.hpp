@@ -21,7 +21,7 @@ namespace utl {
         constexpr explicit Inductance(const MagneticFlux<T> &mf, const ElectricCurrent<T> &ec) : InductanceUnit<T>{
                 mf.Wb() / ec.A()} {}
 
-        [[nodiscard]] constexpr auto H() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto H() const -> T { return static_cast<T>(this->value()); }
 
     };
 

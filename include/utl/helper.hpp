@@ -7,6 +7,8 @@
 
 namespace utl {
 
+    constexpr double PI = 3.14159265358979323846;
+
     constexpr double DECA = 1e1;
     constexpr double HECTO = 1e2;
     constexpr double KILO = 1e3;
