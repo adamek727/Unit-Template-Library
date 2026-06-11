@@ -1,15 +1,26 @@
-cmake_minimum_required(VERSION 3.13)
-project(UnitTemplateLibrary)
+cmake_minimum_required(VERSION 3.14)
+project(UnitTemplateLibrary VERSION 1.0.0 LANGUAGES CXX)
 
-enable_testing()
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE  "-O3")
+option(ENABLE_TESTS "Build unit tests" OFF)
+option(ENABLE_EXAMPLES "Build usage examples" OFF)
 
-include_directories(include)
+add_library(utl INTERFACE)
+add_library(utl::utl ALIAS utl)
+target_include_directories(utl INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>)
+target_compile_features(utl INTERFACE cxx_std_17)
 
+include(GNUInstallDirs)
+install(TARGETS utl EXPORT utlTargets)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT utlTargets
+        FILE utlConfig.cmake
+        NAMESPACE utl::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/utl)
 
 if(ENABLE_TESTS)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 

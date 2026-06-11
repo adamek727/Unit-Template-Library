@@ -54,11 +54,21 @@ git submodule update --recursive
 
 and in your CMakeLists.txt file add
 
-```
-include_directories(libs/utl/include/)
+```cmake
+add_subdirectory(libs/utl)
+target_link_libraries(your_target utl::utl)
 ```
 
+Alternatively install the library (`cmake -B build && cmake --install build`)
+and use `find_package(utl REQUIRED)`.
+
 Now you are able to include UTL headers into you code.
+
+### Documentation
+
+The user guide is published at
+https://adamek727.github.io/Unit-Template-Library/ and lives in `docs/`
+(built with [mdBook](https://rust-lang.github.io/mdBook/)).
 
 ### Run Examples
 

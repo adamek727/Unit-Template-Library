@@ -1,13 +1,11 @@
-cmake_minimum_required(VERSION 3.13)
-
 include_directories(../include)
 
 find_package(GTest REQUIRED)
-enable_testing()
 
 macro(make_units_test name)
     add_executable(${name} utl/${name}.cpp)
-    target_link_libraries(${name} GTest::GTest GTest::Main)
+    target_link_libraries(${name} utl::utl GTest::GTest GTest::Main)
+    target_compile_options(${name} PRIVATE $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra>)
     add_test(NAME ${name} COMMAND ${name})
 endmacro()
 
