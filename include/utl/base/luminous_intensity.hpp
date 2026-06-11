@@ -15,10 +15,10 @@ namespace utl {
     template<typename T>
     class LuminousIntensity : public LuminousIntensityUnit<T> {
     public:
-        explicit LuminousIntensity(T luminous_intensity) : LuminousIntensityUnit<T>{
+        constexpr explicit LuminousIntensity(T luminous_intensity) : LuminousIntensityUnit<T>{
                 luminous_intensity} {}
 
-        [[nodiscard]] auto cd() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto cd() const -> T { return this->value(); }
 
     };
 

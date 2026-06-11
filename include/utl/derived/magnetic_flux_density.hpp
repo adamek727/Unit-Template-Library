@@ -19,12 +19,12 @@ namespace utl {
     template<typename T>
     class MagneticFluxDensity : public MagneticFluxDensityUnit<T> {
     public:
-        explicit MagneticFluxDensity(T illuminance) : MagneticFluxDensityUnit<T>{illuminance} {}
+        constexpr explicit MagneticFluxDensity(T illuminance) : MagneticFluxDensityUnit<T>{illuminance} {}
 
-        explicit MagneticFluxDensity(const MagneticFlux<T> &mf, const Area<T> &a) : MagneticFluxDensityUnit<T>{
+        constexpr explicit MagneticFluxDensity(const MagneticFlux<T> &mf, const Area<T> &a) : MagneticFluxDensityUnit<T>{
                 mf.Wb() / a.m2()} {}
 
-        [[nodiscard]] auto Tesla() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto Tesla() const -> T { return this->value(); }
 
     };
 

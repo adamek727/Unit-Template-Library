@@ -17,11 +17,11 @@ namespace utl {
     class Acceleration : public AccelerationUnit<T> {
 
     public:
-        explicit Acceleration(T acc) : AccelerationUnit<T>{acc} {}
+        constexpr explicit Acceleration(T acc) : AccelerationUnit<T>{acc} {}
 
-        explicit Acceleration(const Velocity<T> v, const Time<T> t) : AccelerationUnit<T>{v.mps() / t.s()} {}
+        constexpr explicit Acceleration(const Velocity<T> v, const Time<T> t) : AccelerationUnit<T>{v.mps() / t.s()} {}
 
-        [[nodiscard]] auto mps2() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto mps2() const -> T { return this->value(); }
 
     };
 

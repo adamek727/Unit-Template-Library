@@ -18,13 +18,13 @@ namespace utl {
     class Power : public PowerUnit<T> {
 
     public:
-        explicit Power(T power) : PowerUnit<T>{power} {}
+        constexpr explicit Power(T power) : PowerUnit<T>{power} {}
 
-        explicit Power(const Energy<T> &e, const Time<T> &t) : PowerUnit<T>{e.J() / t.s()} {}
+        constexpr explicit Power(const Energy<T> &e, const Time<T> &t) : PowerUnit<T>{e.J() / t.s()} {}
 
-        [[nodiscard]] auto kW() const -> T { return W() / KILO; }
+        [[nodiscard]] constexpr auto kW() const -> T { return W() / KILO; }
 
-        [[nodiscard]] auto W() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto W() const -> T { return this->value(); }
 
     };
 

@@ -16,12 +16,12 @@ namespace utl {
     template<typename T>
     class Inductance : public InductanceUnit<T> {
     public:
-        explicit Inductance(T illuminance) : InductanceUnit<T>{illuminance} {}
+        constexpr explicit Inductance(T illuminance) : InductanceUnit<T>{illuminance} {}
 
-        explicit Inductance(const MagneticFlux<T> &mf, const ElectricCurrent<T> &ec) : InductanceUnit<T>{
+        constexpr explicit Inductance(const MagneticFlux<T> &mf, const ElectricCurrent<T> &ec) : InductanceUnit<T>{
                 mf.Wb() / ec.A()} {}
 
-        [[nodiscard]] auto H() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto H() const -> T { return this->value(); }
 
     };
 

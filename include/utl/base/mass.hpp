@@ -15,17 +15,17 @@ namespace utl {
     template<typename T>
     class Mass : public MassUnit<T> {
     public:
-        explicit Mass(T mass) : MassUnit<T>{mass} {}
+        constexpr explicit Mass(T mass) : MassUnit<T>{mass} {}
 
-        [[nodiscard]] auto tonne() const -> T { return this->value() / KILO; }
+        [[nodiscard]] constexpr auto tonne() const -> T { return this->value() / KILO; }
 
-        [[nodiscard]] auto kg() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto kg() const -> T { return this->value(); }
 
-        [[nodiscard]] auto g() const -> T { return static_cast<T>(this->value() / MILLI ); }
+        [[nodiscard]] constexpr auto g() const -> T { return static_cast<T>(this->value() / MILLI ); }
 
-        [[nodiscard]] auto mg() const -> T { return static_cast<T>(this->value() / MICRO); }
+        [[nodiscard]] constexpr auto mg() const -> T { return static_cast<T>(this->value() / MICRO); }
 
-        [[nodiscard]] auto ug() const -> T { return static_cast<T>(this->value() / NANO); }
+        [[nodiscard]] constexpr auto ug() const -> T { return static_cast<T>(this->value() / NANO); }
 
     };
 

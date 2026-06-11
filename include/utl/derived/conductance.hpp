@@ -15,11 +15,11 @@ namespace utl {
     template<typename T>
     class Conductance : public ConductanceUnit<T> {
     public:
-        explicit Conductance(T cap) : ConductanceUnit<T>{cap} {}
+        constexpr explicit Conductance(T cap) : ConductanceUnit<T>{cap} {}
 
-        explicit Conductance(const ElectricCurrent<T> &ec, const Voltage<T> &v) : ConductanceUnit<T>{ec.A() / v.V()} {}
+        constexpr explicit Conductance(const ElectricCurrent<T> &ec, const Voltage<T> &v) : ConductanceUnit<T>{ec.A() / v.V()} {}
 
-        [[nodiscard]] auto S() const -> T { return this->value(); }
+        [[nodiscard]] constexpr auto S() const -> T { return this->value(); }
 
     };
 
