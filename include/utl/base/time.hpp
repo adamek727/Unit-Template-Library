@@ -15,13 +15,13 @@ namespace utl {
 
 
     template<typename T>
-    using TimeTemperatureUnit = BaseUnit<T, 1, 0, 0, 0, 0, 0, 0>;
+    using TimeUnit = BaseUnit<T, 1, 0, 0, 0, 0, 0, 0>;
 
     template<typename T>
-    class Time : public TimeTemperatureUnit<T> {
+    class Time : public TimeUnit<T> {
 
     public:
-        explicit Time(T time) : TimeTemperatureUnit<T>{time} {}
+        explicit Time(T time) : TimeUnit<T>{time} {}
 
         [[nodiscard]] auto h() const -> T { return s() / SECS_IN_MINUTE / MINUTES_IN_HOUR; }
 
@@ -57,7 +57,7 @@ namespace utl {
     };
 
     template<typename T>
-    struct UnitMapper<BaseUnit<T, 1, 0, 0, 0, 0, 0, 0>> {
+    struct UnitMapper<TimeUnit<T>> {
         using type = Time<T>;
     };
 }

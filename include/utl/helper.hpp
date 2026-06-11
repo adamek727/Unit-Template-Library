@@ -26,7 +26,7 @@ namespace utl {
     constexpr double MICRO = 1e-6;
     constexpr double NANO = 1e-9;
     constexpr double PICO = 1e-12;
-    constexpr double FAMTO = 1e-15;
+    constexpr double FEMTO = 1e-15;
     constexpr double ATTO = 1e-18;
     constexpr double ZEPTO = 1e-21;
     constexpr double YOCTO = 1e-24;
@@ -36,5 +36,5 @@ namespace utl {
     constexpr double SECS_IN_MINUTE = 60.0;
     constexpr double MINUTES_IN_HOUR = 60.0;
     constexpr double HOURS_IN_DAY = 24.0;
-    constexpr double DAYS_IN_YEAR = 356.0;
+    constexpr double DAYS_IN_YEAR = 365.0;
 }
