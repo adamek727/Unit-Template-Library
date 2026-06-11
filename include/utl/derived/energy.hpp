@@ -22,6 +22,8 @@ namespace utl {
         static constexpr double JOULES_IN_CALORIE = 4.184;
 
     public:
+        constexpr Energy() = default;
+
         constexpr explicit Energy(T energy) : EnergyUnit<T>{energy} {}
 
         constexpr explicit Energy(const Force<T> &f, const Length<T> &l) : EnergyUnit<T>{f.N() * l.m()} {}

@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class AmountOfSubstance : public AmountOfSubstanceUnit<T> {
     public:
+        constexpr AmountOfSubstance() = default;
+
         constexpr explicit AmountOfSubstance(T amount_of_sub) : AmountOfSubstanceUnit<T>{amount_of_sub} {}
 
         [[nodiscard]] constexpr auto mol() const -> T { return static_cast<T>(this->value()); }

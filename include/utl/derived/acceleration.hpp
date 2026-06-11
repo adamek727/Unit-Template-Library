@@ -17,6 +17,8 @@ namespace utl {
     class Acceleration : public AccelerationUnit<T> {
 
     public:
+        constexpr Acceleration() = default;
+
         constexpr explicit Acceleration(T acc) : AccelerationUnit<T>{acc} {}
 
         constexpr explicit Acceleration(const Velocity<T> v, const Time<T> t) : AccelerationUnit<T>{v.mps() / t.s()} {}

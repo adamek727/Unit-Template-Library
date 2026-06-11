@@ -16,6 +16,8 @@ namespace utl {
     class Area : public AreaUnit<T> {
 
     public:
+        constexpr Area() = default;
+
         constexpr explicit Area(T area) : AreaUnit<T>{area} {}
 
         constexpr explicit Area(const Length<T> l1, const Length<T> l2) : AreaUnit<T>{l1.m() * l2.m()} {}

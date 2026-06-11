@@ -16,6 +16,8 @@ namespace utl {
     class Activity : public ActivityUnit<T> {
 
     public:
+        constexpr Activity() = default;
+
         constexpr explicit Activity(T activity) : ActivityUnit<T>{activity} {}
 
         [[nodiscard]] constexpr auto Bq() const -> T { return static_cast<T>(this->value()); }

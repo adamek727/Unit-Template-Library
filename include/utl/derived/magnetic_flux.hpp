@@ -20,6 +20,8 @@ namespace utl {
     template<typename T>
     class MagneticFlux : public MagneticFluxUnit<T> {
     public:
+        constexpr MagneticFlux() = default;
+
         constexpr explicit MagneticFlux(T illuminance) : MagneticFluxUnit<T>{illuminance} {}
 
         constexpr explicit MagneticFlux(const Voltage<T> &v, const Time<T> &t) : MagneticFluxUnit<T>{

@@ -13,6 +13,9 @@ namespace utl {
     class SolidAngle : public Unit<T> {
     public:
 
+        constexpr SolidAngle() = default;
+
+
         constexpr explicit SolidAngle(T solid_angle) : Unit<T>{solid_angle} {}
 
         constexpr explicit SolidAngle(Area<T> a1, Area<T> a2) : Unit<T>{a1.m2() / a2.m2()} {};

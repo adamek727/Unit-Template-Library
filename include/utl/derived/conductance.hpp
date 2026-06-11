@@ -15,6 +15,8 @@ namespace utl {
     template<typename T>
     class Conductance : public ConductanceUnit<T> {
     public:
+        constexpr Conductance() = default;
+
         constexpr explicit Conductance(T cap) : ConductanceUnit<T>{cap} {}
 
         constexpr explicit Conductance(const ElectricCurrent<T> &ec, const Voltage<T> &v) : ConductanceUnit<T>{ec.A() / v.V()} {}

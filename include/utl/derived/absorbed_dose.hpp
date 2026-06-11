@@ -17,6 +17,8 @@ namespace utl {
     class AbsorbedDose : public AbsorbedDoseUnit<T> {
 
     public:
+        constexpr AbsorbedDose() = default;
+
         constexpr explicit AbsorbedDose(T abs_dose) : AbsorbedDoseUnit<T>{abs_dose} {}
 
         constexpr explicit AbsorbedDose(const Energy<T>& e, const Mass<T>& m) : AbsorbedDoseUnit<T>{e.J() / m.kg()} {}

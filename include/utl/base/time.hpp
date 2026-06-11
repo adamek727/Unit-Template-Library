@@ -17,6 +17,8 @@ namespace utl {
     class Time : public TimeUnit<T> {
 
     public:
+        constexpr Time() = default;
+
         constexpr explicit Time(T time) : TimeUnit<T>{time} {}
 
         [[nodiscard]] constexpr auto day() const -> T { return static_cast<T>(h() / HOURS_IN_DAY); }

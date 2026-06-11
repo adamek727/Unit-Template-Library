@@ -18,6 +18,8 @@ namespace utl {
         static constexpr double MPS_IN_MPH = 0.44704;
 
     public:
+        constexpr Velocity() = default;
+
         constexpr explicit Velocity(T speed) : VelocityUnit<T>{speed} {}
 
         constexpr explicit Velocity(const Length<T> l, const Time<T> t) : VelocityUnit<T>{l.m() / t.s()} {}

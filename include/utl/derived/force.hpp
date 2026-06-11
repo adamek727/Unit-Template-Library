@@ -17,6 +17,8 @@ namespace utl {
     class Force : public ForceUnit<T> {
 
     public:
+        constexpr Force() = default;
+
         constexpr explicit Force(T force) : ForceUnit<T>{force} {}
 
         constexpr explicit Force(const Mass<T> &m, const Acceleration<T> &acc) : ForceUnit<T>{m.kg() * acc.mps2()} {}

@@ -18,6 +18,8 @@ namespace utl {
         static constexpr double LITERS_IN_M3 = 1000;
 
     public:
+        constexpr Volume() = default;
+
         constexpr explicit Volume(T volume) : VolumeUnit<T>{volume} {}
 
         constexpr explicit Volume(const Length<T> l1, const Length<T> l2, const Length<T> l3) : VolumeUnit<T>{

@@ -19,6 +19,8 @@ namespace utl {
     template<typename T>
     class MagneticFluxDensity : public MagneticFluxDensityUnit<T> {
     public:
+        constexpr MagneticFluxDensity() = default;
+
         constexpr explicit MagneticFluxDensity(T illuminance) : MagneticFluxDensityUnit<T>{illuminance} {}
 
         constexpr explicit MagneticFluxDensity(const MagneticFlux<T> &mf, const Area<T> &a) : MagneticFluxDensityUnit<T>{

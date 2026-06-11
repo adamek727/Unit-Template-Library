@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class Illuminance : public IlluminanceUnit<T> {
     public:
+        constexpr Illuminance() = default;
+
         constexpr explicit Illuminance(T illuminance) : IlluminanceUnit<T>{
                 illuminance} {}
 

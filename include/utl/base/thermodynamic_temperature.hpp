@@ -28,6 +28,8 @@ namespace utl {
             FAHRENHEIT,
         };
 
+        constexpr ThermodynamicTemperature() = default;
+
         constexpr explicit ThermodynamicTemperature(T thermodyn_temp, const TYPE &type = TYPE::KELVIN) {
             switch (type) {
                 case TYPE::CELSIUS:

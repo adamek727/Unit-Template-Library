@@ -15,6 +15,8 @@ namespace utl {
     template<typename T>
     class LuminousIntensity : public LuminousIntensityUnit<T> {
     public:
+        constexpr LuminousIntensity() = default;
+
         constexpr explicit LuminousIntensity(T luminous_intensity) : LuminousIntensityUnit<T>{
                 luminous_intensity} {}
 

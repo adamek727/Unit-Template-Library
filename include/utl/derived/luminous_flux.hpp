@@ -21,6 +21,8 @@ namespace utl {
     template<typename T>
     class LuminousFlux : public LuminousFluxUnit<T> {
     public:
+        constexpr LuminousFlux() = default;
+
         constexpr explicit LuminousFlux(T luminous_flux) : LuminousFluxUnit<T>{
                 luminous_flux} {}
 

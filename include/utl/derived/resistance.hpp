@@ -17,6 +17,8 @@ namespace utl {
     template<typename T>
     class Resistance : public ResistanceUnit<T> {
     public:
+        constexpr Resistance() = default;
+
         constexpr explicit Resistance(T res) : ResistanceUnit<T>{res} {}
 
         constexpr explicit Resistance(const Voltage<T> &v, const ElectricCurrent<T> &ec) : ResistanceUnit<T>{v.V() / ec.A()} {}

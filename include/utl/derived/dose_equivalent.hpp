@@ -16,6 +16,8 @@ namespace utl {
     class DoseEquivalent : public DoseEquivalentUnit<T> {
 
     public:
+        constexpr DoseEquivalent() = default;
+
         constexpr explicit DoseEquivalent(T dose_eq) : DoseEquivalentUnit<T>{dose_eq} {}
 
         constexpr explicit DoseEquivalent(const AbsorbedDose<T> ad, const T radiation_weight_factor) : DoseEquivalentUnit<T>{ad.Gy() * radiation_weight_factor} {}

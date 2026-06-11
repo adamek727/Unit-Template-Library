@@ -21,6 +21,8 @@ namespace utl {
         static constexpr double PASCALS_IN_PSI = 6894.757293168361;
 
     public:
+        constexpr Pressure() = default;
+
         constexpr explicit Pressure(T pressure) : PressureUnit<T>{pressure} {}
 
         constexpr explicit Pressure(const Force<T> &f, const Area<T> &a) : PressureUnit<T>{f.N() / a.m2()} {}

@@ -17,6 +17,8 @@ namespace utl {
     template<typename T>
     class CatalyticActivity : public BaseUnit<T, -1, 0, 0, 0, 0, 1, 0> {
     public:
+        constexpr CatalyticActivity() = default;
+
         constexpr explicit CatalyticActivity(T catalytic_activity) : CatalyticActivityUnit<T>{catalytic_activity} {}
 
         constexpr explicit CatalyticActivity(const AmountOfSubstance<T> &aos, const Time<T> &t) : CatalyticActivityUnit<T>{

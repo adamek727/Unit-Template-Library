@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class ElectricCharge : public ElectricChargeUnit<T> {
     public:
+        constexpr ElectricCharge() = default;
+
         constexpr explicit ElectricCharge(const T &charge) : ElectricChargeUnit<T>{charge} {}
 
         constexpr explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChargeUnit<T>{

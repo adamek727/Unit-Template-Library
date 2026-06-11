@@ -21,6 +21,8 @@ namespace utl {
         static constexpr double METERS_IN_INCH = 0.0254;
 
     public:
+        constexpr Length() = default;
+
         constexpr explicit Length(T length) : LengthUnit<T>{length} {}
 
         [[nodiscard]] constexpr auto km() const -> T { return static_cast<T>(m() / KILO); }

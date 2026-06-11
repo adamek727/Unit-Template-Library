@@ -19,6 +19,8 @@ namespace utl {
         static constexpr double KILOGRAMS_IN_OUNCE = 0.028349523125;
 
     public:
+        constexpr Mass() = default;
+
         constexpr explicit Mass(T mass) : MassUnit<T>{mass} {}
 
         [[nodiscard]] constexpr auto tonne() const -> T { return static_cast<T>(this->value() / KILO); }

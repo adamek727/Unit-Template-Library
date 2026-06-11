@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class Capacitance : public CapacitanceUnit<T> {
     public:
+        constexpr Capacitance() = default;
+
         constexpr explicit Capacitance(T cap) : CapacitanceUnit<T>{cap} {}
 
         [[nodiscard]] constexpr auto F() const -> T { return static_cast<T>(this->value()); }

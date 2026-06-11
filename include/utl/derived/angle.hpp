@@ -16,6 +16,8 @@ namespace utl {
             DEG,
         };
 
+        constexpr Angle() = default;
+
         constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD) {
             switch (type) {
                 case TYPE::DEG:

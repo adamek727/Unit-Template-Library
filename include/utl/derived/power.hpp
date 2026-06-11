@@ -20,6 +20,8 @@ namespace utl {
         static constexpr double WATTS_IN_HORSEPOWER = 745.6998715822702;
 
     public:
+        constexpr Power() = default;
+
         constexpr explicit Power(T power) : PowerUnit<T>{power} {}
 
         constexpr explicit Power(const Energy<T> &e, const Time<T> &t) : PowerUnit<T>{e.J() / t.s()} {}

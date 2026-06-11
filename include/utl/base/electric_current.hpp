@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class ElectricCurrent : public ElectricCurrentUnit<T> {
     public:
+        constexpr ElectricCurrent() = default;
+
         constexpr explicit ElectricCurrent(T current) : ElectricCurrentUnit<T>{current} {}
 
         [[nodiscard]] constexpr auto kA() const -> T { return static_cast<T>(A() / KILO); }

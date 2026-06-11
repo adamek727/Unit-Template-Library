@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class Inductance : public InductanceUnit<T> {
     public:
+        constexpr Inductance() = default;
+
         constexpr explicit Inductance(T illuminance) : InductanceUnit<T>{illuminance} {}
 
         constexpr explicit Inductance(const MagneticFlux<T> &mf, const ElectricCurrent<T> &ec) : InductanceUnit<T>{

@@ -16,6 +16,8 @@ namespace utl {
     template<typename T>
     class Voltage : public VoltageUnit<T> {
     public:
+        constexpr Voltage() = default;
+
         constexpr explicit Voltage(T voltage) : VoltageUnit<T>{voltage} {}
 
         constexpr explicit Voltage(const Power<T> &p, const ElectricCurrent<T> &ec = 1) : VoltageUnit<T>{p.W() / ec.A()} {}

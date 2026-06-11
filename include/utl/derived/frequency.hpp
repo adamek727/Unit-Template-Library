@@ -16,6 +16,8 @@ namespace utl {
     class Frequency : public FrequencyUnit<T> {
 
     public:
+        constexpr Frequency() = default;
+
         constexpr explicit Frequency(T freq) : FrequencyUnit<T>{freq} {}
 
         [[nodiscard]] constexpr auto THz() const -> T { return static_cast<T>(Hz() / TERA); }
