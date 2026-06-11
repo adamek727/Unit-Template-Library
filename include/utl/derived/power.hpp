@@ -11,9 +11,8 @@
 
 namespace utl {
 
-
     template<typename T>
-    using PowerUnit = DivBaseUnits<T, Energy<T>, Time<T>>;
+    using PowerUnit = BaseUnit<T, -3, 2, 1, 0, 0, 0, 0>;
 
     template<typename T>
     class Power : public PowerUnit<T> {
@@ -27,34 +26,6 @@ namespace utl {
 
         [[nodiscard]] auto W() const -> T { return this->value(); }
 
-        auto operator+(const Power &other) const -> Power {
-            return Power(W() + other.W());
-        }
-
-        auto operator-(const Power &other) const -> Power {
-            return Power(W() - other.W());
-        }
-
-        auto operator*(const T scalar) const -> Power<T> {
-            return Power(W() * scalar);
-        }
-
-        auto operator/(const T scalar) const -> Power<T> {
-            return Power(W() / scalar);
-        }
-
-
-        auto operator*(const Time<T> &other) const -> Energy<T> {
-            return Energy<T>(W() * other.s());
-        }
-
-        auto operator/(const Energy<T> other) const -> Frequency<T> {
-            return Frequency<T>(W() / other.J());
-        }
-
-        friend auto operator*(T lhs, const Power<T>& rhs) -> Power<T> {
-            return Power<T>(rhs.W() * lhs);
-        }
     };
 
     template<typename T>

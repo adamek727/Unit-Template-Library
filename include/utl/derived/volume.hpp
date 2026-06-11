@@ -10,7 +10,7 @@
 
 namespace utl {
     template<typename T>
-    using VolumeUnit = MulBaseUnits<T, Area<T>, Length<T>>;
+    using VolumeUnit = BaseUnit<T, 0, 3, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class Volume : public VolumeUnit<T> {
@@ -29,33 +29,6 @@ namespace utl {
 
         [[nodiscard]] auto l() const -> T { return this->value() * LITERS_IN_M3; }
 
-        auto operator+(const Volume &other) const -> Volume {
-            return Volume(m3() + other.m3());
-        }
-
-        auto operator-(const Volume &other) const -> Volume {
-            return Volume(m3() - other.m3());
-        }
-
-        auto operator*(T scalar) const -> Volume {
-            return Volume(m3() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Volume {
-            return Volume(m3() / scalar);
-        }
-
-        auto operator/(const Length<T> &other) const -> Area<T> {
-            return Area<T>(m3() / other.m());
-        }
-
-        auto operator/(const Area<T> &other) const -> Length<T> {
-            return Length<T>(m3() / other.m2());
-        }
-
-        friend auto operator*(T lhs, const Volume<T>& rhs) -> Volume<T> {
-            return Volume<T>(rhs.m3() * lhs);
-        }
     };
 
     template<typename T>

@@ -14,7 +14,7 @@ namespace utl {
     class MagneticFluxDensity;
 
     template<typename T>
-    using MagneticFluxDensityUnit = DivBaseUnits<T, MagneticFlux<T>, Area<T>>;
+    using MagneticFluxDensityUnit = BaseUnit<T, -2, 0, 1, -1, 0, 0, 0>;
 
     template<typename T>
     class MagneticFluxDensity : public MagneticFluxDensityUnit<T> {
@@ -26,29 +26,6 @@ namespace utl {
 
         [[nodiscard]] auto Tesla() const -> T { return this->value(); }
 
-        auto operator+(const MagneticFluxDensity &other) const -> MagneticFluxDensity {
-            return MagneticFluxDensity(Tesla() + other.Tesla());
-        }
-
-        auto operator-(const MagneticFluxDensity &other) const -> MagneticFluxDensity {
-            return MagneticFluxDensity(Tesla() - other.Tesla());
-        }
-
-        auto operator*(T scalar) const -> MagneticFluxDensity {
-            return MagneticFluxDensity(Tesla() * scalar);
-        }
-
-        auto operator/(T scalar) const -> MagneticFluxDensity {
-            return MagneticFluxDensity(Tesla() / scalar);
-        }
-
-        auto operator*(const Area<T> &other) const -> MagneticFlux<T> {
-            return MagneticFlux<T>(Tesla() * other.m2());
-        }
-
-        friend auto operator*(T lhs, const MagneticFluxDensity<T>& rhs) -> MagneticFluxDensity<T> {
-            return MagneticFluxDensity<T>(rhs.Tesla() * lhs);
-        }
     };
 
     template<typename T>

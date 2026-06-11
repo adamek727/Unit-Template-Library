@@ -10,15 +10,6 @@
 namespace utl {
 
     template<typename T>
-    class Area;
-
-    template<typename T>
-    class Volume;
-
-    template<typename T>
-    class Velocity;
-
-    template<typename T>
     using LengthUnit = BaseUnit<T, 0, 1, 0, 0, 0, 0, 0>;
 
     template<typename T>
@@ -41,37 +32,6 @@ namespace utl {
 
         [[nodiscard]] auto mi() const -> T { return km() * MILES_IN_KILOMETER; }
 
-        auto operator+(const Length &other) const -> Length {
-            return Length(m() + other.m());
-        }
-
-        auto operator-(const Length &other) const -> Length {
-            return Length(m() - other.m());
-        }
-
-        auto operator*(T scalar) const -> Length {
-            return Length(m() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Length {
-            return Length(m() / scalar);
-        }
-
-        auto operator*(const Length &other) const -> Area<T> {
-            return Area<T>(m() * other.m());
-        }
-
-        auto operator*(const Area<T> &other) const -> Volume<T> {
-            return Volume<T>(m() * other.m2());
-        }
-
-        auto operator/(const Time<T> &other) const -> Velocity<T> {
-            return Velocity<T>(m() / other.s());
-        }
-
-        friend auto operator*(T lhs, const Length<T>& rhs) -> Length<T> {
-            return Length<T>(rhs.m() * lhs);
-        }
     };
 
     template<typename T>

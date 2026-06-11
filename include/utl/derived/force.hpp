@@ -11,14 +11,7 @@
 namespace utl {
 
     template<typename T>
-    class Pressure;
-
-    template<typename T>
-    class Energy;
-
-
-    template<typename T>
-    using ForceUnit = MulBaseUnits<T, Mass<T>, Acceleration<T>>;
+    using ForceUnit = BaseUnit<T, -2, 1, 1, 0, 0, 0, 0>;
 
     template<typename T>
     class Force : public ForceUnit<T> {
@@ -32,42 +25,6 @@ namespace utl {
 
         [[nodiscard]] auto N() const -> T { return this->value(); }
 
-        auto operator+(const Force &other) const -> Force {
-            return Force(N() + other.N());
-        }
-
-        auto operator-(const Force &other) const -> Force {
-            return Force(N() - other.N());
-        }
-
-        auto operator*(const T scalar) const -> Force<T> {
-            return Force(N() * scalar);
-        }
-
-        auto operator/(const T scalar) const -> Force<T> {
-            return Force(N() / scalar);
-        }
-
-
-        auto operator/(const Acceleration<T> &other) const -> Mass<T> {
-            return Mass<T>(N() / other.mps2());
-        }
-
-        auto operator/(const Mass<T> &other) const -> Acceleration<T> {
-            return Acceleration<T>(N() / other.kg());
-        }
-
-        auto operator*(const Length<T> &other) const -> Energy<T> {
-            return Energy<T>(N() * other.m());
-        }
-
-        auto operator/(const Area<T> &other) const -> Pressure<T> {
-            return Pressure<T>(N() / other.m2());
-        }
-
-        friend auto operator*(T lhs, const Force<T>& rhs) -> Force {
-            return Force<T>(rhs.N() * lhs);
-        }
     };
 
     template<typename T>

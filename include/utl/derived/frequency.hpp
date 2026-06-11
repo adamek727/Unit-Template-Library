@@ -10,7 +10,7 @@
 namespace utl {
 
     template<typename T>
-    using FrequencyUnit = InvBaseUnit<T, Time<T>>;
+    using FrequencyUnit = BaseUnit<T, -1, 0, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class Frequency : public FrequencyUnit<T> {
@@ -28,25 +28,6 @@ namespace utl {
 
         [[nodiscard]] auto Hz() const -> T { return this->value(); }
 
-        auto operator+(const Frequency &other) const -> Frequency {
-            return Frequency(Hz() + other.Hz());
-        }
-
-        auto operator-(const Frequency &other) const -> Frequency {
-            return Frequency(Hz() - other.Hz());
-        }
-
-        auto operator*(T scalar) const -> Frequency {
-            return Frequency(Hz() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Frequency {
-            return Frequency(Hz() / scalar);
-        }
-
-        friend auto operator*(T lhs, const Frequency<T>& rhs) -> Frequency {
-            return Frequency<T>(rhs.Hz() * lhs);
-        }
     };
 
     template<typename T>

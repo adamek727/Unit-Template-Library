@@ -4,8 +4,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/magnetic_flux.hpp"
-#include "utl/derived/magnetic_flux_density.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

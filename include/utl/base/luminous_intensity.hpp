@@ -20,25 +20,6 @@ namespace utl {
 
         [[nodiscard]] auto cd() const -> T { return this->value(); }
 
-        auto operator+(const LuminousIntensity &other) const -> LuminousIntensity {
-            return LuminousIntensity(cd() + other.cd());
-        }
-
-        auto operator-(const LuminousIntensity &other) const -> LuminousIntensity {
-            return LuminousIntensity(cd() - other.cd());
-        }
-
-        auto operator*(T scalar) const -> LuminousIntensity {
-            return LuminousIntensity(cd() * scalar);
-        }
-
-        auto operator/(T scalar) const -> LuminousIntensity {
-            return LuminousIntensity(cd() / scalar);
-        }
-
-        friend auto operator*(T lhs, const LuminousIntensity<T>& rhs) -> LuminousIntensity<T> {
-            return LuminousIntensity<T>(rhs.cd() * lhs);
-        }
     };
 
     template<typename T>

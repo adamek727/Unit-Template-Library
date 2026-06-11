@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using AbsorbedDoseUnit = DivBaseUnits<T, Energy<T>, Mass<T>>;
+    using AbsorbedDoseUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0>;
 
     template<typename T>
     class AbsorbedDose : public AbsorbedDoseUnit<T> {
@@ -23,25 +23,6 @@ namespace utl {
 
         [[nodiscard]] auto Gy() const -> T { return this->value(); }
 
-        auto operator+(const AbsorbedDose &other) const -> AbsorbedDose {
-            return AbsorbedDose(Gy() + other.Gy());
-        }
-
-        auto operator-(const AbsorbedDose &other) const -> AbsorbedDose {
-            return AbsorbedDose(Gy() - other.Gy());
-        }
-
-        auto operator*(T scalar) const -> AbsorbedDose {
-            return AbsorbedDose(Gy() * scalar);
-        }
-
-        auto operator/(T scalar) const -> AbsorbedDose {
-            return AbsorbedDose(Gy() / scalar);
-        }
-
-        auto operator*(const Mass<T> &other) const -> Energy<T> {
-            return Energy(Gy() * other.kg());
-        }
     };
 
     template<typename T>
