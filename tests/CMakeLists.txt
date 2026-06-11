@@ -45,3 +45,7 @@ make_units_test(t_derived_solid_angle)
 make_units_test(t_derived_velocity)
 make_units_test(t_derived_voltage)
 make_units_test(t_derived_volume)
+
+add_executable(t_odr utl/t_odr_main.cpp utl/t_odr_second.cpp)
+target_link_libraries(t_odr GTest::GTest)
+add_test(NAME t_odr COMMAND t_odr)

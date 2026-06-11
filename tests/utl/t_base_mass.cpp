@@ -5,6 +5,7 @@
 
 #include <gtest/gtest.h>
 #include "utl/base/mass.hpp"
+#include "utl/derived/force.hpp"
 
 using namespace utl;
 
@@ -53,6 +54,13 @@ TEST(t_mass_test, dim) {
     EXPECT_EQ(Mass<float>::TdTempDim(), 0);
     EXPECT_EQ(Mass<float>::AmOfSubDim(), 0);
     EXPECT_EQ(Mass<float>::LumIntDim(), 0);
+}
+
+TEST(t_mass_test, mass_times_acceleration_is_force) {
+    auto mass = Mass<float>(2.0);
+    auto acceleration = Acceleration<float>(3.0);
+    auto force = mass * acceleration;
+    EXPECT_FLOAT_EQ(force.N(), 6.0f);
 }
 
 int main(int argc, char **argv) {

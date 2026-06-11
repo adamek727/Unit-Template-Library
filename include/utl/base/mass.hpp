@@ -49,8 +49,8 @@ namespace utl {
             return Mass(kg() / scalar);
         }
 
-        auto operator/(const Acceleration<T> &other) const -> Force<T> {
-            return Force<T>(kg() / other.mps2());
+        auto operator*(const Acceleration<T> &other) const -> Force<T> {
+            return Force<T>(kg() * other.mps2());
         }
 
         friend auto operator*(T lhs, const Mass<T>& rhs) -> Mass<T> {
