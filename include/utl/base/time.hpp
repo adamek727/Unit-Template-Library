@@ -19,6 +19,8 @@ namespace utl {
     public:
         constexpr explicit Time(T time) : TimeUnit<T>{time} {}
 
+        [[nodiscard]] constexpr auto day() const -> T { return static_cast<T>(h() / HOURS_IN_DAY); }
+
         [[nodiscard]] constexpr auto h() const -> T { return static_cast<T>(s() / SECS_IN_MINUTE / MINUTES_IN_HOUR); }
 
         [[nodiscard]] constexpr auto min() const -> T { return static_cast<T>(s() / SECS_IN_MINUTE); }

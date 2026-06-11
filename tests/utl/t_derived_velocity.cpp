@@ -68,6 +68,10 @@ TEST(t_velocity_test, dim) {
     EXPECT_EQ(Velocity<float>::LumIntDim(), 0);
 }
 
+TEST(t_velocity_test, miles_per_hour) {
+    EXPECT_FLOAT_EQ(Velocity<float>(0.44704f).mph(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

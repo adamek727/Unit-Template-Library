@@ -63,6 +63,10 @@ TEST(t_power_test, dim) {
     EXPECT_EQ(Power<float>::LumIntDim(), 0);
 }
 
+TEST(t_power_test, horsepower) {
+    EXPECT_FLOAT_EQ(Power<float>(745.69987f).hp(), 1.0f);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
