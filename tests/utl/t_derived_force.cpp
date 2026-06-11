@@ -4,10 +4,10 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/force.hpp"
-#include "utl/derived/area.hpp"
-#include "utl/derived/pressure.hpp"
-#include "utl/derived/energy.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

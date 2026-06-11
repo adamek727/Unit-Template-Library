@@ -10,51 +10,23 @@
 
 namespace utl {
 
+    template<typename T>
+    using ElectricChargeUnit = BaseUnit<T, 1, 0, 0, 1, 0, 0, 0>;
 
     template<typename T>
-    using ElectricChangeUnit = MulBaseUnits<T, ElectricCurrent<T>, Time<T>>;
-
-    template<typename T>
-    class ElectricCharge : public ElectricChangeUnit<T> {
+    class ElectricCharge : public ElectricChargeUnit<T> {
     public:
-        explicit ElectricCharge(const T &charge) : ElectricChangeUnit<T>{charge} {}
+        explicit ElectricCharge(const T &charge) : ElectricChargeUnit<T>{charge} {}
 
-        explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChangeUnit<T>{
+        explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChargeUnit<T>{
                 ec.A() * t.s()} {}
 
         [[nodiscard]] auto C() const -> T { return this->value(); }
 
-        auto operator+(const ElectricCharge &other) const -> ElectricCharge {
-            return ElectricCharge(C() + other.C());
-        }
-
-        auto operator-(const ElectricCharge &other) const -> ElectricCharge {
-            return ElectricCharge(C() - other.C());
-        }
-
-        auto operator*(T scalar) const -> ElectricCharge {
-            return ElectricCharge(C() * scalar);
-        }
-
-        auto operator/(T scalar) const -> ElectricCharge {
-            return ElectricCharge(C() / scalar);
-        }
-
-        auto operator/(const ElectricCurrent<T> &other) const -> Time<T> {
-            return Time<T>(C() / other.A());
-        }
-
-        auto operator/(const Time<T> &other) const -> ElectricCurrent<T> {
-            return ElectricCurrent<T>(C() / other.s());
-        }
-
-        friend auto operator*(T lhs, const ElectricCharge<T>& rhs) -> ElectricCharge {
-            return ElectricCharge<T>(rhs.C() * lhs);
-        }
     };
 
     template<typename T>
-    struct UnitMapper<ElectricCharge<T>> {
+    struct UnitMapper<ElectricChargeUnit<T>> {
         using type = ElectricCharge<T>;
     };
 }

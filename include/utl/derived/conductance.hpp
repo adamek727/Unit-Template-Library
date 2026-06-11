@@ -10,7 +10,7 @@
 namespace utl {
 
     template<typename T>
-    using ConductanceUnit = InvBaseUnit<T, Resistance<T>>;
+    using ConductanceUnit = BaseUnit<T, 3, -2, -1, 2, 0, 0, 0>;
 
     template<typename T>
     class Conductance : public ConductanceUnit<T> {
@@ -21,29 +21,6 @@ namespace utl {
 
         [[nodiscard]] auto S() const -> T { return this->value(); }
 
-        auto operator+(const Conductance &other) const -> Conductance {
-            return Conductance(S() + other.S());
-        }
-
-        auto operator-(const Conductance &other) const -> Conductance {
-            return Conductance(S() - other.S());
-        }
-
-        auto operator*(T scalar) const -> Conductance {
-            return Conductance(S() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Conductance {
-            return Conductance(S() / scalar);
-        }
-
-        auto operator*(const Voltage<T> &other) const -> ElectricCurrent<T> {
-            return ElectricCurrent<T>(S() * other.V());
-        }
-
-        friend auto operator*(T lhs, const Conductance<T>& rhs) -> Conductance {
-            return Conductance<T>(rhs.S() * lhs);
-        }
     };
 
     template<typename T>

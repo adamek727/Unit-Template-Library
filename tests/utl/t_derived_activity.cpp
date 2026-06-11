@@ -4,7 +4,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/activity.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

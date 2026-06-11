@@ -12,10 +12,7 @@
 namespace utl {
 
     template<typename T>
-    class Conductance;
-
-    template<typename T>
-    using ResistanceUnit = DivBaseUnits<T, Voltage<T>, ElectricCurrent<T>>;
+    using ResistanceUnit = BaseUnit<T, -3, 2, 1, -2, 0, 0, 0>;
 
     template<typename T>
     class Resistance : public ResistanceUnit<T> {
@@ -32,29 +29,6 @@ namespace utl {
 
         [[nodiscard]] auto mOhm() const -> T { return this->value() / MILLI; }
 
-        auto operator+(const Resistance &other) const -> Resistance {
-            return Resistance(Ohm() + other.Ohm());
-        }
-
-        auto operator-(const Resistance &other) const -> Resistance {
-            return Resistance(Ohm() - other.Ohm());
-        }
-
-        auto operator*(T scalar) const -> Resistance {
-            return Resistance(Ohm() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Resistance {
-            return Resistance(Ohm() / scalar);
-        }
-
-        auto operator*(const ElectricCurrent<T> &other) const -> Voltage<T> {
-            return Voltage<T>(Ohm() * other.A());
-        }
-
-        friend auto operator*(T lhs, const Resistance<T>& rhs) -> Resistance<T> {
-            return Resistance<T>(rhs.Ohm() * lhs);
-        }
     };
 
     template<typename T>

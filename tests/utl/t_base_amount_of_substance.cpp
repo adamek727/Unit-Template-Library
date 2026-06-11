@@ -4,7 +4,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/base/amount_of_substance.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

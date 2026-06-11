@@ -4,7 +4,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/base/electric_current.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

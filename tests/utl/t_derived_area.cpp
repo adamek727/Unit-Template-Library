@@ -4,7 +4,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/area.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

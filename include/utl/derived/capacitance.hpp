@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using CapacitanceUnit = DivBaseUnits<T, ElectricCharge<T>, Voltage<T>>;
+    using CapacitanceUnit = BaseUnit<T, 4, -2, -1, 2, 0, 0, 0>;
 
     template<typename T>
     class Capacitance : public CapacitanceUnit<T> {
@@ -28,33 +28,10 @@ namespace utl {
 
         [[nodiscard]] auto pF() const -> T { return F() / PICO; }
 
-        auto operator+(const Capacitance &other) const -> Capacitance {
-            return Capacitance(F() + other.F());
-        }
-
-        auto operator-(const Capacitance &other) const -> Capacitance {
-            return Capacitance(F() - other.F());
-        }
-
-        auto operator*(T scalar) const -> Capacitance {
-            return Capacitance(F() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Capacitance {
-            return Capacitance(F() / scalar);
-        }
-
-        auto operator*(const Voltage<T> &other) const -> ElectricCharge<T> {
-            return ElectricCharge<T>(F() * other.V());
-        }
-
-        friend auto operator*(T lhs, const Capacitance<T>& rhs) -> Capacitance<T> {
-            return Capacitance<T>(rhs.F() * lhs);
-        }
     };
 
     template<typename T>
-    struct UnitMapper<Capacitance<T>> {
+    struct UnitMapper<CapacitanceUnit<T>> {
         using type = Capacitance<T>;
     };
 }

@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using VoltageUnit = DivBaseUnits<T, Power<T>, ElectricCurrent<T>>;
+    using VoltageUnit = BaseUnit<T, -3, 2, 1, -1, 0, 0, 0>;
 
     template<typename T>
     class Voltage : public VoltageUnit<T> {
@@ -26,29 +26,6 @@ namespace utl {
 
         [[nodiscard]] auto mV() const -> T { return V() / MILLI; }
 
-        auto operator+(const Voltage &other) const -> Voltage {
-            return Voltage(V() + other.V());
-        }
-
-        auto operator-(const Voltage &other) const -> Voltage {
-            return Voltage(V() - other.V());
-        }
-
-        auto operator*(T scalar) const -> Voltage {
-            return Voltage(V() * scalar);
-        }
-
-        auto operator/(T scalar) const -> Voltage {
-            return Voltage(V() / scalar);
-        }
-
-        auto operator*(const ElectricCurrent<T> &other) const -> Power<T> {
-            return Power<T>(V() * other.A());
-        }
-
-        friend auto operator*(T lhs, const Voltage<T>& rhs) -> Voltage<T> {
-            return Voltage<T>(rhs.V() * lhs);
-        }
     };
 
     template<typename T>

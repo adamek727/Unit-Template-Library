@@ -12,9 +12,11 @@ namespace utl {
     template<typename T>
     class Illuminance;
 
+    template<typename T>
+    class Area;
 
     template<typename T>
-    using LuminousFluxUnit = DivBaseUnits<T, LuminousIntensity<T>, SolidAngle<T>>;
+    using LuminousFluxUnit = BaseUnit<T, 0, 0, 0, 0, 0, 0, 1>;
 
     template<typename T>
     class LuminousFlux : public LuminousFluxUnit<T> {
@@ -56,13 +58,9 @@ namespace utl {
             return Illuminance<T>(lm() / other.m2());
         }
 
-        friend auto operator*(T lhs, const LuminousFlux<T>& rhs) -> LuminousFlux<T> {
+        friend auto operator*(T lhs, const LuminousFlux<T> &rhs) -> LuminousFlux<T> {
             return LuminousFlux<T>(rhs.lm() * lhs);
         }
     };
 
-    template<typename T>
-    struct UnitMapper<LuminousFluxUnit<T>> {
-        using type = LuminousFlux<T>;
-    };
 }

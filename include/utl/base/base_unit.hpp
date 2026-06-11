@@ -6,6 +6,7 @@
 #pragma once
 
 #include <array>
+#include <type_traits>
 #include "utl/helper.hpp"
 
 namespace utl {
@@ -13,6 +14,19 @@ namespace utl {
     template<class UnitType>
     struct UnitMapper {
     };
+
+    template<class UnitType, class = void>
+    struct MappedUnit {
+        using type = UnitType;
+    };
+
+    template<class UnitType>
+    struct MappedUnit<UnitType, std::void_t<typename UnitMapper<UnitType>::type>> {
+        using type = typename UnitMapper<UnitType>::type;
+    };
+
+    template<class UnitType>
+    using mapped_unit_t = typename MappedUnit<UnitType>::type;
 
     template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT>
     class BaseUnit {
@@ -58,66 +72,24 @@ namespace utl {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        auto operator+(const BaseUnit &other) const -> BaseUnit {
-            return BaseUnit(value_ + other.value_);
+        auto operator+(const BaseUnit &other) const -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(value_ + other.value_);
         }
 
-        auto operator-(const BaseUnit &other) const -> BaseUnit {
-            return BaseUnit(value_ - other.value_);
+        auto operator-(const BaseUnit &other) const -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(value_ - other.value_);
         }
 
-        auto operator*(T scalar) const -> Self {
-            return Self(value() * scalar);
+        auto operator*(T scalar) const -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(value() * scalar);
         }
 
-        auto operator/(T scalar) const -> Self {
-            return Self(value() / scalar);
+        auto operator/(T scalar) const -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(value() / scalar);
         }
 
-        friend auto operator*(T lhs, const Self& rhs) -> Self {
-            return Self(rhs.value() * lhs);
-        }
-
-        template<int8_t TIME_O, int8_t LENGTH_O, int8_t MASS_O, int8_t EL_CURR_O, int8_t TD_TEMP_O, int8_t AM_OF_SUB_O, int8_t LUM_INT_O>
-        auto operator*(
-                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) const -> BaseUnit<T,
-                TIME + TIME_O,
-                LENGTH + LENGTH_O,
-                MASS + MASS_O,
-                EL_CURR + EL_CURR_O,
-                TD_TEMP + TD_TEMP_O,
-                AM_OF_SUB + AM_OF_SUB_O,
-                LUM_INT + LUM_INT_O> {
-            return BaseUnit<T,
-                    TIME + TIME_O,
-                    LENGTH + LENGTH_O,
-                    MASS + MASS_O,
-                    EL_CURR + EL_CURR_O,
-                    TD_TEMP + TD_TEMP_O,
-                    AM_OF_SUB + AM_OF_SUB_O,
-                    LUM_INT + LUM_INT_O>(
-                    value_ * other.value());
-        }
-
-        template<int8_t TIME_O, int8_t LENGTH_O, int8_t MASS_O, int8_t EL_CURR_O, int8_t TD_TEMP_O, int8_t AM_OF_SUB_O, int8_t LUM_INT_O>
-        auto operator/(
-                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) const -> BaseUnit<T,
-                TIME - TIME_O,
-                LENGTH - LENGTH_O,
-                MASS - MASS_O,
-                EL_CURR - EL_CURR_O,
-                TD_TEMP - TD_TEMP_O,
-                AM_OF_SUB - AM_OF_SUB_O,
-                LUM_INT - LUM_INT_O> {
-            return BaseUnit<T,
-                    TIME - TIME_O,
-                    LENGTH - LENGTH_O,
-                    MASS - MASS_O,
-                    EL_CURR - EL_CURR_O,
-                    TD_TEMP - TD_TEMP_O,
-                    AM_OF_SUB - AM_OF_SUB_O,
-                    LUM_INT - LUM_INT_O>(
-                    value_ / other.value());
+        friend auto operator*(T lhs, const Self& rhs) -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(rhs.value() * lhs);
         }
 
     private:

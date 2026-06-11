@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using EnergyUnit = MulBaseUnits<T, Force<T>, Length<T>>;
+    using EnergyUnit = BaseUnit<T, -2, 2, 1, 0, 0, 0, 0>;
 
     template<typename T>
     class Energy : public EnergyUnit<T> {
@@ -34,34 +34,6 @@ namespace utl {
 
         [[nodiscard]] auto eV() const -> T { return J() * EVS_IN_JOULE; }
 
-        auto operator+(const Energy &other) const -> Energy {
-            return Energy(J() + other.J());
-        }
-
-        auto operator-(const Energy &other) const -> Energy {
-            return Energy(J() - other.J());
-        }
-
-        auto operator*(const T scalar) const -> Energy<T> {
-            return Energy(J() * scalar);
-        }
-
-        auto operator/(const T scalar) const -> Energy<T> {
-            return Energy(J() / scalar);
-        }
-
-
-        auto operator/(const Length<T> other) const -> Force<T> {
-            return Force<T>(J() / other.m());
-        }
-
-        auto operator/(const Force<T> other) const -> Length<T> {
-            return Length<T>(J() / other.N());
-        }
-
-        friend auto operator*(T lhs, const Energy<T>& rhs) -> Energy {
-            return Energy<T>(rhs.J() * lhs);
-        }
     };
 
     template<typename T>

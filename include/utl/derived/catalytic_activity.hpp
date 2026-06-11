@@ -11,9 +11,8 @@
 
 namespace utl {
 
-
     template<typename T>
-    using CatalyticActivityUnit = DivBaseUnits<T, AmountOfSubstance<T>, Time<T>>;
+    using CatalyticActivityUnit = BaseUnit<T, -1, 0, 0, 0, 0, 1, 0>;
 
     template<typename T>
     class CatalyticActivity : public BaseUnit<T, -1, 0, 0, 0, 0, 1, 0> {
@@ -25,33 +24,6 @@ namespace utl {
 
         [[nodiscard]] auto katal() const -> T { return this->value(); }
 
-        auto operator+(const CatalyticActivity &other) const -> CatalyticActivity {
-            return CatalyticActivity(katal() + other.katal());
-        }
-
-        auto operator-(const CatalyticActivity &other) const -> CatalyticActivity {
-            return CatalyticActivity(katal() - other.katal());
-        }
-
-        auto operator*(T scalar) const -> CatalyticActivity {
-            return CatalyticActivity(katal() * scalar);
-        }
-
-        auto operator/(T scalar) const -> CatalyticActivity {
-            return CatalyticActivity(katal() / scalar);
-        }
-
-        auto operator*(const Time<T> &other) -> AmountOfSubstance<T> {
-            return AmountOfSubstance<T>(katal() * other.s());
-        }
-
-        auto operator/(const AmountOfSubstance<T> &other) -> Frequency<T> {
-            return Frequency<T>(katal() / other.mol());
-        }
-
-        friend auto operator*(T lhs, const CatalyticActivity<T>& rhs) -> CatalyticActivity<T> {
-            return CatalyticActivity<T>(rhs.katal() * lhs);
-        }
     };
 
     template<typename T>

@@ -4,7 +4,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "utl/derived/solid_angle.hpp"
+#include "utl/utl.hpp"
 
 using namespace utl;
 

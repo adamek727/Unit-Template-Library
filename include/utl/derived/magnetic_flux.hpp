@@ -11,12 +11,11 @@
 
 namespace utl {
 
-
     template<typename T>
     class MagneticFluxDensity;
 
     template<typename T>
-    using MagneticFluxUnit = MulBaseUnits<T, Voltage<T>, Time<T>>;
+    using MagneticFluxUnit = BaseUnit<T, -2, 2, 1, -1, 0, 0, 0>;
 
     template<typename T>
     class MagneticFlux : public MagneticFluxUnit<T> {
@@ -31,33 +30,6 @@ namespace utl {
 
         [[nodiscard]] auto Wb() const -> T { return this->value(); }
 
-        auto operator+(const MagneticFlux &other) const -> MagneticFlux {
-            return MagneticFlux(Wb() + other.Wb());
-        }
-
-        auto operator-(const MagneticFlux &other) const -> MagneticFlux {
-            return MagneticFlux(Wb() - other.Wb());
-        }
-
-        auto operator*(T scalar) const -> MagneticFlux {
-            return MagneticFlux(Wb() * scalar);
-        }
-
-        auto operator/(T scalar) const -> MagneticFlux {
-            return MagneticFlux(Wb() / scalar);
-        }
-
-        auto operator/(const Voltage<T> &other) const -> Time<T> {
-            return Time<T>(Wb() / other.V());
-        }
-
-        auto operator/(const Time<T> &other) const -> Voltage<T> {
-            return Voltage<T>(Wb() / other.s());
-        }
-
-        friend auto operator*(T lhs, const MagneticFlux<T>& rhs) -> MagneticFlux<T> {
-            return MagneticFlux<T>(rhs.Wb() * lhs);
-        }
     };
 
     template<typename T>
