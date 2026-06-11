@@ -37,6 +37,11 @@ The dimension system, and how result types are derived:
   (`base/base_unit.hpp`) encodes the seven SI exponents as `int8_t` template
   parameters; the only data member is the value. That exponent order is used
   everywhere — aliases, `dim()`, operators, `io.hpp` symbols.
+- **A physical quantity is never undefined**: `BaseUnit() = delete`, so no
+  unit is default-constructible. Construction always takes an explicit value.
+  Do not add default constructors back (not to `BaseUnit`, not to named
+  units); fix callers instead — `insert_or_assign` over `map::operator[]`,
+  explicit element init for `std::array`, initialized struct members.
 - Each named unit derives from a **literal-exponent** alias
   (`using ForceUnit = BaseUnit<T, -2, 1, 1, 0, 0, 0, 0>`) and registers itself
   via a `UnitMapper<ForceUnit<T>>` specialization. Keep aliases literal:

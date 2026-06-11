@@ -93,6 +93,11 @@ TEST(t_unit_test, zero_overhead) {
     EXPECT_EQ(sizeof(BaseUnit<double, 0, 1, 0, 0, 0, 0, 0>), sizeof(double));
 }
 
+static_assert(!std::is_default_constructible_v<TestUnit>,
+              "a physical quantity is never undefined");
+static_assert(!std::is_default_constructible_v<Unit<double>>,
+              "a physical quantity is never undefined");
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

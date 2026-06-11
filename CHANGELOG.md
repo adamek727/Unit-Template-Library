@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Changed (breaking)
+
+- `BaseUnit` default constructor is deleted: a physical quantity is never
+  undefined. Every unit must be constructed with an explicit value. Callers
+  that relied on default construction (e.g. `std::map::operator[]`,
+  value-initialized `std::array`) must initialize explicitly.
+
 ## v2.0.0 (2026-06-11)
 
 ### Fixed
