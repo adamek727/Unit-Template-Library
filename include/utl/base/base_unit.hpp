@@ -58,11 +58,11 @@ namespace utl {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        auto operator+(const BaseUnit &other) -> BaseUnit {
+        auto operator+(const BaseUnit &other) const -> BaseUnit {
             return BaseUnit(value_ + other.value_);
         }
 
-        auto operator-(const BaseUnit &other) -> BaseUnit {
+        auto operator-(const BaseUnit &other) const -> BaseUnit {
             return BaseUnit(value_ - other.value_);
         }
 
@@ -80,7 +80,7 @@ namespace utl {
 
         template<int8_t TIME_O, int8_t LENGTH_O, int8_t MASS_O, int8_t EL_CURR_O, int8_t TD_TEMP_O, int8_t AM_OF_SUB_O, int8_t LUM_INT_O>
         auto operator*(
-                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) -> BaseUnit<T,
+                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) const -> BaseUnit<T,
                 TIME + TIME_O,
                 LENGTH + LENGTH_O,
                 MASS + MASS_O,
@@ -101,7 +101,7 @@ namespace utl {
 
         template<int8_t TIME_O, int8_t LENGTH_O, int8_t MASS_O, int8_t EL_CURR_O, int8_t TD_TEMP_O, int8_t AM_OF_SUB_O, int8_t LUM_INT_O>
         auto operator/(
-                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) -> BaseUnit<T,
+                const BaseUnit<T, TIME_O, LENGTH_O, MASS_O, EL_CURR_O, TD_TEMP_O, AM_OF_SUB_O, LUM_INT_O> &other) const -> BaseUnit<T,
                 TIME - TIME_O,
                 LENGTH - LENGTH_O,
                 MASS - MASS_O,

@@ -74,6 +74,15 @@ TEST(t_unit_test, div) {
     EXPECT_EQ(unit_t_3.LumIntDim(), 0);
 }
 
+TEST(t_unit_test, add_sub_on_const_operands) {
+    const auto unit_t_1 = TestUnit(1);
+    const auto unit_t_2 = TestUnit(2);
+    EXPECT_FLOAT_EQ((unit_t_1 + unit_t_2).value(), 3);
+    EXPECT_FLOAT_EQ((unit_t_1 - unit_t_2).value(), -1);
+    EXPECT_FLOAT_EQ((unit_t_1 * unit_t_2).value(), 2);
+    EXPECT_FLOAT_EQ((unit_t_1 / unit_t_2).value(), 0.5);
+}
+
 TEST(t_unit_test, zero_overhead) {
     EXPECT_EQ(sizeof(TestUnit), sizeof(float));
     EXPECT_EQ(sizeof(BaseUnit<double, 0, 1, 0, 0, 0, 0, 0>), sizeof(double));
