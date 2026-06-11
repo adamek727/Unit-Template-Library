@@ -93,6 +93,42 @@ namespace utl {
             return mapped_unit_t<Self>(rhs.value() * lhs);
         }
 
+        auto operator-() const -> mapped_unit_t<Self> {
+            return mapped_unit_t<Self>(-value_);
+        }
+
+        auto operator+=(const BaseUnit &other) -> BaseUnit & {
+            value_ += other.value_;
+            return *this;
+        }
+
+        auto operator-=(const BaseUnit &other) -> BaseUnit & {
+            value_ -= other.value_;
+            return *this;
+        }
+
+        auto operator*=(T scalar) -> BaseUnit & {
+            value_ *= scalar;
+            return *this;
+        }
+
+        auto operator/=(T scalar) -> BaseUnit & {
+            value_ /= scalar;
+            return *this;
+        }
+
+        auto operator==(const BaseUnit &other) const -> bool { return value_ == other.value_; }
+
+        auto operator!=(const BaseUnit &other) const -> bool { return value_ != other.value_; }
+
+        auto operator<(const BaseUnit &other) const -> bool { return value_ < other.value_; }
+
+        auto operator<=(const BaseUnit &other) const -> bool { return value_ <= other.value_; }
+
+        auto operator>(const BaseUnit &other) const -> bool { return value_ > other.value_; }
+
+        auto operator>=(const BaseUnit &other) const -> bool { return value_ >= other.value_; }
+
     private:
         T value_ = 0;
     };
