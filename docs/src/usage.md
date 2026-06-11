@@ -29,17 +29,52 @@ auto s = 0.5 * g * tt * tt;
 std::cout << "Free fall: " << s.m() << " m" << std::endl;
 ```
 
-## Arithmetic without predefined operators
+## Arbitrary dimensional expressions
 
-Any dimensionally valid expression can be computed through the raw
-dimension-tracking layer. `raw()` exposes the underlying `BaseUnit` and
-`type()` maps the result back to its named unit:
+Any dimensionally valid expression maps back to its named unit
+automatically. Combinations without a named SI unit yield the raw
+`BaseUnit`, which still tracks dimensions and exposes `value()`:
 
 ```cpp
 auto m = utl::Mass<float>(1);
 auto &c = utl::speed_of_light_f;
-auto e = (m.raw() * c.raw() * c.raw()).type();
+auto e = m * c * c;
 std::cout << "Energy: " << e.J() << " J" << std::endl;
+```
+
+## Unit literals
+
+The `utl::literals` namespace provides double-precision literal
+suffixes for common units:
+
+```cpp
+using namespace utl::literals;
+
+auto distance = 120.0_km + 500.0_m;
+auto speed = distance / 2.0_h;
+if (speed > 50.0_kmph) {
+    std::cout << "Speeding: " << speed.kmph() << " km/h" << std::endl;
+}
+```
+
+Available suffixes: `_s`, `_ms`, `_min`, `_h`, `_m`, `_km`, `_mm`,
+`_kg`, `_g`, `_A`, `_K`, `_mol`, `_cd`, `_mps`, `_kmph`, `_N`, `_J`,
+`_W`, `_Hz`, `_Pa`, `_V`, `_rad`.
+
+## Comparisons and compound assignment
+
+Units of the same dimension support `==`, `!=`, `<`, `<=`, `>`, `>=`
+as well as `+=`, `-=`, scalar `*=`, `/=` and unary minus.
+
+## Stream output
+
+Including `utl/io.hpp` enables printing any unit as its value followed
+by its SI dimensions:
+
+```cpp
+#include <utl/io.hpp>
+
+std::cout << utl::Velocity<float>(30) << std::endl;  // 30 [s^-1 m]
 ```
 
 ## Precision selection
