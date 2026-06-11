@@ -42,6 +42,17 @@ std::cout << "Energy: " << e.J() << "J" << std::endl;
 auto unit_f = Unit<float>(M_PI);
 auto unit_d = Unit<double>(M_PI);
 std::cout << std::fixed << std::setprecision(18) << "float: " << unit_f.value() << " double: " << unit_d.value() << std::endl;
+
+// Unit literals (double precision)
+using namespace utl::literals;
+auto distance = 120.0_km + 500.0_m;
+auto speed = distance / 2.0_h;
+if (speed > 50.0_kmph) {
+    std::cout << "Speeding: " << speed.kmph() << " km/h" << std::endl;
+}
+
+// Stream output (requires #include <utl/io.hpp>)
+std::cout << speed << std::endl;  // prints "16.7361 [s^-1 m]"
 ```
 
 ### Add to Existing Project
