@@ -15,27 +15,27 @@ namespace utl {
 
     // Constants
 
-    Frequency<double> cesium_hyperfine_freq_d(CAESIUM_HYPERFINE_FREQ_VALUE);
-    Frequency<float> cesium_hyperfine_freq_f(CAESIUM_HYPERFINE_FREQ_VALUE);
+    inline Frequency<double> cesium_hyperfine_freq_d(CAESIUM_HYPERFINE_FREQ_VALUE);
+    inline Frequency<float> cesium_hyperfine_freq_f(CAESIUM_HYPERFINE_FREQ_VALUE);
 
-    Velocity<double> speed_of_light_d(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
-    Velocity<float> speed_of_light_f(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
+    inline Velocity<double> speed_of_light_d(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
+    inline Velocity<float> speed_of_light_f(SPEED_OF_LIGHT_IN_VACUUM_VALUE);
 
-    ElectricCharge<float> elementary_charge_f(ELEMENTARY_CHARGE_VALUE);
-    ElectricCharge<double> elementary_charge_d(ELEMENTARY_CHARGE_VALUE);
+    inline ElectricCharge<float> elementary_charge_f(ELEMENTARY_CHARGE_VALUE);
+    inline ElectricCharge<double> elementary_charge_d(ELEMENTARY_CHARGE_VALUE);
 
-    MulBaseUnits<float, Energy<float>, Time<float>> planc_constant_f(PLANCK_CONSTANT_VALUE);
-    MulBaseUnits<double, Energy<double>, Time<double>> planc_constant_d(PLANCK_CONSTANT_VALUE);
+    inline MulBaseUnits<float, Energy<float>, Time<float>> planc_constant_f(PLANCK_CONSTANT_VALUE);
+    inline MulBaseUnits<double, Energy<double>, Time<double>> planc_constant_d(PLANCK_CONSTANT_VALUE);
 
-    DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(BOLTZMANN_CONSTANT_VALUE);
-    DivBaseUnits<double, Energy<double>, ThermodynamicTemperature<double>> boltzmann_constant_d(
+    inline DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(BOLTZMANN_CONSTANT_VALUE);
+    inline DivBaseUnits<double, Energy<double>, ThermodynamicTemperature<double>> boltzmann_constant_d(
             BOLTZMANN_CONSTANT_VALUE);
 
-    InvBaseUnit<float, AmountOfSubstance<float>> avogadro_constant_f(AVOGADRO_CONSTANT_VALUE);
-    InvBaseUnit<double, AmountOfSubstance<double>> avogadro_constant_d(AVOGADRO_CONSTANT_VALUE);
+    inline InvBaseUnit<float, AmountOfSubstance<float>> avogadro_constant_f(AVOGADRO_CONSTANT_VALUE);
+    inline InvBaseUnit<double, AmountOfSubstance<double>> avogadro_constant_d(AVOGADRO_CONSTANT_VALUE);
 
-    DivBaseUnits<float, LuminousFlux<float>, Power<float>> luminous_efficacy_f(LUMINOUS_EFFICACY_VALUE);
-    DivBaseUnits<double, LuminousFlux<double>, Power<double>> luminous_efficacy_d(LUMINOUS_EFFICACY_VALUE);
+    inline DivBaseUnits<float, LuminousFlux<float>, Power<float>> luminous_efficacy_f(LUMINOUS_EFFICACY_VALUE);
+    inline DivBaseUnits<double, LuminousFlux<double>, Power<double>> luminous_efficacy_d(LUMINOUS_EFFICACY_VALUE);
 
 
     // Base Units
