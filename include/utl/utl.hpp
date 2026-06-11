@@ -12,6 +12,7 @@
 #include "base/constants.hpp"
 #include "operators.hpp"
 #include "literals.hpp"
+#include "math.hpp"
 
 namespace utl {
 
