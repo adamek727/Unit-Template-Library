@@ -30,6 +30,17 @@ _DROP_PREFIXES = (
     ".set", ".loc", ".seh", ".def", ".scl", ".endef", ".addrsig",
 )
 
+# Data directives that make up a constant-pool entry's value.
+_DATA_DIRECTIVES = (
+    ".long", ".quad", ".byte", ".word", ".short", ".value", ".octa",
+    ".zero", ".single", ".double", ".ascii", ".asciz",
+)
+
+# Constant-pool labels: gcc emits .LC0, clang emits .LCPI<n>_<m>. Distinct
+# functions get distinct slot names for the *same* constant, so references are
+# compared by resolved value, not by slot name.
+_CONST_LABEL = re.compile(r"\.LC[A-Za-z0-9_]+")
+
 
 def compile_to_asm(compiler):
     out = os.path.join(tempfile.mkdtemp(), "zero_overhead.s")
@@ -53,7 +64,35 @@ def _code(line):
     return line.split("#", 1)[0].strip()
 
 
-def extract_body(asm, name):
+def collect_constants(asm):
+    """Map each constant-pool label to the normalized bytes it defines."""
+    consts = {}
+    lines = asm.splitlines()
+    i = 0
+    while i < len(lines):
+        code = _code(lines[i])
+        m = re.match(r"^(\.LC[A-Za-z0-9_]+):$", code)
+        if not m:
+            i += 1
+            continue
+        data = []
+        j = i + 1
+        while j < len(lines):
+            c = _code(lines[j])
+            if c == "":
+                j += 1
+                continue
+            if c.startswith(_DATA_DIRECTIVES):
+                data.append(re.sub(r"\s+", " ", c))
+                j += 1
+                continue
+            break
+        consts[m.group(1)] = " ".join(data)
+        i = j
+    return consts
+
+
+def extract_body(asm, name, consts):
     """Return the normalized instruction list of function `name`."""
     lines = asm.splitlines()
     start = None
@@ -75,10 +114,17 @@ def extract_body(asm, name):
             break
         body.append(line)
 
-    return normalize(body)
+    return normalize(body, consts)
 
 
-def normalize(body):
+def _resolve_consts(text, consts):
+    """Replace constant-pool label references with the value they point at, so
+    the same constant in differently-named slots compares equal."""
+    return _CONST_LABEL.sub(
+        lambda m: "const(%s)" % consts.get(m.group(0), m.group(0)), text)
+
+
+def normalize(body, consts):
     out = []
     for line in body:
         line = line.split("#", 1)[0]          # strip comments
@@ -89,7 +135,8 @@ def normalize(body):
             continue
         if re.match(r"^\.L[A-Za-z0-9_$.]*:$", stripped):  # local label def
             continue
-        out.append(re.sub(r"\s+", " ", stripped))         # collapse whitespace
+        collapsed = re.sub(r"\s+", " ", stripped)         # collapse whitespace
+        out.append(_resolve_consts(collapsed, consts))
     return out
 
 
@@ -101,10 +148,11 @@ def main():
     except subprocess.CalledProcessError as exc:
         raise SystemExit(f"compilation failed: {exc}")
 
+    consts = collect_constants(asm)
     failures = 0
     for name in PAIRS:
-        raw = extract_body(asm, "raw_" + name)
-        unit = extract_body(asm, "unit_" + name)
+        raw = extract_body(asm, "raw_" + name, consts)
+        unit = extract_body(asm, "unit_" + name, consts)
         if raw == unit:
             print(f"  ok    {name:<8} ({len(raw)} insns identical)")
         else:

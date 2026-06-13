@@ -4,7 +4,6 @@
 
 ### Added
 
-<<<<<<< HEAD
 - Property-based tests (`t_property`) checking algebraic identities such as
   `(a * b) / b == a` and `inv(inv(x)) == x` across randomized values, as
   regression insurance for the mapper and operators.
