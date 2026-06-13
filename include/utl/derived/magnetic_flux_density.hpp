@@ -22,14 +22,13 @@ namespace utl {
         constexpr explicit MagneticFluxDensity(T illuminance) : MagneticFluxDensityUnit<T>{illuminance} {}
 
         constexpr explicit MagneticFluxDensity(const MagneticFlux<T> &mf, const Area<T> &a) : MagneticFluxDensityUnit<T>{
-                mf.Wb() / a.m2()} {}
+                                                                                                  mf.Wb() / a.m2()} {}
 
         [[nodiscard]] constexpr auto Tesla() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<MagneticFluxDensityUnit<T>> {
         using type = MagneticFluxDensity<T>;
     };
-}
+} // namespace utl

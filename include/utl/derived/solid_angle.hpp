@@ -12,7 +12,6 @@ namespace utl {
     template<typename T>
     class SolidAngle : public Unit<T> {
     public:
-
         constexpr explicit SolidAngle(T solid_angle) : Unit<T>{solid_angle} {}
 
         constexpr explicit SolidAngle(Area<T> a1, Area<T> a2) : Unit<T>{a1.m2() / a2.m2()} {};
@@ -37,8 +36,8 @@ namespace utl {
             return SolidAngle(sr() / scalar);
         }
 
-        friend constexpr auto operator*(T lhs, const SolidAngle<T>& rhs) -> SolidAngle<T> {
+        friend constexpr auto operator*(T lhs, const SolidAngle<T> &rhs) -> SolidAngle<T> {
             return SolidAngle<T>(rhs.sr() * lhs);
         }
     };
-}
+} // namespace utl

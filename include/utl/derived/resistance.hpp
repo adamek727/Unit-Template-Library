@@ -28,11 +28,10 @@ namespace utl {
         [[nodiscard]] constexpr auto Ohm() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto mOhm() const -> T { return static_cast<T>(this->value() / MILLI); }
-
     };
 
     template<typename T>
     struct UnitMapper<ResistanceUnit<T>> {
         using type = Resistance<T>;
     };
-}
+} // namespace utl

@@ -32,11 +32,10 @@ namespace utl {
         [[nodiscard]] constexpr auto us() const -> T { return static_cast<T>(s() / MICRO); }
 
         [[nodiscard]] constexpr auto ns() const -> T { return static_cast<T>(s() / NANO); }
-
     };
 
     template<typename T>
     struct UnitMapper<TimeUnit<T>> {
         using type = Time<T>;
     };
-}
+} // namespace utl

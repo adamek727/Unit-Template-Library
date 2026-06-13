@@ -10,7 +10,7 @@
 
 using namespace utl;
 
-int main(int, char*[]) {
+int main(int, char *[]) {
 
     // Definition and unit conversion
     auto a = Area<float>(6543);

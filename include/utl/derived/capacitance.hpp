@@ -27,11 +27,10 @@ namespace utl {
         [[nodiscard]] constexpr auto nF() const -> T { return static_cast<T>(F() / NANO); }
 
         [[nodiscard]] constexpr auto pF() const -> T { return static_cast<T>(F() / PICO); }
-
     };
 
     template<typename T>
     struct UnitMapper<CapacitanceUnit<T>> {
         using type = Capacitance<T>;
     };
-}
+} // namespace utl

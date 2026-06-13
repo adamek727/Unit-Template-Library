@@ -22,11 +22,10 @@ namespace utl {
         constexpr explicit Acceleration(const Velocity<T> v, const Time<T> t) : AccelerationUnit<T>{v.mps() / t.s()} {}
 
         [[nodiscard]] constexpr auto mps2() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<AccelerationUnit<T>> {
         using type = Acceleration<T>;
     };
-}
+} // namespace utl

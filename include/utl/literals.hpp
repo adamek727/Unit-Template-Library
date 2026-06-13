@@ -8,18 +8,18 @@
 #include "utl/base/all.hpp"
 #include "utl/derived/all.hpp"
 
-#define UTL_DEFINE_LITERAL(suffix, UnitType, FACTOR) \
-    constexpr auto operator"" suffix(long double value) -> UnitType<double> { \
-        return UnitType<double>(static_cast<double>(value) * (FACTOR)); \
-    } \
-    constexpr auto operator"" suffix(unsigned long long value) -> UnitType<double> { \
-        return UnitType<double>(static_cast<double>(value) * (FACTOR)); \
+#define UTL_DEFINE_LITERAL(suffix, UnitType, FACTOR)                               \
+    constexpr auto operator"" suffix(long double value)->UnitType<double> {        \
+        return UnitType<double>(static_cast<double>(value) * (FACTOR));            \
+    }                                                                              \
+    constexpr auto operator"" suffix(unsigned long long value)->UnitType<double> { \
+        return UnitType<double>(static_cast<double>(value) * (FACTOR));            \
     }
 
 namespace utl {
     namespace literals {
 
-        UTL_DEFINE_LITERAL(_h, Time, SECS_IN_MINUTE * MINUTES_IN_HOUR)
+        UTL_DEFINE_LITERAL(_h, Time, SECS_IN_MINUTE *MINUTES_IN_HOUR)
         UTL_DEFINE_LITERAL(_min, Time, SECS_IN_MINUTE)
         UTL_DEFINE_LITERAL(_s, Time, 1.0)
         UTL_DEFINE_LITERAL(_ms, Time, MILLI)
@@ -46,7 +46,7 @@ namespace utl {
         UTL_DEFINE_LITERAL(_Pa, Pressure, 1.0)
         UTL_DEFINE_LITERAL(_V, Voltage, 1.0)
         UTL_DEFINE_LITERAL(_rad, Angle, 1.0)
-    }
-}
+    } // namespace literals
+} // namespace utl
 
 #undef UTL_DEFINE_LITERAL

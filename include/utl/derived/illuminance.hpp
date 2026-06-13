@@ -17,10 +17,10 @@ namespace utl {
     class Illuminance : public IlluminanceUnit<T> {
     public:
         constexpr explicit Illuminance(T illuminance) : IlluminanceUnit<T>{
-                illuminance} {}
+                                                            illuminance} {}
 
         constexpr explicit Illuminance(const LuminousFlux<T> &lf, const Area<T> &a) : IlluminanceUnit<T>{
-                lf.lm() / a.m2()} {}
+                                                                                          lf.lm() / a.m2()} {}
 
         [[nodiscard]] constexpr auto lux() const -> T { return static_cast<T>(this->value()); }
 
@@ -35,4 +35,4 @@ namespace utl {
     struct UnitMapper<IlluminanceUnit<T>> {
         using type = Illuminance<T>;
     };
-}
+} // namespace utl
