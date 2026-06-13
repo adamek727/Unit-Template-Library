@@ -9,3 +9,6 @@ cmake-build-*/
 # CMake artifacts
 CMakeCache.txt
 CMakeFiles/
+
+# Python
+__pycache__/

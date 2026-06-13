@@ -65,3 +65,17 @@ jobs:
 
       - name: Run example
         run: ./build/examples/Debug/usage_example.exe
+
+  zero-overhead:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang
+        run: sudo apt-get update && sudo apt-get install -y clang
+
+      - name: Zero-overhead proof (g++)
+        run: python3 tools/check_zero_overhead.py g++
+
+      - name: Zero-overhead proof (clang++)
+        run: python3 tools/check_zero_overhead.py clang++
