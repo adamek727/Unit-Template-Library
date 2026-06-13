@@ -36,11 +36,10 @@ namespace utl {
         [[nodiscard]] constexpr auto atm() const -> T { return static_cast<T>(Pa() / PASCALS_IN_ATMOSPHERE); }
 
         [[nodiscard]] constexpr auto psi() const -> T { return static_cast<T>(Pa() / PASCALS_IN_PSI); }
-
     };
 
     template<typename T>
     struct UnitMapper<PressureUnit<T>> {
         using type = Pressure<T>;
     };
-}
+} // namespace utl

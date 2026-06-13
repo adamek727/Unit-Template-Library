@@ -16,14 +16,13 @@ namespace utl {
     class LuminousIntensity : public LuminousIntensityUnit<T> {
     public:
         constexpr explicit LuminousIntensity(T luminous_intensity) : LuminousIntensityUnit<T>{
-                luminous_intensity} {}
+                                                                         luminous_intensity} {}
 
         [[nodiscard]] constexpr auto cd() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<LuminousIntensityUnit<T>> {
         using type = LuminousIntensity<T>;
     };
-}
+} // namespace utl

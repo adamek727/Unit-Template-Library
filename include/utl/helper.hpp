@@ -39,4 +39,4 @@ namespace utl {
     constexpr double MINUTES_IN_HOUR = 60.0;
     constexpr double HOURS_IN_DAY = 24.0;
     constexpr double DAYS_IN_YEAR = 365.0;
-}
+} // namespace utl

@@ -21,7 +21,6 @@ namespace utl {
         static constexpr double C2F_Q = 32;
 
     public:
-
         enum class TYPE {
             KELVIN,
             CELSIUS,
@@ -41,7 +40,6 @@ namespace utl {
         }
 
     public:
-
         constexpr explicit ThermodynamicTemperature(T thermodyn_temp, const TYPE &type = TYPE::KELVIN)
             : ThermodynamicTemperatureUnit<T>{to_kelvin(thermodyn_temp, type)} {}
 
@@ -50,11 +48,10 @@ namespace utl {
         [[nodiscard]] constexpr auto degC() const -> T { return static_cast<T>(K() + K2C); }
 
         [[nodiscard]] constexpr auto degF() const -> T { return static_cast<T>(degC() * C2F_K + C2F_Q); }
-
     };
 
     template<typename T>
     struct UnitMapper<ThermodynamicTemperatureUnit<T>> {
         using type = ThermodynamicTemperature<T>;
     };
-}
+} // namespace utl

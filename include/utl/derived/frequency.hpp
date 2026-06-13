@@ -27,11 +27,10 @@ namespace utl {
         [[nodiscard]] constexpr auto kHz() const -> T { return static_cast<T>(Hz() / KILO); }
 
         [[nodiscard]] constexpr auto Hz() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<FrequencyUnit<T>> {
         using type = Frequency<T>;
     };
-}
+} // namespace utl

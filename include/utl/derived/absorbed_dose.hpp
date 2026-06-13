@@ -19,14 +19,13 @@ namespace utl {
     public:
         constexpr explicit AbsorbedDose(T abs_dose) : AbsorbedDoseUnit<T>{abs_dose} {}
 
-        constexpr explicit AbsorbedDose(const Energy<T>& e, const Mass<T>& m) : AbsorbedDoseUnit<T>{e.J() / m.kg()} {}
+        constexpr explicit AbsorbedDose(const Energy<T> &e, const Mass<T> &m) : AbsorbedDoseUnit<T>{e.J() / m.kg()} {}
 
         [[nodiscard]] constexpr auto Gy() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<AbsorbedDoseUnit<T>> {
         using type = AbsorbedDose<T>;
     };
-}
+} // namespace utl

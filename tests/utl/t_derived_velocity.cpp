@@ -53,7 +53,6 @@ TEST(t_velocity_test, div) {
 
     auto acc_1 = velocity_1 / time_1;
     EXPECT_FLOAT_EQ(acc_1.mps2(), 3.0f / 5.0f);
-
 }
 
 TEST(t_velocity_test, dim) {

@@ -25,11 +25,10 @@ namespace utl {
         [[nodiscard]] constexpr auto umol() const -> T { return static_cast<T>(mol() / MICRO); }
 
         [[nodiscard]] constexpr auto nmol() const -> T { return static_cast<T>(mol() / NANO); }
-
     };
 
     template<typename T>
     struct UnitMapper<AmountOfSubstanceUnit<T>> {
         using type = AmountOfSubstance<T>;
     };
-}
+} // namespace utl

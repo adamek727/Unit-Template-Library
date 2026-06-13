@@ -40,11 +40,10 @@ namespace utl {
         [[nodiscard]] constexpr auto ft() const -> T { return static_cast<T>(m() / METERS_IN_FOOT); }
 
         [[nodiscard]] constexpr auto in() const -> T { return static_cast<T>(m() / METERS_IN_INCH); }
-
     };
 
     template<typename T>
     struct UnitMapper<LengthUnit<T>> {
         using type = Length<T>;
     };
-}
+} // namespace utl

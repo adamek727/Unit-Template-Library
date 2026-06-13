@@ -32,14 +32,13 @@ namespace utl {
 
     constexpr DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(static_cast<float>(BOLTZMANN_CONSTANT_VALUE));
     constexpr DivBaseUnits<double, Energy<double>, ThermodynamicTemperature<double>> boltzmann_constant_d(
-            BOLTZMANN_CONSTANT_VALUE);
+        BOLTZMANN_CONSTANT_VALUE);
 
     constexpr InvBaseUnit<float, AmountOfSubstance<float>> avogadro_constant_f(static_cast<float>(AVOGADRO_CONSTANT_VALUE));
     constexpr InvBaseUnit<double, AmountOfSubstance<double>> avogadro_constant_d(AVOGADRO_CONSTANT_VALUE);
 
     constexpr DivBaseUnits<float, LuminousFlux<float>, Power<float>> luminous_efficacy_f(static_cast<float>(LUMINOUS_EFFICACY_VALUE));
     constexpr DivBaseUnits<double, LuminousFlux<double>, Power<double>> luminous_efficacy_d(LUMINOUS_EFFICACY_VALUE);
-
 
     // Base Units
 
@@ -141,4 +140,4 @@ namespace utl {
     using Volume_f = Volume<float>;
     using Volume_d = Volume<double>;
 
-}
+} // namespace utl

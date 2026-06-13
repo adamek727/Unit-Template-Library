@@ -19,14 +19,13 @@ namespace utl {
         constexpr explicit ElectricCharge(const T &charge) : ElectricChargeUnit<T>{charge} {}
 
         constexpr explicit ElectricCharge(const ElectricCurrent<T> &ec, const Time<T> &t) : ElectricChargeUnit<T>{
-                ec.A() * t.s()} {}
+                                                                                                ec.A() * t.s()} {}
 
         [[nodiscard]] constexpr auto C() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<ElectricChargeUnit<T>> {
         using type = ElectricCharge<T>;
     };
-}
+} // namespace utl

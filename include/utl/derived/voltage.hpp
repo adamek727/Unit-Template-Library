@@ -25,11 +25,10 @@ namespace utl {
         [[nodiscard]] constexpr auto kV() const -> T { return static_cast<T>(V() / KILO); }
 
         [[nodiscard]] constexpr auto mV() const -> T { return static_cast<T>(V() / MILLI); }
-
     };
 
     template<typename T>
     struct UnitMapper<VoltageUnit<T>> {
         using type = Voltage<T>;
     };
-}
+} // namespace utl
