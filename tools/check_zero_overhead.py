@@ -43,13 +43,23 @@ def compile_to_asm(compiler):
         return f.read()
 
 
+def _code(line):
+    """Line with any trailing comment and surrounding whitespace removed.
+
+    clang annotates labels with a trailing comment (`raw_add: # @raw_add`),
+    so matching must ignore everything after `#`. (x86 AT&T uses `#` only for
+    comments; immediates use `$`.)
+    """
+    return line.split("#", 1)[0].strip()
+
+
 def extract_body(asm, name):
     """Return the normalized instruction list of function `name`."""
     lines = asm.splitlines()
     start = None
     label = name + ":"
     for i, line in enumerate(lines):
-        if line.strip() == label:
+        if _code(line) == label:
             start = i + 1
             break
     if start is None:
@@ -57,11 +67,11 @@ def extract_body(asm, name):
 
     body = []
     for line in lines[start:]:
-        stripped = line.strip()
+        code = _code(line)
         # End of this function: a new top-level label or the .size marker.
-        if re.match(r"^[A-Za-z_][A-Za-z0-9_]*:$", stripped):
+        if re.match(r"^[A-Za-z_][A-Za-z0-9_]*:$", code):
             break
-        if stripped.startswith(".size"):
+        if code.startswith(".size"):
             break
         body.append(line)
 
