@@ -19,6 +19,9 @@ ctest --test-dir build -R t_base_length        # or: ./build/tests/t_base_length
 # Zero-overhead proof (raw vs unit arithmetic must emit identical asm at -O2)
 python3 tools/check_zero_overhead.py g++        # or clang++
 
+# Format (CI fails on unformatted files; pin matches .github/workflows/ci.yml)
+clang-format -i $(find include tests examples \( -name '*.hpp' -o -name '*.cpp' \))
+
 # User guide (deployed to GitHub Pages from main)
 mdbook build docs
 ```
