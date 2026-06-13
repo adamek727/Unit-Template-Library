@@ -1,0 +1,21 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: c++17
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+# Hand-laid-out template signatures span many columns on purpose; do not reflow.
+ColumnLimit: 0
+AccessModifierOffset: -4
+NamespaceIndentation: All
+PointerAlignment: Right
+ReferenceAlignment: Right
+IndentCaseLabels: true
+AllowShortFunctionsOnASingleLine: All
+SpaceBeforeParens: ControlStatements
+# Match the existing house style rather than reflow it.
+SpaceAfterTemplateKeyword: false
+EmptyLineBeforeAccessModifier: Leave
+SortIncludes: false
+...
