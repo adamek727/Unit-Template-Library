@@ -8,6 +8,7 @@
 // a broken cross-unit mapping or a sign slip shows up as a violated identity
 // rather than waiting for a hand-written example to happen to cover it.
 
+#include <algorithm>
 #include <cmath>
 #include <random>
 #include <gtest/gtest.h>
