@@ -90,6 +90,10 @@ Top-level headers: `literals.hpp` (`utl::literals`, double-based suffixes),
 
 ## Conventions
 
+- **One PR, one commit on `main`.** History is linear: every change lands via a
+  squash-merged PR (the repo allows squash merges only), so each PR is exactly
+  one commit. No merge commits, no "WIP"/"fix typo" commits on `main`. See
+  `CONTRIBUTING.md`.
 - TDD is the norm here: write the failing test first; for compile-time API the
   RED phase is a compile error.
 - CI runs gcc, clang, MSVC (`/W4`) and an ASan/UBSan job, all with warnings as
