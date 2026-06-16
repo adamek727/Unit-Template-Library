@@ -75,6 +75,7 @@ their arithmetic preserves their type:
 | 1/s | `Frequency` | `Activity` |
 | m²/s² | `AbsorbedDose` | `DoseEquivalent` |
 | cd | `LuminousIntensity` | `LuminousFlux` |
+| K | `ThermodynamicTemperature` | `TemperatureDelta` |
 | dimensionless | raw `Unit` | `Angle`, `SolidAngle` |
 
 The photometric chain (`LuminousFlux`/`SolidAngle`/`Illuminance`) keeps
