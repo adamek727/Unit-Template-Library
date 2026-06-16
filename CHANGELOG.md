@@ -7,6 +7,10 @@
 - Property-based tests (`t_property`) checking algebraic identities such as
   `(a * b) / b == a` and `inv(inv(x)) == x` across randomized values, as
   regression insurance for the mapper and operators.
+- README status badges (CI, docs, latest release, license, C++17).
+- Release automation: pushing a `v*` tag publishes a GitHub Release with notes
+  drawn from the matching `CHANGELOG.md` section
+  (`tools/extract_changelog.sh`, `.github/workflows/release.yml`).
 
 ### Changed (breaking)
 
