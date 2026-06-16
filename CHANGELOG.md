@@ -30,8 +30,21 @@
   overlay port (`packaging/vcpkg/ports`), plus README install instructions for
   Conan, vcpkg and CMake FetchContent. The imported target is `utl::utl`
   everywhere.
+- Angle as an eighth pseudo-dimension: `Angle` (rad) and `SolidAngle` (sr) are
+  now distinct dimensions (`rad` = angle¹, `sr` = angle²), so `Angle * Angle ==
+  SolidAngle`, `sqrt(SolidAngle) == Angle`, and `LuminousIntensity * SolidAngle
+  == LuminousFlux`. A new `Torque` (N·m = energy/angle) is type-distinct from
+  `Energy` (`Energy / Angle == Torque`, `Torque * Angle == Energy`). Added
+  `sin` / `cos` / `tan` overloads that take an `Angle` and return a scalar.
 
 ### Changed (breaking)
+
+- `BaseUnit` gained an eighth template exponent `ANGLE` (defaulted to `0`, so
+  named-unit code is unaffected) and `dim()` now returns `std::array<int8_t, 8>`.
+  `Angle` and `SolidAngle` are no longer dimensionless — they carry the angle
+  dimension — and `LuminousFlux` (cd·sr) is now type-distinct from
+  `LuminousIntensity` (cd). Code reading `dim()` as a 7-element array, or
+  relying on angles comparing equal to raw scalars, must adjust.
 
 - `ThermodynamicTemperature - ThermodynamicTemperature` now returns a
   `TemperatureDelta` (was `ThermodynamicTemperature`), and

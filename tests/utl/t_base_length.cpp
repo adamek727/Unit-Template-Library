@@ -39,7 +39,7 @@ TEST(t_length_test, scalar_mul_div) {
 }
 
 TEST(t_length_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 1, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 1, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Length<float>::dim(), dim);
     EXPECT_EQ(Length<float>::TimeDim(), 0);
     EXPECT_EQ(Length<float>::LengthDim(), 1);

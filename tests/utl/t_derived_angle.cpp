@@ -39,7 +39,7 @@ TEST(t_derived_angle_test, sub) {
 }
 
 TEST(t_derived_angle_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 0, 0, 0, 0, 1};
     EXPECT_EQ(Angle<float>::dim(), dim);
     EXPECT_EQ(Angle<float>::TimeDim(), 0);
     EXPECT_EQ(Angle<float>::LengthDim(), 0);

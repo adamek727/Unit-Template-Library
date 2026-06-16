@@ -56,7 +56,7 @@ TEST(t_velocity_test, div) {
 }
 
 TEST(t_velocity_test, dim) {
-    auto dim = std::array<int8_t, 7>{-1, 1, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-1, 1, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Velocity<float>::dim(), dim);
     EXPECT_EQ(Velocity<float>::TimeDim(), -1);
     EXPECT_EQ(Velocity<float>::LengthDim(), 1);

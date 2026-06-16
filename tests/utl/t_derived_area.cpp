@@ -58,7 +58,7 @@ TEST(t_area_test, div) {
 }
 
 TEST(t_area_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 2, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 2, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Area<float>::dim(), dim);
     EXPECT_EQ(Area<float>::TimeDim(), 0);
     EXPECT_EQ(Area<float>::LengthDim(), 2);

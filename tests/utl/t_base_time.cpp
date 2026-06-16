@@ -46,7 +46,7 @@ TEST(t_time_test, inv) {
 }
 
 TEST(t_time_test, dim) {
-    auto dim = std::array<int8_t, 7>{1, 0, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{1, 0, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Time<float>::dim(), dim);
     EXPECT_EQ(Time<float>::TimeDim(), 1);
     EXPECT_EQ(Time<float>::LengthDim(), 0);

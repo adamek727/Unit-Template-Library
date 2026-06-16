@@ -53,7 +53,7 @@ TEST(t_area_test, div) {
 }
 
 TEST(t_area_test, dim) {
-    auto dim = std::array<int8_t, 7>{-1, 0, 0, 0, 0, 1, 0};
+    auto dim = std::array<int8_t, 8>{-1, 0, 0, 0, 0, 1, 0, 0};
     EXPECT_EQ(CatalyticActivity<float>::dim(), dim);
     EXPECT_EQ(CatalyticActivity<float>::TimeDim(), -1);
     EXPECT_EQ(CatalyticActivity<float>::LengthDim(), 0);

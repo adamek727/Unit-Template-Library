@@ -44,7 +44,7 @@ TEST(t_magnetic_flux_dens_density_test, mul) {
 }
 
 TEST(t_magnetic_flux_dens_density_test, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 0, 1, -1, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 0, 1, -1, 0, 0, 0, 0};
     EXPECT_EQ(MagneticFluxDensity<float>::dim(), dim);
     EXPECT_EQ(MagneticFluxDensity<float>::TimeDim(), -2);
     EXPECT_EQ(MagneticFluxDensity<float>::LengthDim(), 0);

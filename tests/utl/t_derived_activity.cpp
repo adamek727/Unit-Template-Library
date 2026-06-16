@@ -34,7 +34,7 @@ TEST(t_activity_test, scalar_mul_div) {
 }
 
 TEST(t_activity_test, dim) {
-    auto dim = std::array<int8_t, 7>{-1, 0, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-1, 0, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Activity<float>::dim(), dim);
     EXPECT_EQ(Activity<float>::TimeDim(), -1);
     EXPECT_EQ(Activity<float>::LengthDim(), 0);

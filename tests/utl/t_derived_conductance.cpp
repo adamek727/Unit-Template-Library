@@ -49,7 +49,7 @@ TEST(t_conductance_test, inv) {
 }
 
 TEST(t_mass_test, dim) {
-    auto dim = std::array<int8_t, 7>{3, -2, -1, 2, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{3, -2, -1, 2, 0, 0, 0, 0};
     EXPECT_EQ(Conductance<float>::dim(), dim);
     EXPECT_EQ(Conductance<float>::TimeDim(), 3);
     EXPECT_EQ(Conductance<float>::LengthDim(), -2);

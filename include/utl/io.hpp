@@ -11,9 +11,9 @@
 
 namespace utl {
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT>
-    auto operator<<(std::ostream &os, const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &unit) -> std::ostream & {
-        static constexpr const char *symbols[7] = {"s", "m", "kg", "A", "K", "mol", "cd"};
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
+    auto operator<<(std::ostream &os, const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &unit) -> std::ostream & {
+        static constexpr const char *symbols[8] = {"s", "m", "kg", "A", "K", "mol", "cd", "rad"};
         os << unit.value() << " [";
         auto dims = unit.dim();
         bool empty = true;

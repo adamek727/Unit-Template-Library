@@ -16,7 +16,7 @@ namespace utl {
     class Area;
 
     template<typename T>
-    using LuminousFluxUnit = BaseUnit<T, 0, 0, 0, 0, 0, 0, 1>;
+    using LuminousFluxUnit = BaseUnit<T, 0, 0, 0, 0, 0, 0, 1, 2>;
 
     template<typename T>
     class LuminousFlux : public LuminousFluxUnit<T> {
@@ -61,6 +61,11 @@ namespace utl {
         friend constexpr auto operator*(T lhs, const LuminousFlux<T> &rhs) -> LuminousFlux<T> {
             return LuminousFlux<T>(rhs.lm() * lhs);
         }
+    };
+
+    template<typename T>
+    struct UnitMapper<LuminousFluxUnit<T>> {
+        using type = LuminousFlux<T>;
     };
 
 } // namespace utl

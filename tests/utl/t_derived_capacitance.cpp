@@ -45,7 +45,7 @@ TEST(t_cap_test, mul) {
 }
 
 TEST(t_mass_test, dim) {
-    auto dim = std::array<int8_t, 7>{4, -2, -1, 2, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{4, -2, -1, 2, 0, 0, 0, 0};
     EXPECT_EQ(Capacitance<float>::dim(), dim);
     EXPECT_EQ(Capacitance<float>::TimeDim(), 4);
     EXPECT_EQ(Capacitance<float>::LengthDim(), -2);

@@ -53,7 +53,7 @@ TEST(t_magnetic_flux_test, div) {
 }
 
 TEST(t_magnetic_flux_test, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 2, 1, -1, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 2, 1, -1, 0, 0, 0, 0};
     EXPECT_EQ(MagneticFlux<float>::dim(), dim);
     EXPECT_EQ(MagneticFlux<float>::TimeDim(), -2);
     EXPECT_EQ(MagneticFlux<float>::LengthDim(), 2);

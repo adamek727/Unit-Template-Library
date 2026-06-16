@@ -45,7 +45,7 @@ TEST(t_mass_test, inv) {
 }
 
 TEST(t_mass_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 1, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 0, 1, 0, 0, 0, 0, 0};
     EXPECT_EQ(Mass<float>::dim(), dim);
     EXPECT_EQ(Mass<float>::TimeDim(), 0);
     EXPECT_EQ(Mass<float>::LengthDim(), 0);

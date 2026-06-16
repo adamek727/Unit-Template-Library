@@ -63,7 +63,7 @@ TEST(t_volume_test, div) {
 }
 
 TEST(t_volume_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 3, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 3, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Volume<float>::dim(), dim);
     EXPECT_EQ(Volume<float>::TimeDim(), 0);
     EXPECT_EQ(Volume<float>::LengthDim(), 3);
