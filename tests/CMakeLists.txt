@@ -52,6 +52,7 @@ make_units_test(t_derived_voltage)
 make_units_test(t_derived_volume)
 
 make_units_test(t_mixed_precision)
+make_units_test(t_temperature_delta)
 make_units_test(t_operators)
 make_units_test(t_ux)
 make_units_test(t_constexpr)

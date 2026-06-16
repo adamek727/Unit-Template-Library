@@ -21,9 +21,20 @@
   and the cross-unit `*` / `/` now accept operands with different storage types
   (e.g. `Length<float> + Length<double>`) and promote the result to the wider
   type via `std::common_type_t`.
+- `TemperatureDelta` type for affine-correct temperature arithmetic: a
+  *difference* of temperatures is a displacement, not an absolute point, so its
+  `degC()` / `degF()` apply only the scale factor and never the `+273.15` /
+  `+32` offset. Supports `Delta ± Delta`, scalar `*` / `/`, unary `-`, and
+  `Temperature ± Delta`.
 
 ### Changed (breaking)
 
+- `ThermodynamicTemperature - ThermodynamicTemperature` now returns a
+  `TemperatureDelta` (was `ThermodynamicTemperature`), and
+  `ThermodynamicTemperature + ThermodynamicTemperature` is deleted: adding two
+  absolute temperatures is physically meaningless. Add a `TemperatureDelta`
+  instead (`temp + TemperatureDelta(5)`). Reading a temperature *difference*
+  via `.degC()` / `.degF()` previously misapplied the scale offset.
 - `BaseUnit` default constructor is deleted: a physical quantity is never
   undefined. Every unit must be constructed with an explicit value. Callers
   that relied on default construction (e.g. `std::map::operator[]`,

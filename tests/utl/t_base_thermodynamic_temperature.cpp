@@ -15,13 +15,13 @@ TEST(t_thermodynamic_temperature_test, init) {
     EXPECT_FLOAT_EQ(td_temp_1.degF(), -450.67f);
 }
 
-TEST(t_thermodynamic_temperature_test, add) {
-    auto td_temp_1 = ThermodynamicTemperature<float>(5.0);
-    auto td_temp_2 = ThermodynamicTemperature<float>(10.0);
-    EXPECT_FLOAT_EQ((td_temp_1 + td_temp_2).K(), 15);
+TEST(t_thermodynamic_temperature_test, add_delta) {
+    auto td_temp = ThermodynamicTemperature<float>(5.0);
+    auto delta = TemperatureDelta<float>(10.0);
+    EXPECT_FLOAT_EQ((td_temp + delta).K(), 15);
 }
 
-TEST(t_thermodynamic_temperature_test, sub) {
+TEST(t_thermodynamic_temperature_test, sub_temps_is_delta) {
     auto td_temp_1 = ThermodynamicTemperature<float>(15.0);
     auto td_temp_2 = ThermodynamicTemperature<float>(10.0);
     EXPECT_FLOAT_EQ((td_temp_1 - td_temp_2).K(), 5);
