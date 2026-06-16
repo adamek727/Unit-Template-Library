@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.0.0 (2026-06-16)
+
 ### Added
 
 - Property-based tests (`t_property`) checking algebraic identities such as
