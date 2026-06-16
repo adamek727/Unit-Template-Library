@@ -82,8 +82,16 @@ std::cout << utl::Velocity<float>(30) << std::endl;  // 30 [s^-1 m]
 Every unit is templated on its storage type:
 
 ```cpp
-auto unit_f = utl::Unit<float>(M_PI);
-auto unit_d = utl::Unit<double>(M_PI);
+auto unit_f = utl::Unit<float>(utl::PI);
+auto unit_d = utl::Unit<double>(utl::PI);
+```
+
+Mixing storage types in the same expression is allowed; the result is promoted
+to the wider type (`std::common_type_t`):
+
+```cpp
+auto sum = utl::Length<float>(1.0f) + utl::Length<double>(2.0);  // Length<double>
+auto d   = utl::Velocity<float>(30.0f) * utl::Time<double>(5.0); // Length<double>
 ```
 
 ## Physical constants
@@ -100,3 +108,43 @@ variants:
 | `boltzmann_constant_f` / `_d` | Energy / Temperature |
 | `avogadro_constant_f` / `_d` | 1 / AmountOfSubstance |
 | `luminous_efficacy_f` / `_d` | LuminousFlux / Power |
+
+## Temperature differences
+
+Temperature is affine: °C and °F have offset origins, so the *difference* of
+two temperatures is a displacement, not an absolute point. `Temperature -
+Temperature` therefore yields a `TemperatureDelta`, whose `degC()` / `degF()`
+apply only the scale factor (never the `+273.15` / `+32` offset). Adding two
+absolute temperatures is deleted; add a delta instead:
+
+```cpp
+using Temp = utl::ThermodynamicTemperature<double>;
+
+auto d = Temp(20, Temp::TYPE::CELSIUS) - Temp(5, Temp::TYPE::CELSIUS); // TemperatureDelta
+d.degC();                                                             // 15 (not -258.15)
+
+auto warmer = Temp(20, Temp::TYPE::CELSIUS) + utl::TemperatureDelta<double>(5); // 25 °C
+```
+
+## Angles, solid angles and torque
+
+Angle is tracked as an eighth pseudo-dimension, so `rad`, `sr` and a plain
+scalar are distinct types:
+
+```cpp
+auto solid = utl::Angle<double>(2.0) * utl::Angle<double>(3.0); // SolidAngle, 6 sr
+auto back  = utl::sqrt(utl::SolidAngle<double>(9.0));           // Angle, 3 rad
+
+// luminous intensity * solid angle = luminous flux (cd * sr = lm)
+auto flux = utl::LuminousIntensity<double>(60.0) * utl::SolidAngle<double>(2.0); // 120 lm
+
+// torque (N*m = energy / angle) is a distinct type from energy
+auto torque = utl::Energy<double>(10.0) / utl::Angle<double>(2.0); // Torque, 5 N*m
+auto work   = torque * utl::Angle<double>(2.0);                    // Energy, 10 J
+
+// trigonometry takes an Angle and returns a scalar
+auto y = utl::sin(utl::Angle<double>(90.0, utl::Angle<double>::TYPE::DEG)); // 1.0
+```
+
+The angle exponent defaults to zero, so every other named unit and all existing
+code are unaffected.

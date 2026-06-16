@@ -13,6 +13,7 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `Mass` | kilogram [kg] | `kg()`, `g()`, `mg()`, `ug()`, `tonne()`, `lb()`, `oz()` |
 | `ElectricCurrent` | ampere [A] | `A()` |
 | `ThermodynamicTemperature` | kelvin [K] | `K()`, `degC()`, `degF()` |
+| `TemperatureDelta` | kelvin [K] (a *difference*) | `K()`, `degC()`, `degF()` (offset-free) |
 | `AmountOfSubstance` | mole [mol] | `mol()` |
 | `LuminousIntensity` | candela [cd] | `cd()` |
 
@@ -41,6 +42,7 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `Power` | watt [W] |
 | `Pressure` | pascal [Pa] |
 | `SolidAngle` | steradian [sr] |
+| `Torque` | newton-metre [N·m] (energy / angle) |
 | `Velocity` | [m/s] |
 | `Voltage` | volt [V] |
 | `Volume` | [m³] |
@@ -55,8 +57,16 @@ explicitly when needed:
 |---|---|---|
 | 1/s | `Frequency` | `Activity` |
 | m²/s² | `AbsorbedDose` | `DoseEquivalent` |
-| cd | `LuminousIntensity` | `LuminousFlux` |
-| dimensionless | raw `Unit` | `Angle`, `SolidAngle` |
+| K | `ThermodynamicTemperature` | `TemperatureDelta` |
 
-This is also why there is no `Torque` class: torque (N·m) has exactly
-the dimensions of energy, so `Force * Length` maps to `Energy`.
+## The angle pseudo-dimension
+
+An eighth exponent tracks angle (`rad` = angle¹, `sr` = angle²), so `Angle`,
+`SolidAngle` and a dimensionless scalar are now distinct, and `LuminousFlux`
+(cd·sr) is distinct from `LuminousIntensity` (cd) — both get their own mapped
+result type instead of colliding. The exponent defaults to zero, so every other
+unit and all existing code are unchanged.
+
+This is also what makes `Torque` (N·m = energy / angle) a type distinct from
+`Energy` (J): `Energy / Angle == Torque` and `Torque * Angle == Energy`, while a
+plain `Force * Length` still maps to `Energy`.

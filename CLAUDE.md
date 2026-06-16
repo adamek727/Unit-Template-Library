@@ -67,7 +67,10 @@ The dimension system, and how result types are derived:
   derived. Consequence: cross-unit arithmetic needs `#include <utl/utl.hpp>`,
   not individual unit headers.
 - Same-dimension `+`, `-`, comparisons, compound assignment and scalar ops are
-  `BaseUnit` members that also return the mapped type.
+  `BaseUnit` members that also return the mapped type. `+`, `-` and the
+  comparisons are templated on the other operand's scalar type, so mixed
+  precision (`Length<float> + Length<double>`) promotes to `std::common_type_t`
+  of the two; cross-unit `*` / `/` in `operators.hpp` promote the same way.
 
 Dimension collisions — units sharing an exponent signature cannot both register
 a mapper. One winner is mapped; the others keep an explicit operator set so
