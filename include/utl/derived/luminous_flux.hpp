@@ -22,11 +22,11 @@ namespace utl {
     class LuminousFlux : public LuminousFluxUnit<T> {
     public:
         constexpr explicit LuminousFlux(T luminous_flux) : LuminousFluxUnit<T>{
-                luminous_flux} {}
+                                                               luminous_flux} {}
 
         constexpr explicit LuminousFlux(const LuminousIntensity<T> &lum_int, const SolidAngle<T> &solid_angle)
-                : LuminousFluxUnit<T>{
-                lum_int.cd() * solid_angle.sr()} {}
+            : LuminousFluxUnit<T>{
+                  lum_int.cd() * solid_angle.sr()} {}
 
         [[nodiscard]] constexpr auto lm() const -> T { return static_cast<T>(this->value()); }
 
@@ -63,4 +63,4 @@ namespace utl {
         }
     };
 
-}
+} // namespace utl

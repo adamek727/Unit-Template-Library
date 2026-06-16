@@ -25,7 +25,7 @@ namespace utl {
 
         [[nodiscard]] constexpr auto kg() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto g() const -> T { return static_cast<T>(this->value() / MILLI ); }
+        [[nodiscard]] constexpr auto g() const -> T { return static_cast<T>(this->value() / MILLI); }
 
         [[nodiscard]] constexpr auto mg() const -> T { return static_cast<T>(this->value() / MICRO); }
 
@@ -34,11 +34,10 @@ namespace utl {
         [[nodiscard]] constexpr auto lb() const -> T { return static_cast<T>(kg() / KILOGRAMS_IN_POUND); }
 
         [[nodiscard]] constexpr auto oz() const -> T { return static_cast<T>(kg() / KILOGRAMS_IN_OUNCE); }
-
     };
 
     template<typename T>
     struct UnitMapper<MassUnit<T>> {
         using type = Mass<T>;
     };
-}
+} // namespace utl

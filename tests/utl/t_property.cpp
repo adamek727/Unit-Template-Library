@@ -35,7 +35,7 @@ namespace {
         EXPECT_NEAR(a, b, rel * scale);
     }
 
-}  // namespace
+} // namespace
 
 // (a * b) / b == a, exercised through the cross-unit mapper:
 // Velocity * Time -> Length, then Length / Time -> Velocity.

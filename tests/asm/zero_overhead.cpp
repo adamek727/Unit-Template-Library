@@ -75,4 +75,4 @@ double unit_inv(double a) {
     return Time<double>(a).inv().value();
 }
 
-}  // extern "C"
+} // extern "C"

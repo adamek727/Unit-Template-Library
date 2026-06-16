@@ -63,9 +63,8 @@ namespace utl {
         }
 
         constexpr auto inv() const -> SelfInv {
-            return SelfInv {
-                    static_cast<T>(1.0) / value_
-            };
+            return SelfInv{
+                static_cast<T>(1.0) / value_};
         }
 
         template<typename UnitType = Self>
@@ -89,7 +88,7 @@ namespace utl {
             return mapped_unit_t<Self>(value() / scalar);
         }
 
-        friend constexpr auto operator*(T lhs, const Self& rhs) -> mapped_unit_t<Self> {
+        friend constexpr auto operator*(T lhs, const Self &rhs) -> mapped_unit_t<Self> {
             return mapped_unit_t<Self>(rhs.value() * lhs);
         }
 
@@ -138,31 +137,31 @@ namespace utl {
 
     template<typename T, typename U1, typename U2>
     using MulBaseUnits = BaseUnit<T,
-            U1::TimeDim() + U2::TimeDim(),
-            U1::LengthDim() + U2::LengthDim(),
-            U1::MassDim() + U2::MassDim(),
-            U1::ElCurrDim() + U2::ElCurrDim(),
-            U1::TdTempDim() + U2::TdTempDim(),
-            U1::AmOfSubDim() + U2::AmOfSubDim(),
-            U1::LumIntDim() + U2::LumIntDim()>;
+                                  U1::TimeDim() + U2::TimeDim(),
+                                  U1::LengthDim() + U2::LengthDim(),
+                                  U1::MassDim() + U2::MassDim(),
+                                  U1::ElCurrDim() + U2::ElCurrDim(),
+                                  U1::TdTempDim() + U2::TdTempDim(),
+                                  U1::AmOfSubDim() + U2::AmOfSubDim(),
+                                  U1::LumIntDim() + U2::LumIntDim()>;
 
     template<typename T, typename U1, typename U2>
     using DivBaseUnits = BaseUnit<T,
-            U1::TimeDim() - U2::TimeDim(),
-            U1::LengthDim() - U2::LengthDim(),
-            U1::MassDim() - U2::MassDim(),
-            U1::ElCurrDim() - U2::ElCurrDim(),
-            U1::TdTempDim() - U2::TdTempDim(),
-            U1::AmOfSubDim() - U2::AmOfSubDim(),
-            U1::LumIntDim() - U2::LumIntDim()>;
+                                  U1::TimeDim() - U2::TimeDim(),
+                                  U1::LengthDim() - U2::LengthDim(),
+                                  U1::MassDim() - U2::MassDim(),
+                                  U1::ElCurrDim() - U2::ElCurrDim(),
+                                  U1::TdTempDim() - U2::TdTempDim(),
+                                  U1::AmOfSubDim() - U2::AmOfSubDim(),
+                                  U1::LumIntDim() - U2::LumIntDim()>;
 
     template<typename T, typename U1>
     using InvBaseUnit = BaseUnit<T,
-            -U1::TimeDim(),
-            -U1::LengthDim(),
-            -U1::MassDim(),
-            -U1::ElCurrDim(),
-            -U1::TdTempDim(),
-            -U1::AmOfSubDim(),
-            -U1::LumIntDim()>;
-}
+                                 -U1::TimeDim(),
+                                 -U1::LengthDim(),
+                                 -U1::MassDim(),
+                                 -U1::ElCurrDim(),
+                                 -U1::TdTempDim(),
+                                 -U1::AmOfSubDim(),
+                                 -U1::LumIntDim()>;
+} // namespace utl

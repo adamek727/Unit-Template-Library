@@ -48,7 +48,6 @@ TEST(t_amount_of_substance_test, dim) {
     EXPECT_EQ(AmountOfSubstance<float>::LumIntDim(), 0);
 }
 
-
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

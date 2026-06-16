@@ -23,17 +23,16 @@ namespace utl {
         constexpr explicit MagneticFlux(T illuminance) : MagneticFluxUnit<T>{illuminance} {}
 
         constexpr explicit MagneticFlux(const Voltage<T> &v, const Time<T> &t) : MagneticFluxUnit<T>{
-                v.V() * t.s()} {}
+                                                                                     v.V() * t.s()} {}
 
         constexpr explicit MagneticFlux(const MagneticFluxDensity<T> &mfd, const Area<T> &a) : MagneticFluxUnit<T>{
-                mfd.Tesla() * a.m2()} {}
+                                                                                                   mfd.Tesla() * a.m2()} {}
 
         [[nodiscard]] constexpr auto Wb() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<MagneticFluxUnit<T>> {
         using type = MagneticFlux<T>;
     };
-}
+} // namespace utl

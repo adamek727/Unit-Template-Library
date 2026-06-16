@@ -27,11 +27,10 @@ namespace utl {
         [[nodiscard]] constexpr auto mph() const -> T { return static_cast<T>(mps() / MPS_IN_MPH); }
 
         [[nodiscard]] constexpr auto kmph() const -> T { return static_cast<T>(this->value() * 3.6); }
-
     };
 
     template<typename T>
     struct UnitMapper<VelocityUnit<T>> {
         using type = Velocity<T>;
     };
-}
+} // namespace utl

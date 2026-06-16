@@ -33,11 +33,10 @@ namespace utl {
         [[nodiscard]] constexpr auto um2() const -> T { return static_cast<T>(m2() / MICRO / MICRO); }
 
         [[nodiscard]] constexpr auto nm2() const -> T { return static_cast<T>(m2() / NANO / NANO); }
-
     };
 
     template<typename T>
     struct UnitMapper<AreaUnit<T>> {
         using type = Area<T>;
     };
-}
+} // namespace utl

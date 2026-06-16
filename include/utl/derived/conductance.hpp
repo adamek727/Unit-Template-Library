@@ -20,11 +20,10 @@ namespace utl {
         constexpr explicit Conductance(const ElectricCurrent<T> &ec, const Voltage<T> &v) : ConductanceUnit<T>{ec.A() / v.V()} {}
 
         [[nodiscard]] constexpr auto S() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<ConductanceUnit<T>> {
         using type = Conductance<T>;
     };
-}
+} // namespace utl
