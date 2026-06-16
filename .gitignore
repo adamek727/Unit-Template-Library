@@ -12,3 +12,4 @@ CMakeFiles/
 
 # Python
 __pycache__/
+CMakeUserPresets.json

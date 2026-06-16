@@ -99,7 +99,38 @@ target_link_libraries(your_target utl::utl)
 Alternatively install the library (`cmake -B build && cmake --install build`)
 and use `find_package(utl REQUIRED)`.
 
-Now you are able to include UTL headers into you code.
+#### CMake FetchContent
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(utl
+        GIT_REPOSITORY https://github.com/adamek727/Unit-Template-Library
+        GIT_TAG v2.0.0)
+FetchContent_MakeAvailable(utl)
+target_link_libraries(your_target utl::utl)
+```
+
+#### Conan
+
+A header-only recipe ships in `conanfile.py`. Until the package is on Conan
+Center, export it locally:
+
+```
+conan create .
+```
+
+then depend on `unit-template-library/2.0.0` and link `utl::utl`.
+
+#### vcpkg
+
+An overlay port lives in `packaging/vcpkg/ports`. Install with:
+
+```
+vcpkg install unit-template-library --overlay-ports=packaging/vcpkg/ports
+```
+
+In all cases the imported target is `utl::utl` and headers are included as
+`#include <utl/utl.hpp>`.
 
 ### Documentation
 

@@ -26,6 +26,10 @@
   `degC()` / `degF()` apply only the scale factor and never the `+273.15` /
   `+32` offset. Supports `Delta ± Delta`, scalar `*` / `/`, unary `-`, and
   `Temperature ± Delta`.
+- Packaging: a Conan recipe (`conanfile.py` with a `test_package`) and a vcpkg
+  overlay port (`packaging/vcpkg/ports`), plus README install instructions for
+  Conan, vcpkg and CMake FetchContent. The imported target is `utl::utl`
+  everywhere.
 
 ### Changed (breaking)
 
