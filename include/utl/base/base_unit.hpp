@@ -72,12 +72,16 @@ namespace utl {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        constexpr auto operator+(const BaseUnit &other) const -> mapped_unit_t<Self> {
-            return mapped_unit_t<Self>(value_ + other.value_);
+        template<typename U>
+        constexpr auto operator+(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>> {
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>>;
+            return Result(value_ + other.value());
         }
 
-        constexpr auto operator-(const BaseUnit &other) const -> mapped_unit_t<Self> {
-            return mapped_unit_t<Self>(value_ - other.value_);
+        template<typename U>
+        constexpr auto operator-(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>> {
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>>;
+            return Result(value_ - other.value());
         }
 
         constexpr auto operator*(T scalar) const -> mapped_unit_t<Self> {
@@ -116,17 +120,23 @@ namespace utl {
             return *this;
         }
 
-        constexpr auto operator==(const BaseUnit &other) const -> bool { return value_ == other.value_; }
+        template<typename U>
+        constexpr auto operator==(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ == other.value(); }
 
-        constexpr auto operator!=(const BaseUnit &other) const -> bool { return value_ != other.value_; }
+        template<typename U>
+        constexpr auto operator!=(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ != other.value(); }
 
-        constexpr auto operator<(const BaseUnit &other) const -> bool { return value_ < other.value_; }
+        template<typename U>
+        constexpr auto operator<(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ < other.value(); }
 
-        constexpr auto operator<=(const BaseUnit &other) const -> bool { return value_ <= other.value_; }
+        template<typename U>
+        constexpr auto operator<=(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ <= other.value(); }
 
-        constexpr auto operator>(const BaseUnit &other) const -> bool { return value_ > other.value_; }
+        template<typename U>
+        constexpr auto operator>(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ > other.value(); }
 
-        constexpr auto operator>=(const BaseUnit &other) const -> bool { return value_ >= other.value_; }
+        template<typename U>
+        constexpr auto operator>=(const BaseUnit<U, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT> &other) const -> bool { return value_ >= other.value(); }
 
     private:
         T value_;

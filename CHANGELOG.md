@@ -17,6 +17,10 @@
   the zero-overhead claim a regression test.
 - `.clang-format` codifying the house style, with a CI `format` job that fails
   on any unformatted file. clang-format is pinned so local and CI agree.
+- Mixed-precision arithmetic: same-dimension `+`, `-`, the comparison operators
+  and the cross-unit `*` / `/` now accept operands with different storage types
+  (e.g. `Length<float> + Length<double>`) and promote the result to the wider
+  type via `std::common_type_t`.
 
 ### Changed (breaking)
 
