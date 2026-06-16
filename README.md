@@ -1,5 +1,11 @@
 # Unit Template Library
 
+[![CI](https://github.com/adamek727/Unit-Template-Library/actions/workflows/ci.yml/badge.svg)](https://github.com/adamek727/Unit-Template-Library/actions/workflows/ci.yml)
+[![Docs](https://github.com/adamek727/Unit-Template-Library/actions/workflows/docs.yml/badge.svg)](https://adamek727.github.io/Unit-Template-Library/)
+[![Release](https://img.shields.io/github/v/release/adamek727/Unit-Template-Library?sort=semver)](https://github.com/adamek727/Unit-Template-Library/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](License.txt)
+[![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
+
 Easy to use header-only library to represent type-safety SI units.
 
 ## Authors and feedback

@@ -92,5 +92,7 @@ Top-level headers: `literals.hpp` (`utl::literals`, double-based suffixes),
   literals need an `f` suffix unless exactly representable; use `utl::PI`,
   never `M_PI`.
 - Breaking changes go to `CHANGELOG.md`; releases are semver tags with the
-  version mirrored in `CMakeLists.txt` and `CITATION.cff`. The roadmap lives in
-  `FUTURE_WORK.md`.
+  version mirrored in `CMakeLists.txt` and `CITATION.cff`. Pushing a `v*` tag
+  triggers `release.yml`, which publishes a GitHub Release with notes taken
+  from the matching `CHANGELOG.md` section (so add that section before tagging).
+  The roadmap lives in `FUTURE_WORK.md`.
