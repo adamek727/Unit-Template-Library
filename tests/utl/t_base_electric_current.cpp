@@ -37,7 +37,7 @@ TEST(t_electric_current_test, scalar_mul_div) {
 }
 
 TEST(t_electric_current_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 1, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 1, 0, 0, 0, 0};
     EXPECT_EQ(ElectricCurrent<float>::dim(), dim);
     EXPECT_EQ(ElectricCurrent<float>::TimeDim(), 0);
     EXPECT_EQ(ElectricCurrent<float>::LengthDim(), 0);

@@ -38,7 +38,7 @@ TEST(t_dose_equivalent, scalar_mul_div) {
 }
 
 TEST(t_dose_equivalent, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 2, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 2, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(DoseEquivalent<float>::dim(), dim);
     EXPECT_EQ(DoseEquivalent<float>::TimeDim(), -2);
     EXPECT_EQ(DoseEquivalent<float>::LengthDim(), 2);

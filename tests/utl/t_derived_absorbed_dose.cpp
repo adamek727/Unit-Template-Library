@@ -45,7 +45,7 @@ TEST(t_absorbed_dose, mul) {
 }
 
 TEST(t_absorbed_dose, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 2, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 2, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(AbsorbedDose<float>::dim(), dim);
     EXPECT_EQ(AbsorbedDose<float>::TimeDim(), -2);
     EXPECT_EQ(AbsorbedDose<float>::LengthDim(), 2);

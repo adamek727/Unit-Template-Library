@@ -49,7 +49,7 @@ TEST(t_el_charge_test, div) {
 }
 
 TEST(t_el_charge_test, dim) {
-    auto dim = std::array<int8_t, 7>{1, 0, 0, 1, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{1, 0, 0, 1, 0, 0, 0, 0};
     EXPECT_EQ(ElectricCharge<float>::dim(), dim);
     EXPECT_EQ(ElectricCharge<float>::TimeDim(), 1);
     EXPECT_EQ(ElectricCharge<float>::LengthDim(), 0);

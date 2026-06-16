@@ -34,7 +34,7 @@ TEST(t_luminous_intensity_test, scalar_mul_div) {
 }
 
 TEST(t_luminous_intensity_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 0, 0, 0, 1};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 0, 0, 0, 1, 0};
     EXPECT_EQ(LuminousIntensity<float>::dim(), dim);
     EXPECT_EQ(LuminousIntensity<float>::TimeDim(), 0);
     EXPECT_EQ(LuminousIntensity<float>::LengthDim(), 0);

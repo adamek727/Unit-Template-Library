@@ -53,7 +53,7 @@ TEST(t_resistance_test, inv) {
 }
 
 TEST(t_mass_test, dim) {
-    auto dim = std::array<int8_t, 7>{-3, 2, 1, -2, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-3, 2, 1, -2, 0, 0, 0, 0};
     EXPECT_EQ(Resistance<float>::dim(), dim);
     EXPECT_EQ(Resistance<float>::TimeDim(), -3);
     EXPECT_EQ(Resistance<float>::LengthDim(), 2);

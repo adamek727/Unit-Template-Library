@@ -46,7 +46,7 @@ TEST(t_pressure_test, mul) {
 }
 
 TEST(t_pressure_test, dim) {
-    auto dim = std::array<int8_t, 7>{-2, -1, 1, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, -1, 1, 0, 0, 0, 0, 0};
     EXPECT_EQ(Pressure<float>::dim(), dim);
     EXPECT_EQ(Pressure<float>::TimeDim(), -2);
     EXPECT_EQ(Pressure<float>::LengthDim(), -1);

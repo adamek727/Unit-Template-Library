@@ -52,7 +52,7 @@ TEST(t_acceleration_test, div) {
 }
 
 TEST(t_acceleration_test, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 1, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 1, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Acceleration<float>::dim(), dim);
     EXPECT_EQ(Acceleration<float>::TimeDim(), -2);
     EXPECT_EQ(Acceleration<float>::LengthDim(), 1);

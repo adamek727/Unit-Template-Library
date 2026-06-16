@@ -81,6 +81,30 @@ if (speed > 50.0_kmph) {
 std::cout << speed << std::endl;  // prints "16.7361 [s^-1 m]"
 ```
 
+### Angles, solid angles and torque
+
+Angle is tracked as an eighth pseudo-dimension, so `rad`, `sr` and a plain
+scalar are distinct types and the dimension system relates them:
+
+```
+// rad * rad = sr,  sqrt(sr) = rad
+auto solid = Angle<double>(2.0) * Angle<double>(3.0);   // SolidAngle, 6 sr
+auto back  = sqrt(SolidAngle<double>(9.0));             // Angle, 3 rad
+
+// luminous intensity * solid angle = luminous flux (cd * sr = lm)
+auto flux = LuminousIntensity<double>(60.0) * SolidAngle<double>(2.0); // 120 lm
+
+// torque is N*m = energy / angle, and is NOT the same type as energy
+auto torque = Energy<double>(10.0) / Angle<double>(2.0);  // Torque, 5 N*m
+auto work   = torque * Angle<double>(2.0);                // Energy, 10 J
+
+// trigonometry takes an Angle and returns a scalar
+auto y = sin(Angle<double>(90.0, Angle<double>::TYPE::DEG)); // 1.0
+```
+
+Because the angle exponent defaults to zero, every other named unit
+(`Length`, `Force`, …) and all existing code are unaffected.
+
 ### Add to Existing Project
 
 ```

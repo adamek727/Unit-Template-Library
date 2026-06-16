@@ -44,7 +44,7 @@ TEST(t_frequency_test, inversion) {
 }
 
 TEST(t_frequency_test, dim) {
-    auto dim = std::array<int8_t, 7>{-1, 0, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-1, 0, 0, 0, 0, 0, 0, 0};
     EXPECT_EQ(Frequency<float>::dim(), dim);
     EXPECT_EQ(Frequency<float>::TimeDim(), -1);
     EXPECT_EQ(Frequency<float>::LengthDim(), 0);

@@ -48,7 +48,7 @@ TEST(t_energy_test, div) {
 }
 
 TEST(t_energy_test, dim) {
-    auto dim = std::array<int8_t, 7>{-2, 2, 1, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-2, 2, 1, 0, 0, 0, 0, 0};
     EXPECT_EQ(Energy<float>::dim(), dim);
     EXPECT_EQ(Energy<float>::TimeDim(), -2);
     EXPECT_EQ(Energy<float>::LengthDim(), 2);

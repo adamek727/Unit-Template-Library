@@ -39,10 +39,13 @@ guard the compile-time and zero-overhead guarantees.
 
 The dimension system, and how result types are derived:
 
-- `BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT>`
-  (`base/base_unit.hpp`) encodes the seven SI exponents as `int8_t` template
-  parameters; the only data member is the value. That exponent order is used
-  everywhere — aliases, `dim()`, operators, `io.hpp` symbols.
+- `BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>`
+  (`base/base_unit.hpp`) encodes the seven SI exponents plus an eighth angle
+  pseudo-dimension (`rad` = angle¹, `sr` = angle²) as `int8_t` template
+  parameters. `ANGLE` defaults to `0`, so 7-argument aliases and all named-unit
+  code keep working. The only data member is the value. That exponent order is
+  used everywhere — aliases, `dim()` (an 8-element array), operators, `io.hpp`
+  symbols.
 - **A physical quantity is never undefined**: `BaseUnit() = delete`, so no
   unit is default-constructible. Construction always takes an explicit value.
   Do not add default constructors back (not to `BaseUnit`, not to named
@@ -74,15 +77,23 @@ their arithmetic preserves their type:
 |---|---|---|
 | 1/s | `Frequency` | `Activity` |
 | m²/s² | `AbsorbedDose` | `DoseEquivalent` |
-| cd | `LuminousIntensity` | `LuminousFlux` |
 | K | `ThermodynamicTemperature` | `TemperatureDelta` |
-| dimensionless | raw `Unit` | `Angle`, `SolidAngle` |
 
-The photometric chain (`LuminousFlux`/`SolidAngle`/`Illuminance`) keeps
-hand-written conversion operators for the same reason (steradian is
-dimensionless). A member operator hides the base-class ones — re-expose with
-`using XxxUnit<T>::operator*;` (see `illuminance.hpp`). There is no `Torque`
-class because N·m has exactly the dimensions of energy.
+The angle pseudo-dimension resolved two former collisions: `Angle` (angle¹),
+`SolidAngle` (angle²) and dimensionless are now distinct and all mapped, and
+`LuminousFlux` (cd·sr = `[cd, angle²]`) is now distinct from `LuminousIntensity`
+(cd) and gets its own mapper.
+
+The photometric chain (`LuminousFlux`/`Illuminance`) keeps hand-written
+conversion operators (`LuminousFlux / SolidAngle → LuminousIntensity`,
+`Illuminance * Area → LuminousFlux`, …); with the angle dimension these are now
+also derivable from the dimension system, but the explicit members are retained
+and win overload resolution. A member operator hides the base-class ones —
+re-expose with `using XxxUnit<T>::operator*;` (see `illuminance.hpp`). `Torque`
+(N·m = energy/angle, i.e. `[…, angle⁻¹]`) is type-distinct from `Energy` (J):
+`Energy / Angle == Torque` and `Torque * Angle == Energy`, while `Force * Length`
+still yields `Energy`. Angle-aware `sin`/`cos`/`tan` (in `angle.hpp`) take an
+`Angle` and return a scalar.
 
 Top-level headers: `literals.hpp` (`utl::literals`, double-based suffixes),
 `math.hpp` (`sqrt` halves exponents — odd exponents are a compile error —

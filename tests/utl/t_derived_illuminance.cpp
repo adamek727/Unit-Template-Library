@@ -45,7 +45,7 @@ TEST(t_illuminance_test, mul) {
 }
 
 TEST(t_illuminance_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, -2, 0, 0, 0, 0, 1};
+    auto dim = std::array<int8_t, 8>{0, -2, 0, 0, 0, 0, 1, 2};
     EXPECT_EQ(Illuminance<float>::dim(), dim);
     EXPECT_EQ(Illuminance<float>::TimeDim(), 0);
     EXPECT_EQ(Illuminance<float>::LengthDim(), -2);

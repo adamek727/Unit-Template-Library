@@ -52,7 +52,7 @@ TEST(t_power_test, div) {
 }
 
 TEST(t_power_test, dim) {
-    auto dim = std::array<int8_t, 7>{-3, 2, 1, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{-3, 2, 1, 0, 0, 0, 0, 0};
     EXPECT_EQ(Power<float>::dim(), dim);
     EXPECT_EQ(Power<float>::TimeDim(), -3);
     EXPECT_EQ(Power<float>::LengthDim(), 2);

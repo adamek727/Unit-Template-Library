@@ -5,11 +5,16 @@
 
 #pragma once
 
+#include <cmath>
 #include "utl/base/length.hpp"
 
 namespace utl {
+
     template<typename T>
-    class Angle : public Unit<T> {
+    using AngleUnit = BaseUnit<T, 0, 0, 0, 0, 0, 0, 0, 1>;
+
+    template<typename T>
+    class Angle : public AngleUnit<T> {
     public:
         enum class TYPE {
             RAD,
@@ -28,33 +33,27 @@ namespace utl {
 
     public:
         constexpr explicit Angle(T angle, const TYPE &type = TYPE::RAD)
-            : Unit<T>{to_rad(angle, type)} {}
+            : AngleUnit<T>{to_rad(angle, type)} {}
 
-        constexpr explicit Angle(Length<T> s, Length<T> r) : Unit<T>{s.m() / r.m()} {};
+        constexpr explicit Angle(Length<T> s, Length<T> r) : AngleUnit<T>{s.m() / r.m()} {};
 
         [[nodiscard]] constexpr auto rad() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto deg() const -> T { return static_cast<T>(rad() / PI * 180.0); }
-
-        constexpr auto operator+(const Angle &other) const -> Angle {
-            return Angle(rad() + other.rad());
-        }
-
-        constexpr auto operator-(const Angle &other) const -> Angle {
-            return Angle(rad() - other.rad());
-        }
-
-        constexpr auto operator*(T scalar) const -> Angle {
-            return Angle(rad() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> Angle {
-            return Angle(rad() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const Angle<T> &rhs) -> Angle<T> {
-            return Angle<T>(rhs.rad() * lhs);
-        }
     };
+
+    template<typename T>
+    struct UnitMapper<AngleUnit<T>> {
+        using type = Angle<T>;
+    };
+
+    template<typename T>
+    auto sin(const Angle<T> &angle) -> T { return static_cast<T>(std::sin(angle.rad())); }
+
+    template<typename T>
+    auto cos(const Angle<T> &angle) -> T { return static_cast<T>(std::cos(angle.rad())); }
+
+    template<typename T>
+    auto tan(const Angle<T> &angle) -> T { return static_cast<T>(std::tan(angle.rad())); }
 
 } // namespace utl

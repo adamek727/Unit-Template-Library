@@ -40,7 +40,7 @@ TEST(t_derived_angle_test, scalar_mul_div) {
 }
 
 TEST(t_derived_angle_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 0, 0, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 0, 0, 0, 0, 2};
     EXPECT_EQ(SolidAngle<float>::dim(), dim);
     EXPECT_EQ(SolidAngle<float>::TimeDim(), 0);
     EXPECT_EQ(SolidAngle<float>::LengthDim(), 0);

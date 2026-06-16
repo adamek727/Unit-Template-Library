@@ -23,6 +23,7 @@
 #include "power.hpp"                 // watt [W] (J/s)
 #include "pressure.hpp"              // pascal [Pa] (N/m^2)
 #include "resistance.hpp"            // ohm [Ohm] (V/A)
+#include "torque.hpp"                // newton-metre [N*m] (J/rad)
 #include "voltage.hpp"               // volt [V] (W/A)
 
 #include "angle.hpp"       // radian [rad]

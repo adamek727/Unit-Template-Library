@@ -11,7 +11,7 @@
 namespace utl {
 
     template<typename T>
-    using IlluminanceUnit = BaseUnit<T, 0, -2, 0, 0, 0, 0, 1>;
+    using IlluminanceUnit = BaseUnit<T, 0, -2, 0, 0, 0, 0, 1, 2>;
 
     template<typename T>
     class Illuminance : public IlluminanceUnit<T> {

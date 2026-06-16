@@ -54,7 +54,7 @@ TEST(t_luminous_flux_test, div) {
 }
 
 TEST(t_luminous_flux_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 0, 0, 0, 1};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 0, 0, 0, 1, 2};
     EXPECT_EQ(LuminousFlux<float>::dim(), dim);
     EXPECT_EQ(LuminousFlux<float>::TimeDim(), 0);
     EXPECT_EQ(LuminousFlux<float>::LengthDim(), 0);

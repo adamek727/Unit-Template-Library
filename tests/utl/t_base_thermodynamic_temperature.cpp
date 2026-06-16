@@ -36,7 +36,7 @@ TEST(t_thermodynamic_temperature_test, scalar_mul_div) {
 }
 
 TEST(t_thermodynamic_temperature_test, dim) {
-    auto dim = std::array<int8_t, 7>{0, 0, 0, 0, 1, 0, 0};
+    auto dim = std::array<int8_t, 8>{0, 0, 0, 0, 1, 0, 0, 0};
     EXPECT_EQ(ThermodynamicTemperature<float>::dim(), dim);
     EXPECT_EQ(ThermodynamicTemperature<float>::TimeDim(), 0);
     EXPECT_EQ(ThermodynamicTemperature<float>::LengthDim(), 0);
