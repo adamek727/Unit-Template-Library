@@ -1,0 +1,8 @@
+{
+  "name": "unit-template-library",
+  "version": "2.0.0",
+  "description": "Header-only C++17 compile-time SI units / dimensional-analysis library",
+  "homepage": "https://github.com/adamek727/Unit-Template-Library",
+  "license": "MIT",
+  "supports": "!uwp"
+}
