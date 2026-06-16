@@ -6,7 +6,7 @@ from conan.tools.files import copy
 
 class UnitTemplateLibraryConan(ConanFile):
     name = "unit-template-library"
-    version = "2.0.0"
+    version = "3.0.0"
     description = "Header-only C++17 compile-time SI units / dimensional-analysis library"
     license = "MIT"
     author = "Adam Ligocki <ligocki.a@gmail.com>"
