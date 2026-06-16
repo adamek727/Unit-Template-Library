@@ -19,14 +19,13 @@ namespace utl {
         constexpr explicit Inductance(T illuminance) : InductanceUnit<T>{illuminance} {}
 
         constexpr explicit Inductance(const MagneticFlux<T> &mf, const ElectricCurrent<T> &ec) : InductanceUnit<T>{
-                mf.Wb() / ec.A()} {}
+                                                                                                     mf.Wb() / ec.A()} {}
 
         [[nodiscard]] constexpr auto H() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<InductanceUnit<T>> {
         using type = Inductance<T>;
     };
-}
+} // namespace utl

@@ -43,7 +43,6 @@ TEST(t_voltage_test, mul) {
     auto el_cur_1 = ElectricCurrent<float>(5.0);
     auto power_1 = voltage_1 * el_cur_1;
     EXPECT_FLOAT_EQ(power_1.W(), 75.0);
-
 }
 
 TEST(t_voltage_test, dim) {

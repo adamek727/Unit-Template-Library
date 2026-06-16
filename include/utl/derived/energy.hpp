@@ -39,11 +39,10 @@ namespace utl {
         [[nodiscard]] constexpr auto Wh() const -> T { return static_cast<T>(J() / JOULES_IN_WATTHOUR); }
 
         [[nodiscard]] constexpr auto cal() const -> T { return static_cast<T>(J() / JOULES_IN_CALORIE); }
-
     };
 
     template<typename T>
     struct UnitMapper<EnergyUnit<T>> {
         using type = Energy<T>;
     };
-}
+} // namespace utl

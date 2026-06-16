@@ -20,14 +20,13 @@ namespace utl {
         constexpr explicit CatalyticActivity(T catalytic_activity) : CatalyticActivityUnit<T>{catalytic_activity} {}
 
         constexpr explicit CatalyticActivity(const AmountOfSubstance<T> &aos, const Time<T> &t) : CatalyticActivityUnit<T>{
-                aos.mol() / t.s()} {}
+                                                                                                      aos.mol() / t.s()} {}
 
         [[nodiscard]] constexpr auto katal() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<CatalyticActivityUnit<T>> {
         using type = CatalyticActivity<T>;
     };
-}
+} // namespace utl

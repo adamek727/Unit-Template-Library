@@ -22,16 +22,15 @@ namespace utl {
 
         [[nodiscard]] constexpr auto A() const -> T { return static_cast<T>(this->value()); }
 
-        [[nodiscard]] constexpr auto mA() const -> T { return static_cast<T>(A() / MILLI ); }
+        [[nodiscard]] constexpr auto mA() const -> T { return static_cast<T>(A() / MILLI); }
 
         [[nodiscard]] constexpr auto uA() const -> T { return static_cast<T>(A() / MICRO); }
 
         [[nodiscard]] constexpr auto nA() const -> T { return static_cast<T>(A() / NANO); }
-
     };
 
     template<typename T>
     struct UnitMapper<ElectricCurrentUnit<T>> {
         using type = ElectricCurrent<T>;
     };
-}
+} // namespace utl

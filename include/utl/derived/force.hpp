@@ -24,11 +24,10 @@ namespace utl {
         [[nodiscard]] constexpr auto kN() const -> T { return static_cast<T>(N() / KILO); }
 
         [[nodiscard]] constexpr auto N() const -> T { return static_cast<T>(this->value()); }
-
     };
 
     template<typename T>
     struct UnitMapper<ForceUnit<T>> {
         using type = Force<T>;
     };
-}
+} // namespace utl

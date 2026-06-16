@@ -52,9 +52,9 @@ namespace utl {
             return Angle(rad() / scalar);
         }
 
-        friend constexpr auto operator*(T lhs, const Angle<T>& rhs) -> Angle<T>{
+        friend constexpr auto operator*(T lhs, const Angle<T> &rhs) -> Angle<T> {
             return Angle<T>(rhs.rad() * lhs);
         }
     };
 
-}
+} // namespace utl

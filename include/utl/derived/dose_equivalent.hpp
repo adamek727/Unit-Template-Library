@@ -42,4 +42,4 @@ namespace utl {
             return DoseEquivalent<T>(rhs.Sv() * lhs);
         }
     };
-}
+} // namespace utl

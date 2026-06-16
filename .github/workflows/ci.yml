@@ -6,6 +6,20 @@ on:
   pull_request:
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pin to the same version used to format the tree so CI and local agree.
+      - name: Install clang-format
+        run: pip install clang-format==22.1.5
+
+      - name: Check formatting
+        run: |
+          clang-format --version
+          clang-format --dry-run --Werror $(find include tests examples \( -name '*.hpp' -o -name '*.cpp' \))
+
   linux:
     runs-on: ubuntu-latest
     strategy:

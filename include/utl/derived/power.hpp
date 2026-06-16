@@ -29,11 +29,10 @@ namespace utl {
         [[nodiscard]] constexpr auto W() const -> T { return static_cast<T>(this->value()); }
 
         [[nodiscard]] constexpr auto hp() const -> T { return static_cast<T>(W() / WATTS_IN_HORSEPOWER); }
-
     };
 
     template<typename T>
     struct UnitMapper<PowerUnit<T>> {
         using type = Power<T>;
     };
-}
+} // namespace utl

@@ -16,7 +16,6 @@ TEST(t_pressure_test, init) {
 
     auto pressure_2 = Pressure<float>(Force<float>(15), Area<float>(3));
     EXPECT_FLOAT_EQ(pressure_2.Pa(), 5.0f);
-
 }
 
 TEST(t_pressure_test, add) {
