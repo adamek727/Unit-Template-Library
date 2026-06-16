@@ -11,6 +11,10 @@
 - Release automation: pushing a `v*` tag publishes a GitHub Release with notes
   drawn from the matching `CHANGELOG.md` section
   (`tools/extract_changelog.sh`, `.github/workflows/release.yml`).
+- Zero-overhead proof (`tools/check_zero_overhead.py`, run in CI for gcc and
+  clang): compiles unit arithmetic and the equivalent raw arithmetic to
+  assembly at `-O2` and asserts the two are byte-for-byte identical, making
+  the zero-overhead claim a regression test.
 
 ### Changed (breaking)
 
