@@ -16,6 +16,9 @@ ctest --test-dir build -R t_base_length        # or: ./build/tests/t_base_length
 # Example binary
 ./build/examples/usage_example
 
+# Zero-overhead proof (raw vs unit arithmetic must emit identical asm at -O2)
+python3 tools/check_zero_overhead.py g++        # or clang++
+
 # User guide (deployed to GitHub Pages from main)
 mdbook build docs
 ```
