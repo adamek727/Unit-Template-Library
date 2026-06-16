@@ -51,5 +51,20 @@ int main(int, char *[]) {
     // Stream output
     std::cout << "Speed: " << speed << std::endl;
 
+    // Mixed precision: promotes to the wider storage type
+    auto mixed = Length<float>(1.0f) + Length<double>(2.0); // Length<double>
+    std::cout << "Mixed precision sum: " << mixed.m() << "m" << std::endl;
+
+    // Temperature is affine: a difference is a TemperatureDelta, not a temperature
+    using Temp = ThermodynamicTemperature<double>;
+    auto delta = Temp(20, Temp::TYPE::CELSIUS) - Temp(5, Temp::TYPE::CELSIUS);
+    std::cout << "Temp difference: " << delta.degC() << " degC" << std::endl;
+
+    // Angle pseudo-dimension: rad * rad = sr, and torque is distinct from energy
+    auto solid = Angle<double>(2.0) * Angle<double>(3.0);    // SolidAngle
+    auto torque = Energy<double>(10.0) / Angle<double>(2.0); // Torque
+    std::cout << "Solid angle: " << solid.sr() << " sr, torque: " << torque.Nm() << " Nm" << std::endl;
+    std::cout << "sin(90 deg): " << sin(Angle<double>(90.0, Angle<double>::TYPE::DEG)) << std::endl;
+
     return 0;
 }

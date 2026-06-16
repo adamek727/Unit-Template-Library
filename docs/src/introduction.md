@@ -5,9 +5,10 @@ type-safe SI units.
 
 Every quantity is represented by its seven SI base dimension exponents (time,
 length, mass, electric current, thermodynamic temperature, amount of
-substance, luminous intensity) encoded as template parameters. The compiler
-tracks dimensions through arithmetic, so adding a `Length` to a `Time` is a
-compile-time error, while dividing a `Length` by a `Time` yields a
+substance, luminous intensity) plus an eighth *angle* pseudo-dimension
+(`rad` = angle¹, `sr` = angle²), all encoded as template parameters. The
+compiler tracks dimensions through arithmetic, so adding a `Length` to a `Time`
+is a compile-time error, while dividing a `Length` by a `Time` yields a
 `Velocity`.
 
 The library is the successor of the
