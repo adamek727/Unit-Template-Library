@@ -10,6 +10,10 @@
   `TimeStamp +/- TimeDuration` yields a `TimeStamp`, and `TimeStamp + TimeStamp`
   is deleted. `to_time()` bridges to the dimensional `Time<double>` (seconds).
   The floating-point unit machinery is untouched.
+- `std::chrono` interop (opt-in `utl/chrono.hpp`): `to_duration` / `to_timestamp`
+  convert from `std::chrono::duration` / `time_point`, and overloads of
+  `to_chrono` convert `TimeDuration` / `TimeStamp` back. Kept separate so
+  `<chrono>` is only included on demand.
 - Readable dimension-mismatch diagnostics: adding, subtracting or comparing
   quantities of different dimensions now fails with a clear `static_assert`
   message (e.g. "utl: cannot add quantities of different dimensions") instead of
