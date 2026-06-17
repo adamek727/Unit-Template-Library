@@ -171,3 +171,14 @@ auto seconds_as_double = milliseconds(1500).to_time();   // Time<double>, 1.5 s
 Construct durations with `nanoseconds` / `microseconds` / `milliseconds` /
 `seconds`, read them with `ns()` / `us()` / `ms()` / `s()` (integer counts), and
 cross into the dimensional world with `to_time()`.
+
+`utl/chrono.hpp` bridges these types to `std::chrono`:
+
+```cpp
+#include <utl/chrono.hpp>
+
+auto d  = to_duration(std::chrono::milliseconds(250));   // TimeDuration
+auto c  = to_chrono(milliseconds(250));                  // std::chrono::nanoseconds
+auto ts = to_timestamp(std::chrono::steady_clock::now()); // TimeStamp
+auto tp = to_chrono<std::chrono::steady_clock>(ts);       // std::chrono::time_point
+```
