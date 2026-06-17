@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.1.0 (2026-06-17)
+
 ### Added
 
 - Precise integer time (opt-in `utl/time_point.hpp`): `TimeDuration` and
