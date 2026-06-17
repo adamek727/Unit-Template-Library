@@ -148,3 +148,26 @@ auto y = utl::sin(utl::Angle<double>(90.0, utl::Angle<double>::TYPE::DEG)); // 1
 
 The angle exponent defaults to zero, so every other named unit and all existing
 code are unaffected.
+
+## Precise time (`utl/time_point.hpp`)
+
+For real-time use where sub-microsecond precision matters, the opt-in
+`utl/time_point.hpp` provides `TimeDuration` and `TimeStamp` — integer-native
+(`int64` nanosecond) wrappers with affine semantics. They never use floating
+point, so they do not lose precision the way `double` seconds do near a large
+epoch.
+
+```cpp
+#include <utl/time_point.hpp>
+using namespace utl;
+
+auto dt = TimeStamp(1500000000) - TimeStamp(1000000000); // TimeDuration, 500 ms
+auto later = TimeStamp(1000000000) + milliseconds(250);  // TimeStamp
+// TimeStamp + TimeStamp does not compile (adding absolute times is meaningless)
+
+auto seconds_as_double = milliseconds(1500).to_time();   // Time<double>, 1.5 s
+```
+
+Construct durations with `nanoseconds` / `microseconds` / `milliseconds` /
+`seconds`, read them with `ns()` / `us()` / `ms()` / `s()` (integer counts), and
+cross into the dimensional world with `to_time()`.

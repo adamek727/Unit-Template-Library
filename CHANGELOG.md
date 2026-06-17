@@ -4,6 +4,12 @@
 
 ### Added
 
+- Precise integer time (opt-in `utl/time_point.hpp`): `TimeDuration` and
+  `TimeStamp`, nanosecond-native `int64` wrappers over `Time<int64_t>` with
+  affine semantics — `TimeStamp - TimeStamp` yields a `TimeDuration`,
+  `TimeStamp +/- TimeDuration` yields a `TimeStamp`, and `TimeStamp + TimeStamp`
+  is deleted. `to_time()` bridges to the dimensional `Time<double>` (seconds).
+  The floating-point unit machinery is untouched.
 - Readable dimension-mismatch diagnostics: adding, subtracting or comparing
   quantities of different dimensions now fails with a clear `static_assert`
   message (e.g. "utl: cannot add quantities of different dimensions") instead of
