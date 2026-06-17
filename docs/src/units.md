@@ -28,7 +28,10 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `Area` | [m²] |
 | `Capacitance` | farad [F] |
 | `CatalyticActivity` | katal [kat] |
+| `Concentration` | [mol/m³] |
 | `Conductance` | siemens [S] |
+| `CurrentDensity` | [A/m²] |
+| `Density` | [kg/m³] |
 | `DoseEquivalent` | sievert [Sv] |
 | `ElectricCharge` | coulomb [C] |
 | `Energy` | joule [J] |
@@ -36,6 +39,7 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `Frequency` | hertz [Hz] |
 | `Illuminance` | lux [lx] |
 | `Inductance` | henry [H] |
+| `Luminance` | [cd/m²] |
 | `LuminousFlux` | lumen [lm] |
 | `MagneticFlux` | weber [Wb] |
 | `MagneticFluxDensity` | tesla [T] |
@@ -44,6 +48,7 @@ every unit, e.g. `Length_f`, `Length_d`.
 | `SolidAngle` | steradian [sr] |
 | `Torque` | newton-metre [N·m] (energy / angle) |
 | `Velocity` | [m/s] |
+| `Vergence` | [1/m] (diopter) |
 | `Voltage` | volt [V] |
 | `Volume` | [m³] |
 

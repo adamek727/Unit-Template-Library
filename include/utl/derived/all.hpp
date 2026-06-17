@@ -30,18 +30,18 @@
 #include "solid_angle.hpp" // steradian [sr]
 
 // coherent derived units in terms of base units
-#include "area.hpp"         // m^2
-#include "volume.hpp"       // m^3
-#include "velocity.hpp"     // m/s
-#include "acceleration.hpp" // m/s^2
+#include "area.hpp"            // m^2
+#include "volume.hpp"          // m^3
+#include "velocity.hpp"        // m/s
+#include "acceleration.hpp"    // m/s^2
+#include "vergence.hpp"        // 1/m (diopter)
+#include "density.hpp"         // kg/m^3
+#include "current_density.hpp" // A/m^2
+#include "concentration.hpp"   // mol/m^3
+#include "luminance.hpp"       // cd/m^2
 
 // TODO:
-// #include "vergence.hpp"  // 1/m
-// #include "density.hpp"  // kg/m^3
 // #include "surface_density.hpp"  // kg/m^2
 // #include "specific_volume.hpp"  // m^3/kg
-// #include "current_density.hpp"  // A/m^2
 // #include "magnetic_filed_strength.hpp"  // A/m
-// #include "concentration.hpp"  // mol/m^3
 // #include "mass_concentration.hpp"  // kg/m^3
-// #include "luminance.hpp"  // cd/m^2
