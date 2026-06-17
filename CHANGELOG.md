@@ -4,6 +4,10 @@
 
 ### Added
 
+- Readable dimension-mismatch diagnostics: adding, subtracting or comparing
+  quantities of different dimensions now fails with a clear `static_assert`
+  message (e.g. "utl: cannot add quantities of different dimensions") instead of
+  an overload-resolution wall of "no matching operator" notes.
 - Single-header amalgamation: `single_include/utl/utl.hpp`, generated from the
   multi-header tree by `tools/amalgamate.py` and kept in sync by CI, for
   zero-setup drop-in use. (The opt-in `utl/io.hpp` is not amalgamated.)
