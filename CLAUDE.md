@@ -70,7 +70,10 @@ The dimension system, and how result types are derived:
   `BaseUnit` members that also return the mapped type. `+`, `-` and the
   comparisons are templated on the other operand's scalar type, so mixed
   precision (`Length<float> + Length<double>`) promotes to `std::common_type_t`
-  of the two; cross-unit `*` / `/` in `operators.hpp` promote the same way.
+  of the two; cross-unit `*` / `/` in `operators.hpp` promote the same way. Those
+  members accept an operand of any dimension and `static_assert` that the
+  exponents match, so a dimension mismatch yields a readable message rather than
+  "no matching operator" spew.
 
 Dimension collisions — units sharing an exponent signature cannot both register
 a mapper. One winner is mapped; the others keep an explicit operator set so
