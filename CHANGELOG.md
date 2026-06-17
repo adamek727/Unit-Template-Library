@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Added
+
+- Five more coherent derived units, each with a from-constituents constructor
+  and an automatic result-type mapping: `Vergence` (1/m, diopter),
+  `Density` (kg/m³), `CurrentDensity` (A/m²), `Concentration` (mol/m³) and
+  `Luminance` (cd/m²). `Luminance` (cd/m²) is distinct from `Illuminance`
+  (lm/m²) thanks to the angle dimension.
+
 ## v3.0.0 (2026-06-16)
 
 ### Added
