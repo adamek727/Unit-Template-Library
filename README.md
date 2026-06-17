@@ -129,7 +129,7 @@ and use `find_package(utl REQUIRED)`.
 include(FetchContent)
 FetchContent_Declare(utl
         GIT_REPOSITORY https://github.com/adamek727/Unit-Template-Library
-        GIT_TAG v3.0.0)
+        GIT_TAG v3.1.0)
 FetchContent_MakeAvailable(utl)
 target_link_libraries(your_target utl::utl)
 ```
@@ -143,7 +143,7 @@ Center, export it locally:
 conan create .
 ```
 
-then depend on `unit-template-library/3.0.0` and link `utl::utl`.
+then depend on `unit-template-library/3.1.0` and link `utl::utl`.
 
 #### vcpkg
 
