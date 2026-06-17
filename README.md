@@ -129,7 +129,7 @@ and use `find_package(utl REQUIRED)`.
 include(FetchContent)
 FetchContent_Declare(utl
         GIT_REPOSITORY https://github.com/adamek727/Unit-Template-Library
-        GIT_TAG v2.0.0)
+        GIT_TAG v3.0.0)
 FetchContent_MakeAvailable(utl)
 target_link_libraries(your_target utl::utl)
 ```
@@ -143,7 +143,7 @@ Center, export it locally:
 conan create .
 ```
 
-then depend on `unit-template-library/2.0.0` and link `utl::utl`.
+then depend on `unit-template-library/3.0.0` and link `utl::utl`.
 
 #### vcpkg
 
@@ -152,6 +152,19 @@ An overlay port lives in `packaging/vcpkg/ports`. Install with:
 ```
 vcpkg install unit-template-library --overlay-ports=packaging/vcpkg/ports
 ```
+
+#### Single header
+
+For a zero-setup drop-in, copy the amalgamated header
+`single_include/utl/utl.hpp` into your project and include it directly:
+
+```cpp
+#include <utl/utl.hpp>
+```
+
+It is generated from the multi-header tree by `tools/amalgamate.py` (CI keeps it
+in sync). The opt-in stream output (`utl/io.hpp`) is not part of the
+amalgamation.
 
 In all cases the imported target is `utl::utl` and headers are included as
 `#include <utl/utl.hpp>`.

@@ -4,6 +4,9 @@
 
 ### Added
 
+- Single-header amalgamation: `single_include/utl/utl.hpp`, generated from the
+  multi-header tree by `tools/amalgamate.py` and kept in sync by CI, for
+  zero-setup drop-in use. (The opt-in `utl/io.hpp` is not amalgamated.)
 - Five more coherent derived units, each with a from-constituents constructor
   and an automatic result-type mapping: `Vergence` (1/m, diopter),
   `Density` (kg/m³), `CurrentDensity` (A/m²), `Concentration` (mol/m³) and

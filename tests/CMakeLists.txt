@@ -69,3 +69,12 @@ add_executable(t_odr utl/t_odr_main.cpp utl/t_odr_second.cpp)
 target_link_libraries(t_odr utl::utl GTest::GTest)
 utl_apply_warnings(t_odr)
 add_test(NAME t_odr COMMAND t_odr)
+
+# Compiled against single_include/ only (no utl::utl), so it tests the
+# amalgamated single header in isolation from the multi-header tree.
+add_executable(t_single_header utl/t_single_header.cpp)
+target_include_directories(t_single_header PRIVATE ${PROJECT_SOURCE_DIR}/single_include)
+target_link_libraries(t_single_header GTest::GTest GTest::Main)
+target_compile_features(t_single_header PRIVATE cxx_std_17)
+utl_apply_warnings(t_single_header)
+add_test(NAME t_single_header COMMAND t_single_header)
