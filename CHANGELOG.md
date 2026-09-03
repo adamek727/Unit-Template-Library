@@ -17,6 +17,12 @@
   precision (`LuminousFlux<float> + LuminousFlux<double>`) and the readable
   dimension-mismatch `static_assert` now apply to the photometric chain too.
 
+### Changed
+
+- `BaseUnit`'s dimension-equality `static_assert`s now go through one constexpr
+  `same_dim` helper over the two `dim()` arrays instead of eight repeated 8-way
+  comparisons. Diagnostics, generated code and the public API are unchanged.
+
 ## v3.1.0 (2026-06-17)
 
 ### Added
