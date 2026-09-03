@@ -58,6 +58,26 @@ TEST(t_mixed_precision_test, illuminance_multiply_promotes) {
     EXPECT_DOUBLE_EQ(flux.lm(), 6.0);
 }
 
+TEST(t_mixed_precision_test, scalar_multiply_promotes_to_wider_type) {
+    auto a = Length<float>(1.5f) * 2.0;
+    static_assert(std::is_same_v<decltype(a), Length<double>>, "float unit * double scalar must promote");
+    EXPECT_DOUBLE_EQ(a.m(), 3.0);
+    auto b = 2.0 * Length<float>(1.5f);
+    static_assert(std::is_same_v<decltype(b), Length<double>>, "double scalar * float unit must promote");
+    EXPECT_DOUBLE_EQ(b.m(), 3.0);
+    auto c = Length<float>(3.0f) / 2.0;
+    static_assert(std::is_same_v<decltype(c), Length<double>>, "float unit / double scalar must promote");
+    EXPECT_DOUBLE_EQ(c.m(), 1.5);
+}
+
+TEST(t_mixed_precision_test, scalar_narrower_than_unit_keeps_unit_type) {
+    static_assert(std::is_same_v<decltype(Length<float>(1.0f) * 2), Length<float>>, "int scalar keeps float");
+    static_assert(std::is_same_v<decltype(Length<double>(1.0) * 2.0f), Length<double>>, "float scalar keeps double");
+    static_assert(std::is_same_v<decltype(3 * Length<float>(1.0f)), Length<float>>, "int scalar keeps float");
+    static_assert(std::is_same_v<decltype(Length<double>(1.0) / 2), Length<double>>, "int scalar keeps double");
+    static_assert(std::is_same_v<decltype(Activity<float>(1.0f) * 2.0), Activity<double>>, "promotion keeps the kind");
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

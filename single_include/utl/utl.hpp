@@ -84,6 +84,9 @@ namespace utl {
     class BaseUnit {
         using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>;
         using SelfInv = BaseUnit<T, -TIME, -LENGTH, -MASS, -EL_CURR, -TD_TEMP, -AM_OF_SUB, -LUM_INT, -ANGLE>;
+
+        template<typename U>
+        using Scaled = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
     public:
         using Kind = KIND;
 
@@ -142,16 +145,19 @@ namespace utl {
             return Result(value_ - other.value());
         }
 
-        constexpr auto operator*(T scalar) const -> mapped_unit_t<Self> {
-            return mapped_unit_t<Self>(value() * scalar);
+        template<typename U, std::enable_if_t<std::is_arithmetic_v<U>, int> = 0>
+        constexpr auto operator*(U scalar) const -> Scaled<U> {
+            return Scaled<U>(value() * scalar);
         }
 
-        constexpr auto operator/(T scalar) const -> mapped_unit_t<Self> {
-            return mapped_unit_t<Self>(value() / scalar);
+        template<typename U, std::enable_if_t<std::is_arithmetic_v<U>, int> = 0>
+        constexpr auto operator/(U scalar) const -> Scaled<U> {
+            return Scaled<U>(value() / scalar);
         }
 
-        friend constexpr auto operator*(T lhs, const Self &rhs) -> mapped_unit_t<Self> {
-            return mapped_unit_t<Self>(rhs.value() * lhs);
+        template<typename U, std::enable_if_t<std::is_arithmetic_v<U>, int> = 0>
+        friend constexpr auto operator*(U lhs, const Self &rhs) -> Scaled<U> {
+            return Scaled<U>(rhs.value() * lhs);
         }
 
         constexpr auto operator-() const -> mapped_unit_t<Self> {

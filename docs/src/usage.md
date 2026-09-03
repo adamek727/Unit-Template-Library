@@ -92,6 +92,8 @@ to the wider type (`std::common_type_t`):
 ```cpp
 auto sum = utl::Length<float>(1.0f) + utl::Length<double>(2.0);  // Length<double>
 auto d   = utl::Velocity<float>(30.0f) * utl::Time<double>(5.0); // Length<double>
+auto s   = utl::Length<float>(1.5f) * 2.0;                        // Length<double>
+auto f   = utl::Length<float>(1.5f) * 2;                          // Length<float>
 ```
 
 ## Physical constants

@@ -31,6 +31,12 @@
 
 ### Changed
 
+- **Breaking:** scalar `*` and `/` now promote like unit `+` / `-` already did:
+  `Length<float> * 2.0` is a `Length<double>` (`std::common_type_t` of the
+  storage type and the scalar), while an `int` or narrower scalar keeps the
+  unit's type. Before, the scalar was silently narrowed to the unit's storage
+  type. Code that stored such a result in a `float` unit must now cast or use a
+  `float` literal (`2.0f`).
 - **Breaking:** `BaseUnit` gained a tenth template parameter, `typename KIND =
   void`, a kind tag that is part of the type but not a dimension. Units that
   share an exponent signature now carry their own tag (`Activity`,
