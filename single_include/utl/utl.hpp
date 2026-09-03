@@ -684,6 +684,10 @@ namespace utl {
             return Activity(Bq() - other.Bq());
         }
 
+        constexpr auto operator-() const -> Activity {
+            return Activity(-Bq());
+        }
+
         constexpr auto operator*(T scalar) const -> Activity {
             return Activity(Bq() * scalar);
         }
@@ -924,6 +928,10 @@ namespace utl {
 
         constexpr auto operator-(const DoseEquivalent &other) const -> DoseEquivalent {
             return DoseEquivalent(Sv() - other.Sv());
+        }
+
+        constexpr auto operator-() const -> DoseEquivalent {
+            return DoseEquivalent(-Sv());
         }
 
         constexpr auto operator*(T scalar) const -> DoseEquivalent {
