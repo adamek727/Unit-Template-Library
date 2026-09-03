@@ -47,7 +47,9 @@ The dimension system, and how result types are derived:
   (`base/base_unit.hpp`) encodes the seven SI exponents plus an eighth angle
   pseudo-dimension (`rad` = angle¹, `sr` = angle²) as `int8_t` template
   parameters. `ANGLE` defaults to `0`, so 7-argument aliases and all named-unit
-  code keep working. The only data member is the value. That exponent order is
+  code keep working. A tenth parameter, `typename KIND = void`, is a kind tag
+  (see below): not a dimension, not in `dim()`, but part of the type. The only
+  data member is the value. That exponent order is
   used everywhere — aliases, `dim()` (an 8-element array), operators, `io.hpp`
   symbols.
 - **A physical quantity is never undefined**: `BaseUnit() = delete`, so no
@@ -79,15 +81,25 @@ The dimension system, and how result types are derived:
   exponents match, so a dimension mismatch yields a readable message rather than
   "no matching operator" spew.
 
-Dimension collisions — units sharing an exponent signature cannot both register
-a mapper. One winner is mapped; the others keep an explicit operator set so
-their arithmetic preserves their type:
+Kind tags — units sharing an exponent signature would otherwise fight over the
+mapper. The tenth `BaseUnit` parameter `KIND` resolves that: each colliding unit
+derives from an alias with its own empty tag struct
+(`BaseUnit<T, -1, 0, 0, 0, 0, 0, 0, 0, ActivityKind>`), registers its own mapper
+and needs no hand-written operators. Same-dimension operators (`+`, `-`,
+comparisons, scalar `*` / `/`, `abs` / `min` / `max`) require equal kinds and
+`static_assert` a readable "different kinds" message; dimension-changing ones
+(cross-unit `*` / `/`, `inv`, `sqrt`, `pow`) drop the kind, so `Bq * s` is a
+plain dimensionless count and `J / ΔK` is the same quantity as `J / K`.
 
-| Signature | Mapped | Explicit operators instead |
+| Signature | Default kind | Tagged kind |
 |---|---|---|
-| 1/s | `Frequency` | `Activity` |
-| m²/s² | `AbsorbedDose` | `DoseEquivalent` |
-| K | `ThermodynamicTemperature` | `TemperatureDelta` |
+| 1/s | `Frequency` | `Activity` (`ActivityKind`) |
+| m²/s² | `AbsorbedDose` | `DoseEquivalent` (`DoseEquivalentKind`) |
+| K | `ThermodynamicTemperature` | `TemperatureDelta` (`TemperatureDeltaKind`) |
+
+`ThermodynamicTemperature` is affine and keeps hand-written members:
+`Temp - Temp` → `TemperatureDelta`, `Temp ± Delta` → `Temp`, and `Temp + Temp` /
+`Temp += Temp` are deleted.
 
 The angle pseudo-dimension resolved two former collisions: `Angle` (angle¹),
 `SolidAngle` (angle²) and dimensionless are now distinct and all mapped, and

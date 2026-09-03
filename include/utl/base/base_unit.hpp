@@ -39,11 +39,13 @@ namespace utl {
         return true;
     }
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE = 0>
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE = 0, typename KIND = void>
     class BaseUnit {
-        using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>;
+        using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>;
         using SelfInv = BaseUnit<T, -TIME, -LENGTH, -MASS, -EL_CURR, -TD_TEMP, -AM_OF_SUB, -LUM_INT, -ANGLE>;
     public:
+        using Kind = KIND;
+
         BaseUnit() = delete;
 
         constexpr explicit BaseUnit(const T &value) : value_{value} {};
@@ -83,17 +85,19 @@ namespace utl {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator+(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator+(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot add quantities of different dimensions");
-            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot add quantities of different kinds");
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
             return Result(value_ + other.value());
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator-(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator-(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot subtract quantities of different dimensions");
-            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot subtract quantities of different kinds");
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
             return Result(value_ - other.value());
         }
 
@@ -133,39 +137,45 @@ namespace utl {
             return *this;
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator==(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator==(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ == other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator!=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator!=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ != other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator<(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator<(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ < other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator<=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator<=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ <= other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator>(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator>(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ > other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator>=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator>=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ >= other.value();
         }
 

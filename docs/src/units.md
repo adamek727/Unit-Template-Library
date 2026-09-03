@@ -54,15 +54,21 @@ every unit, e.g. `Length_f`, `Length_d`.
 
 ## Units sharing a dimension signature
 
-Several SI units share the same dimension exponents, so automatic
-result-type mapping has to pick one winner; construct the other
-explicitly when needed:
+Several SI units share the same dimension exponents. Each still gets its own
+type and its own automatic result-type mapping, because `BaseUnit` carries a
+*kind tag* next to the exponents: a type parameter that defaults to `void` and
+that two quantities must share before they can be added, subtracted or
+compared. A mismatch is a compile-time error with a readable message.
 
-| Dimensions | Mapped result | Construct explicitly |
+| Dimensions | Default kind | Tagged kind |
 |---|---|---|
 | 1/s | `Frequency` | `Activity` |
 | m²/s² | `AbsorbedDose` | `DoseEquivalent` |
 | K | `ThermodynamicTemperature` | `TemperatureDelta` |
+
+The tag is not a dimension: multiplying or dividing by another unit, `inv()`,
+`sqrt` and `pow` drop it, so `Activity * Time` is a plain dimensionless count
+and `Energy / TemperatureDelta` is the same quantity as `Energy / Temperature`.
 
 ## The angle pseudo-dimension
 
