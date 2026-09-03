@@ -4,6 +4,10 @@
 
 ### Fixed
 
+- `ThermodynamicTemperature` compound assignment is now affine: `+=` and `-=`
+  take a `TemperatureDelta` and return the temperature, while the overloads
+  taking another temperature are deleted. Before, both went through `BaseUnit`
+  (the delta and the temperature share a base type), so `Temp += Temp` compiled.
 - `Activity` and `DoseEquivalent` gained unary minus. Their hand-written binary
   `operator-` hid the one from `BaseUnit`, so `-Activity(x)` did not compile.
   Each now has a test that pins the result type of its whole operator set.
