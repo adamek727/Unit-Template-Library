@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v4.0.0 (2026-09-03)
+
 ### Added
 
 - Compile-fail tests: `tests/compile_fail/cf_*.cpp` snippets registered with
