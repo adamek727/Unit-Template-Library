@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(UnitTemplateLibrary VERSION 3.1.0 LANGUAGES CXX)
+project(UnitTemplateLibrary VERSION 4.0.0 LANGUAGES CXX)
 
 option(ENABLE_TESTS "Build unit tests" OFF)
 option(ENABLE_EXAMPLES "Build usage examples" OFF)

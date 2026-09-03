@@ -42,7 +42,7 @@ target_link_libraries(your_target utl::utl)
 include(FetchContent)
 FetchContent_Declare(utl
         GIT_REPOSITORY https://github.com/adamek727/Unit-Template-Library
-        GIT_TAG v3.1.0)
+        GIT_TAG v4.0.0)
 FetchContent_MakeAvailable(utl)
 target_link_libraries(your_target utl::utl)
 ```
@@ -51,7 +51,7 @@ target_link_libraries(your_target utl::utl)
 
 A header-only recipe ships in `conanfile.py`. Until the package is on Conan
 Center, export it locally with `conan create .`, then depend on
-`unit-template-library/3.1.0` and link `utl::utl`.
+`unit-template-library/4.0.0` and link `utl::utl`.
 
 ## vcpkg
 
