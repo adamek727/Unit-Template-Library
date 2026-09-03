@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added
+
+- Compile-fail tests: `tests/compile_fail/cf_*.cpp` snippets registered with
+  `make_compile_fail_test(<name> "<expected message>")`. Each one is built by
+  its CTest entry and passes only when the compiler output matches the expected
+  message, so the readable dimension-mismatch diagnostics, the odd-exponent
+  `sqrt` error, the deleted `Temperature + Temperature` and the explicit-only
+  construction are now guarded by tests instead of by convention.
+
 ### Fixed
 
 - The Planck constant is now spelled correctly: `planck_constant_f` /

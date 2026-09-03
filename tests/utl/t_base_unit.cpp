@@ -4,6 +4,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <type_traits>
 #include "utl/operators.hpp"
 
 using namespace utl;
@@ -97,6 +98,8 @@ static_assert(!std::is_default_constructible_v<TestUnit>,
               "a physical quantity is never undefined");
 static_assert(!std::is_default_constructible_v<Unit<double>>,
               "a physical quantity is never undefined");
+
+static_assert(!std::is_default_constructible_v<BaseUnit<double, 0, 1, 0, 0, 0, 0, 0>>, "a quantity is never undefined");
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
