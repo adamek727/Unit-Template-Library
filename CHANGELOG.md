@@ -31,6 +31,17 @@
 
 ### Changed
 
+- **Breaking:** `BaseUnit` gained a tenth template parameter, `typename KIND =
+  void`, a kind tag that is part of the type but not a dimension. Units that
+  share an exponent signature now carry their own tag (`Activity`,
+  `DoseEquivalent`, `TemperatureDelta`), so each has its own mapper and no
+  hand-written operators: mixed precision, unary minus and `abs` / `min` / `max`
+  keep their type. Same-dimension arithmetic and comparisons require equal
+  kinds and fail with `utl: cannot … quantities of different kinds`, so
+  `Frequency + Activity` and `Temperature == TemperatureDelta` no longer
+  compile; cross-unit `*` / `/`, `inv`, `sqrt` and `pow` drop the tag. Code that
+  relied on `Activity` converting to a `FrequencyUnit` (or the other two pairs)
+  must construct the intended type explicitly.
 - `BaseUnit`'s dimension-equality `static_assert`s now go through one constexpr
   `same_dim` helper over the two `dim()` arrays instead of eight repeated 8-way
   comparisons. Diagnostics, generated code and the public API are unchanged.

@@ -80,11 +80,13 @@ namespace utl {
         return true;
     }
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE = 0>
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE = 0, typename KIND = void>
     class BaseUnit {
-        using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>;
+        using Self = BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>;
         using SelfInv = BaseUnit<T, -TIME, -LENGTH, -MASS, -EL_CURR, -TD_TEMP, -AM_OF_SUB, -LUM_INT, -ANGLE>;
     public:
+        using Kind = KIND;
+
         BaseUnit() = delete;
 
         constexpr explicit BaseUnit(const T &value) : value_{value} {};
@@ -124,17 +126,19 @@ namespace utl {
             return typename UnitMapper<UnitType>::type(this->value_);
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator+(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator+(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot add quantities of different dimensions");
-            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot add quantities of different kinds");
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
             return Result(value_ + other.value());
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator-(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator-(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot subtract quantities of different dimensions");
-            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot subtract quantities of different kinds");
+            using Result = mapped_unit_t<BaseUnit<std::common_type_t<T, U>, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
             return Result(value_ - other.value());
         }
 
@@ -174,39 +178,45 @@ namespace utl {
             return *this;
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator==(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator==(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ == other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator!=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator!=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ != other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator<(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator<(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ < other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator<=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator<=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ <= other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator>(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator>(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ > other.value();
         }
 
-        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2>
-        constexpr auto operator>=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2> &other) const -> bool {
+        template<typename U, int8_t TIME2, int8_t LENGTH2, int8_t MASS2, int8_t EL_CURR2, int8_t TD_TEMP2, int8_t AM_OF_SUB2, int8_t LUM_INT2, int8_t ANGLE2, typename KIND2>
+        constexpr auto operator>=(const BaseUnit<U, TIME2, LENGTH2, MASS2, EL_CURR2, TD_TEMP2, AM_OF_SUB2, LUM_INT2, ANGLE2, KIND2> &other) const -> bool {
             static_assert(same_dim(dim(), std::decay_t<decltype(other)>::dim()), "utl: cannot compare quantities of different dimensions");
+            static_assert(std::is_same_v<KIND, KIND2>, "utl: cannot compare quantities of different kinds");
             return value_ >= other.value();
         }
 
@@ -392,8 +402,10 @@ namespace utl {
     static constexpr double TEMPERATURE_C2F_K = 1.8;
     static constexpr double TEMPERATURE_C2F_Q = 32;
 
+    struct TemperatureDeltaKind {};
+
     template<typename T>
-    using TemperatureDeltaUnit = BaseUnit<T, 0, 0, 0, 0, 1, 0, 0>;
+    using TemperatureDeltaUnit = BaseUnit<T, 0, 0, 0, 0, 1, 0, 0, 0, TemperatureDeltaKind>;
 
     template<typename T>
     class TemperatureDelta : public TemperatureDeltaUnit<T> {
@@ -406,30 +418,11 @@ namespace utl {
         [[nodiscard]] constexpr auto degC() const -> T { return K(); }
 
         [[nodiscard]] constexpr auto degF() const -> T { return static_cast<T>(K() * TEMPERATURE_C2F_K); }
+    };
 
-        constexpr auto operator+(const TemperatureDelta &other) const -> TemperatureDelta {
-            return TemperatureDelta(K() + other.K());
-        }
-
-        constexpr auto operator-(const TemperatureDelta &other) const -> TemperatureDelta {
-            return TemperatureDelta(K() - other.K());
-        }
-
-        constexpr auto operator-() const -> TemperatureDelta {
-            return TemperatureDelta(-K());
-        }
-
-        constexpr auto operator*(T scalar) const -> TemperatureDelta {
-            return TemperatureDelta(K() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> TemperatureDelta {
-            return TemperatureDelta(K() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const TemperatureDelta<T> &rhs) -> TemperatureDelta<T> {
-            return TemperatureDelta<T>(rhs.K() * lhs);
-        }
+    template<typename T>
+    struct UnitMapper<TemperatureDeltaUnit<T>> {
+        using type = TemperatureDelta<T>;
     };
 
     template<typename T>
@@ -689,8 +682,10 @@ namespace utl {
 
 namespace utl {
 
+    struct ActivityKind {};
+
     template<typename T>
-    using ActivityUnit = BaseUnit<T, -1, 0, 0, 0, 0, 0, 0>;
+    using ActivityUnit = BaseUnit<T, -1, 0, 0, 0, 0, 0, 0, 0, ActivityKind>;
 
     template<typename T>
     class Activity : public ActivityUnit<T> {
@@ -699,36 +694,12 @@ namespace utl {
         constexpr explicit Activity(T activity) : ActivityUnit<T>{activity} {}
 
         [[nodiscard]] constexpr auto Bq() const -> T { return static_cast<T>(this->value()); }
-
-        constexpr auto operator+(const Activity &other) const -> Activity {
-            return Activity(Bq() + other.Bq());
-        }
-
-        constexpr auto operator-(const Activity &other) const -> Activity {
-            return Activity(Bq() - other.Bq());
-        }
-
-        constexpr auto operator-() const -> Activity {
-            return Activity(-Bq());
-        }
-
-        constexpr auto operator*(T scalar) const -> Activity {
-            return Activity(Bq() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> Activity {
-            return Activity(Bq() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const Activity<T> &rhs) -> Activity<T> {
-            return Activity<T>(rhs.Bq() * lhs);
-        }
     };
 
-    //    template<typename T>
-    //    struct UnitMapper<ActivityUnit<T>> {
-    //        using type = Activity<T>;
-    //    };
+    template<typename T>
+    struct UnitMapper<ActivityUnit<T>> {
+        using type = Activity<T>;
+    };
 } // namespace utl
 
 namespace utl {
@@ -933,8 +904,10 @@ namespace utl {
 
 namespace utl {
 
+    struct DoseEquivalentKind {};
+
     template<typename T>
-    using DoseEquivalentUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0>;
+    using DoseEquivalentUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0, 0, DoseEquivalentKind>;
 
     template<typename T>
     class DoseEquivalent : public DoseEquivalentUnit<T> {
@@ -945,30 +918,11 @@ namespace utl {
         constexpr explicit DoseEquivalent(const AbsorbedDose<T> ad, const T radiation_weight_factor) : DoseEquivalentUnit<T>{ad.Gy() * radiation_weight_factor} {}
 
         [[nodiscard]] constexpr auto Sv() const -> T { return static_cast<T>(this->value()); }
+    };
 
-        constexpr auto operator+(const DoseEquivalent &other) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() + other.Sv());
-        }
-
-        constexpr auto operator-(const DoseEquivalent &other) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() - other.Sv());
-        }
-
-        constexpr auto operator-() const -> DoseEquivalent {
-            return DoseEquivalent(-Sv());
-        }
-
-        constexpr auto operator*(T scalar) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const DoseEquivalent<T> &rhs) -> DoseEquivalent<T> {
-            return DoseEquivalent<T>(rhs.Sv() * lhs);
-        }
+    template<typename T>
+    struct UnitMapper<DoseEquivalentUnit<T>> {
+        using type = DoseEquivalent<T>;
     };
 } // namespace utl
 
@@ -1417,10 +1371,11 @@ namespace utl {
 
     template<typename T_L, typename T_R,
              int8_t TIME_L, int8_t LENGTH_L, int8_t MASS_L, int8_t EL_CURR_L, int8_t TD_TEMP_L, int8_t AM_OF_SUB_L, int8_t LUM_INT_L, int8_t ANGLE_L,
-             int8_t TIME_R, int8_t LENGTH_R, int8_t MASS_R, int8_t EL_CURR_R, int8_t TD_TEMP_R, int8_t AM_OF_SUB_R, int8_t LUM_INT_R, int8_t ANGLE_R>
+             int8_t TIME_R, int8_t LENGTH_R, int8_t MASS_R, int8_t EL_CURR_R, int8_t TD_TEMP_R, int8_t AM_OF_SUB_R, int8_t LUM_INT_R, int8_t ANGLE_R,
+             typename KIND_L, typename KIND_R>
     constexpr auto operator*(
-        const BaseUnit<T_L, TIME_L, LENGTH_L, MASS_L, EL_CURR_L, TD_TEMP_L, AM_OF_SUB_L, LUM_INT_L, ANGLE_L> &lhs,
-        const BaseUnit<T_R, TIME_R, LENGTH_R, MASS_R, EL_CURR_R, TD_TEMP_R, AM_OF_SUB_R, LUM_INT_R, ANGLE_R> &rhs)
+        const BaseUnit<T_L, TIME_L, LENGTH_L, MASS_L, EL_CURR_L, TD_TEMP_L, AM_OF_SUB_L, LUM_INT_L, ANGLE_L, KIND_L> &lhs,
+        const BaseUnit<T_R, TIME_R, LENGTH_R, MASS_R, EL_CURR_R, TD_TEMP_R, AM_OF_SUB_R, LUM_INT_R, ANGLE_R, KIND_R> &rhs)
         -> mapped_unit_t<BaseUnit<std::common_type_t<T_L, T_R>,
                                   TIME_L + TIME_R,
                                   LENGTH_L + LENGTH_R,
@@ -1444,10 +1399,11 @@ namespace utl {
 
     template<typename T_L, typename T_R,
              int8_t TIME_L, int8_t LENGTH_L, int8_t MASS_L, int8_t EL_CURR_L, int8_t TD_TEMP_L, int8_t AM_OF_SUB_L, int8_t LUM_INT_L, int8_t ANGLE_L,
-             int8_t TIME_R, int8_t LENGTH_R, int8_t MASS_R, int8_t EL_CURR_R, int8_t TD_TEMP_R, int8_t AM_OF_SUB_R, int8_t LUM_INT_R, int8_t ANGLE_R>
+             int8_t TIME_R, int8_t LENGTH_R, int8_t MASS_R, int8_t EL_CURR_R, int8_t TD_TEMP_R, int8_t AM_OF_SUB_R, int8_t LUM_INT_R, int8_t ANGLE_R,
+             typename KIND_L, typename KIND_R>
     constexpr auto operator/(
-        const BaseUnit<T_L, TIME_L, LENGTH_L, MASS_L, EL_CURR_L, TD_TEMP_L, AM_OF_SUB_L, LUM_INT_L, ANGLE_L> &lhs,
-        const BaseUnit<T_R, TIME_R, LENGTH_R, MASS_R, EL_CURR_R, TD_TEMP_R, AM_OF_SUB_R, LUM_INT_R, ANGLE_R> &rhs)
+        const BaseUnit<T_L, TIME_L, LENGTH_L, MASS_L, EL_CURR_L, TD_TEMP_L, AM_OF_SUB_L, LUM_INT_L, ANGLE_L, KIND_L> &lhs,
+        const BaseUnit<T_R, TIME_R, LENGTH_R, MASS_R, EL_CURR_R, TD_TEMP_R, AM_OF_SUB_R, LUM_INT_R, ANGLE_R, KIND_R> &rhs)
         -> mapped_unit_t<BaseUnit<std::common_type_t<T_L, T_R>,
                                   TIME_L - TIME_R,
                                   LENGTH_L - LENGTH_R,
@@ -1515,8 +1471,8 @@ namespace utl {
 
 namespace utl {
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
-    auto sqrt(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &unit)
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE, typename KIND>
+    auto sqrt(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &unit)
         -> mapped_unit_t<BaseUnit<T, TIME / 2, LENGTH / 2, MASS / 2, EL_CURR / 2, TD_TEMP / 2, AM_OF_SUB / 2, LUM_INT / 2, ANGLE / 2>> {
         static_assert(TIME % 2 == 0 && LENGTH % 2 == 0 && MASS % 2 == 0 && EL_CURR % 2 == 0 && TD_TEMP % 2 == 0 && AM_OF_SUB % 2 == 0 && LUM_INT % 2 == 0 && ANGLE % 2 == 0,
                       "sqrt requires all dimension exponents to be even");
@@ -1524,8 +1480,8 @@ namespace utl {
         return Result(std::sqrt(unit.value()));
     }
 
-    template<int8_t N, typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
-    constexpr auto pow(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &unit)
+    template<int8_t N, typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE, typename KIND>
+    constexpr auto pow(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &unit)
         -> mapped_unit_t<BaseUnit<T, TIME * N, LENGTH * N, MASS * N, EL_CURR * N, TD_TEMP * N, AM_OF_SUB * N, LUM_INT * N, ANGLE * N>> {
         static_assert(N >= 0, "pow supports non-negative exponents; use inv() for reciprocals");
         using Result = mapped_unit_t<BaseUnit<T, TIME * N, LENGTH * N, MASS * N, EL_CURR * N, TD_TEMP * N, AM_OF_SUB * N, LUM_INT * N, ANGLE * N>>;
@@ -1536,26 +1492,26 @@ namespace utl {
         return Result(result);
     }
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
-    constexpr auto abs(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &unit)
-        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
-        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE, typename KIND>
+    constexpr auto abs(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &unit)
+        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
+        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
         return Result(unit.value() < 0 ? -unit.value() : unit.value());
     }
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
-    constexpr auto min(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &lhs,
-                       const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &rhs)
-        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
-        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE, typename KIND>
+    constexpr auto min(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &lhs,
+                       const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &rhs)
+        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
+        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
         return Result(lhs.value() < rhs.value() ? lhs.value() : rhs.value());
     }
 
-    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE>
-    constexpr auto max(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &lhs,
-                       const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE> &rhs)
-        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>> {
-        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE>>;
+    template<typename T, int8_t TIME, int8_t LENGTH, int8_t MASS, int8_t EL_CURR, int8_t TD_TEMP, int8_t AM_OF_SUB, int8_t LUM_INT, int8_t ANGLE, typename KIND>
+    constexpr auto max(const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &lhs,
+                       const BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND> &rhs)
+        -> mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>> {
+        using Result = mapped_unit_t<BaseUnit<T, TIME, LENGTH, MASS, EL_CURR, TD_TEMP, AM_OF_SUB, LUM_INT, ANGLE, KIND>>;
         return Result(lhs.value() < rhs.value() ? rhs.value() : lhs.value());
     }
 } // namespace utl

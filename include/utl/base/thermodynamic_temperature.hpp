@@ -14,8 +14,10 @@ namespace utl {
     static constexpr double TEMPERATURE_C2F_K = 1.8;
     static constexpr double TEMPERATURE_C2F_Q = 32;
 
+    struct TemperatureDeltaKind {};
+
     template<typename T>
-    using TemperatureDeltaUnit = BaseUnit<T, 0, 0, 0, 0, 1, 0, 0>;
+    using TemperatureDeltaUnit = BaseUnit<T, 0, 0, 0, 0, 1, 0, 0, 0, TemperatureDeltaKind>;
 
     template<typename T>
     class TemperatureDelta : public TemperatureDeltaUnit<T> {
@@ -28,30 +30,11 @@ namespace utl {
         [[nodiscard]] constexpr auto degC() const -> T { return K(); }
 
         [[nodiscard]] constexpr auto degF() const -> T { return static_cast<T>(K() * TEMPERATURE_C2F_K); }
+    };
 
-        constexpr auto operator+(const TemperatureDelta &other) const -> TemperatureDelta {
-            return TemperatureDelta(K() + other.K());
-        }
-
-        constexpr auto operator-(const TemperatureDelta &other) const -> TemperatureDelta {
-            return TemperatureDelta(K() - other.K());
-        }
-
-        constexpr auto operator-() const -> TemperatureDelta {
-            return TemperatureDelta(-K());
-        }
-
-        constexpr auto operator*(T scalar) const -> TemperatureDelta {
-            return TemperatureDelta(K() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> TemperatureDelta {
-            return TemperatureDelta(K() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const TemperatureDelta<T> &rhs) -> TemperatureDelta<T> {
-            return TemperatureDelta<T>(rhs.K() * lhs);
-        }
+    template<typename T>
+    struct UnitMapper<TemperatureDeltaUnit<T>> {
+        using type = TemperatureDelta<T>;
     };
 
     template<typename T>

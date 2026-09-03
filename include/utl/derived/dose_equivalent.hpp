@@ -9,8 +9,10 @@
 
 namespace utl {
 
+    struct DoseEquivalentKind {};
+
     template<typename T>
-    using DoseEquivalentUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0>;
+    using DoseEquivalentUnit = BaseUnit<T, -2, 2, 0, 0, 0, 0, 0, 0, DoseEquivalentKind>;
 
     template<typename T>
     class DoseEquivalent : public DoseEquivalentUnit<T> {
@@ -21,29 +23,10 @@ namespace utl {
         constexpr explicit DoseEquivalent(const AbsorbedDose<T> ad, const T radiation_weight_factor) : DoseEquivalentUnit<T>{ad.Gy() * radiation_weight_factor} {}
 
         [[nodiscard]] constexpr auto Sv() const -> T { return static_cast<T>(this->value()); }
+    };
 
-        constexpr auto operator+(const DoseEquivalent &other) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() + other.Sv());
-        }
-
-        constexpr auto operator-(const DoseEquivalent &other) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() - other.Sv());
-        }
-
-        constexpr auto operator-() const -> DoseEquivalent {
-            return DoseEquivalent(-Sv());
-        }
-
-        constexpr auto operator*(T scalar) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() * scalar);
-        }
-
-        constexpr auto operator/(T scalar) const -> DoseEquivalent {
-            return DoseEquivalent(Sv() / scalar);
-        }
-
-        friend constexpr auto operator*(T lhs, const DoseEquivalent<T> &rhs) -> DoseEquivalent<T> {
-            return DoseEquivalent<T>(rhs.Sv() * lhs);
-        }
+    template<typename T>
+    struct UnitMapper<DoseEquivalentUnit<T>> {
+        using type = DoseEquivalent<T>;
     };
 } // namespace utl
