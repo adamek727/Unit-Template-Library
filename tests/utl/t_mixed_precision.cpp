@@ -40,6 +40,24 @@ TEST(t_mixed_precision_test, cross_unit_divide_promotes) {
     EXPECT_DOUBLE_EQ(v.mps(), 25.0);
 }
 
+TEST(t_mixed_precision_test, luminous_flux_add_promotes) {
+    auto sum = LuminousFlux<float>(1.0f) + LuminousFlux<double>(2.0);
+    static_assert(std::is_same_v<decltype(sum), LuminousFlux<double>>, "mixed LuminousFlux add must promote");
+    EXPECT_DOUBLE_EQ(sum.lm(), 3.0);
+}
+
+TEST(t_mixed_precision_test, luminous_flux_divide_promotes) {
+    auto intensity = LuminousFlux<double>(10.0) / SolidAngle<float>(2.0f);
+    static_assert(std::is_same_v<decltype(intensity), LuminousIntensity<double>>, "mixed lm / sr must promote");
+    EXPECT_DOUBLE_EQ(intensity.cd(), 5.0);
+}
+
+TEST(t_mixed_precision_test, illuminance_multiply_promotes) {
+    auto flux = Illuminance<float>(3.0f) * Area<double>(2.0);
+    static_assert(std::is_same_v<decltype(flux), LuminousFlux<double>>, "mixed lux * m2 must promote");
+    EXPECT_DOUBLE_EQ(flux.lm(), 6.0);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

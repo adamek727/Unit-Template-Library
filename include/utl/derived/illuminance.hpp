@@ -23,12 +23,6 @@ namespace utl {
                                                                                           lf.lm() / a.m2()} {}
 
         [[nodiscard]] constexpr auto lux() const -> T { return static_cast<T>(this->value()); }
-
-        using IlluminanceUnit<T>::operator*;
-
-        constexpr auto operator*(const Area<T> &other) const -> LuminousFlux<T> {
-            return LuminousFlux<T>(lux() * other.m2());
-        }
     };
 
     template<typename T>

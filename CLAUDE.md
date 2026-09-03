@@ -90,12 +90,13 @@ The angle pseudo-dimension resolved two former collisions: `Angle` (angle¹),
 `LuminousFlux` (cd·sr = `[cd, angle²]`) is now distinct from `LuminousIntensity`
 (cd) and gets its own mapper.
 
-The photometric chain (`LuminousFlux`/`Illuminance`) keeps hand-written
-conversion operators (`LuminousFlux / SolidAngle → LuminousIntensity`,
-`Illuminance * Area → LuminousFlux`, …); with the angle dimension these are now
-also derivable from the dimension system, but the explicit members are retained
-and win overload resolution. A member operator hides the base-class ones —
-re-expose with `using XxxUnit<T>::operator*;` (see `illuminance.hpp`). `Torque`
+The photometric chain (`LuminousFlux`/`Illuminance`) is fully derived: with the
+angle dimension, `LuminousFlux / SolidAngle → LuminousIntensity`,
+`LuminousFlux / Area → Illuminance` and `Illuminance * Area → LuminousFlux` all
+come from `operators.hpp` plus the mappers, so those classes carry no operators
+of their own. A member operator hides the base-class ones — and with them mixed
+precision and the readable mismatch diagnostics — so if a class must add one,
+re-expose the rest with `using XxxUnit<T>::operator*;`. `Torque`
 (N·m = energy/angle, i.e. `[…, angle⁻¹]`) is type-distinct from `Energy` (J):
 `Energy / Angle == Torque` and `Torque * Angle == Energy`, while `Force * Length`
 still yields `Energy`. Angle-aware `sin`/`cos`/`tan` (in `angle.hpp`) take an

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Fixed
+
+- `LuminousFlux` and `Illuminance` no longer carry hand-written operators; with
+  the angle dimension `lm / sr`, `lm / cd`, `lm / m²` and `lux · m²` are
+  derivable, so they now go through the generic operators. As a result mixed
+  precision (`LuminousFlux<float> + LuminousFlux<double>`) and the readable
+  dimension-mismatch `static_assert` now apply to the photometric chain too.
+
 ## v3.1.0 (2026-06-17)
 
 ### Added
