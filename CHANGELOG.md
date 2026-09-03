@@ -4,6 +4,9 @@
 
 ### Fixed
 
+- `Activity` and `DoseEquivalent` gained unary minus. Their hand-written binary
+  `operator-` hid the one from `BaseUnit`, so `-Activity(x)` did not compile.
+  Each now has a test that pins the result type of its whole operator set.
 - `LuminousFlux` and `Illuminance` no longer carry hand-written operators; with
   the angle dimension `lm / sr`, `lm / cd`, `lm / m²` and `lux · m²` are
   derivable, so they now go through the generic operators. As a result mixed

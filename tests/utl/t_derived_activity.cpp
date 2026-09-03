@@ -4,6 +4,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <type_traits>
 #include "utl/utl.hpp"
 
 using namespace utl;
@@ -43,6 +44,21 @@ TEST(t_activity_test, dim) {
     EXPECT_EQ(Activity<float>::TdTempDim(), 0);
     EXPECT_EQ(Activity<float>::AmOfSubDim(), 0);
     EXPECT_EQ(Activity<float>::LumIntDim(), 0);
+}
+
+TEST(t_activity_test, operator_set_keeps_type) {
+    auto unit_1 = Activity<float>(6.0);
+    static_assert(std::is_same_v<decltype(unit_1 + unit_1), Activity<float>>, "+ must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 - unit_1), Activity<float>>, "- must keep the type");
+    static_assert(std::is_same_v<decltype(-unit_1), Activity<float>>, "unary - must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 * 2.0f), Activity<float>>, "* scalar must keep the type");
+    static_assert(std::is_same_v<decltype(2.0f * unit_1), Activity<float>>, "scalar * must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 / 2.0f), Activity<float>>, "/ scalar must keep the type");
+    EXPECT_FLOAT_EQ((-unit_1).Bq(), -6);
+    unit_1 += Activity<float>(1.0);
+    unit_1 -= Activity<float>(2.0);
+    EXPECT_FLOAT_EQ(unit_1.Bq(), 5);
+    EXPECT_TRUE(unit_1 < Activity<float>(6.0));
 }
 
 int main(int argc, char **argv) {

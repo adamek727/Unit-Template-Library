@@ -28,6 +28,10 @@ namespace utl {
             return Activity(Bq() - other.Bq());
         }
 
+        constexpr auto operator-() const -> Activity {
+            return Activity(-Bq());
+        }
+
         constexpr auto operator*(T scalar) const -> Activity {
             return Activity(Bq() * scalar);
         }

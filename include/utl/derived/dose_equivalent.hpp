@@ -30,6 +30,10 @@ namespace utl {
             return DoseEquivalent(Sv() - other.Sv());
         }
 
+        constexpr auto operator-() const -> DoseEquivalent {
+            return DoseEquivalent(-Sv());
+        }
+
         constexpr auto operator*(T scalar) const -> DoseEquivalent {
             return DoseEquivalent(Sv() * scalar);
         }

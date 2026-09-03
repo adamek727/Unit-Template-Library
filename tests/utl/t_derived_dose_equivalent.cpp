@@ -4,6 +4,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <type_traits>
 #include "utl/utl.hpp"
 
 using namespace utl;
@@ -47,6 +48,21 @@ TEST(t_dose_equivalent, dim) {
     EXPECT_EQ(DoseEquivalent<float>::TdTempDim(), 0);
     EXPECT_EQ(DoseEquivalent<float>::AmOfSubDim(), 0);
     EXPECT_EQ(DoseEquivalent<float>::LumIntDim(), 0);
+}
+
+TEST(t_dose_equivalent, operator_set_keeps_type) {
+    auto unit_1 = DoseEquivalent<float>(6.0);
+    static_assert(std::is_same_v<decltype(unit_1 + unit_1), DoseEquivalent<float>>, "+ must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 - unit_1), DoseEquivalent<float>>, "- must keep the type");
+    static_assert(std::is_same_v<decltype(-unit_1), DoseEquivalent<float>>, "unary - must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 * 2.0f), DoseEquivalent<float>>, "* scalar must keep the type");
+    static_assert(std::is_same_v<decltype(2.0f * unit_1), DoseEquivalent<float>>, "scalar * must keep the type");
+    static_assert(std::is_same_v<decltype(unit_1 / 2.0f), DoseEquivalent<float>>, "/ scalar must keep the type");
+    EXPECT_FLOAT_EQ((-unit_1).Sv(), -6);
+    unit_1 += DoseEquivalent<float>(1.0);
+    unit_1 -= DoseEquivalent<float>(2.0);
+    EXPECT_FLOAT_EQ(unit_1.Sv(), 5);
+    EXPECT_TRUE(unit_1 < DoseEquivalent<float>(6.0));
 }
 
 int main(int argc, char **argv) {
