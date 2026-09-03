@@ -29,7 +29,11 @@ mdbook build docs
 GTest comes from the system package or, when absent, a FetchContent fallback in
 `tests/CMakeLists.txt`. New test files go in `tests/utl/t_*.cpp` (with their own
 `main`) and are registered with `make_units_test(<name>)` in
-`tests/CMakeLists.txt`.
+`tests/CMakeLists.txt`. "Must not compile" cases go in `tests/compile_fail/cf_*.cpp`
+and are registered with `make_compile_fail_test(<name> "<expected message>")`:
+the test builds the snippet on its own and passes only when the compiler output
+matches the message, so a snippet that compiles, or fails for another reason,
+fails the test.
 
 ## Architecture
 

@@ -4,6 +4,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <type_traits>
 #include <sstream>
 #include "utl/utl.hpp"
 #include "utl/io.hpp"
@@ -85,6 +86,9 @@ TEST(t_ux_test, stream_output) {
     ss << Unit<float>(2);
     EXPECT_EQ(ss.str(), "2 [-]");
 }
+
+static_assert(!std::is_default_constructible_v<Length<double>>, "a named unit is never undefined");
+static_assert(!std::is_convertible_v<double, Length<double>>, "a scalar never becomes a unit implicitly");
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
