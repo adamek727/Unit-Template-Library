@@ -2,7 +2,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO adamek727/Unit-Template-Library
     REF "v${VERSION}"
-    SHA512 1b5bf2d7db4ad4a4725ba3576c4eedcba0184f9e12a731885eff92b6264c9fa79af7f6c380a96f362e732982ba9ace84fb8c4aa4439c3c30512be6fb6c251cd7
+    SHA512 da522688b28492d6bde5505dfcfee9498ec5b0d31a96794e55fea674db68718b763374a4db5c8a6d56b1ed4cb449a65eef249f362d1aa71cb6f52a68f223ecfc
     HEAD_REF main
 )
 
