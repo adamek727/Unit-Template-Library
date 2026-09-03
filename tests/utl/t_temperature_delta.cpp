@@ -4,6 +4,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <utility>
 #include <type_traits>
 #include "utl/utl.hpp"
 
@@ -46,6 +47,31 @@ TEST(t_temperature_delta_test, delta_only_arithmetic) {
     EXPECT_DOUBLE_EQ((2.0 * Delta(4)).K(), 8.0);
     EXPECT_DOUBLE_EQ((Delta(4) / 2.0).K(), 2.0);
     EXPECT_DOUBLE_EQ((-Delta(4)).K(), -4.0);
+}
+
+template<class Lhs, class Rhs, class = void>
+struct can_add_assign : std::false_type {};
+
+template<class Lhs, class Rhs>
+struct can_add_assign<Lhs, Rhs, std::void_t<decltype(std::declval<Lhs &>() += std::declval<const Rhs &>())>> : std::true_type {};
+
+template<class Lhs, class Rhs, class = void>
+struct can_sub_assign : std::false_type {};
+
+template<class Lhs, class Rhs>
+struct can_sub_assign<Lhs, Rhs, std::void_t<decltype(std::declval<Lhs &>() -= std::declval<const Rhs &>())>> : std::true_type {};
+
+TEST(t_temperature_delta_test, compound_assign_is_affine) {
+    static_assert(can_add_assign<Temp, Delta>::value, "Temp += Delta must compile");
+    static_assert(can_sub_assign<Temp, Delta>::value, "Temp -= Delta must compile");
+    static_assert(!can_add_assign<Temp, Temp>::value, "Temp += Temp must not compile");
+    static_assert(!can_sub_assign<Temp, Temp>::value, "Temp -= Temp must not compile");
+    auto t = Temp(20, Temp::TYPE::CELSIUS);
+    static_assert(std::is_same_v<decltype(t += Delta(1)), Temp &>, "Temp += Delta must return the temperature");
+    t += Delta(5);
+    EXPECT_DOUBLE_EQ(t.degC(), 25.0);
+    t -= Delta(10);
+    EXPECT_DOUBLE_EQ(t.degC(), 15.0);
 }
 
 int main(int argc, char **argv) {
