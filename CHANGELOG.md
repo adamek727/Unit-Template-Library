@@ -4,6 +4,9 @@
 
 ### Fixed
 
+- The Planck constant is now spelled correctly: `planck_constant_f` /
+  `planck_constant_d`. The misspelled `planc_constant_f` / `planc_constant_d`
+  remain as `[[deprecated]]` aliases.
 - `ThermodynamicTemperature` compound assignment is now affine: `+=` and `-=`
   take a `TemperatureDelta` and return the temperature, while the overloads
   taking another temperature are deleted. Before, both went through `BaseUnit`

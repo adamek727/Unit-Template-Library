@@ -1573,8 +1573,11 @@ namespace utl {
     constexpr ElectricCharge<float> elementary_charge_f(static_cast<float>(ELEMENTARY_CHARGE_VALUE));
     constexpr ElectricCharge<double> elementary_charge_d(ELEMENTARY_CHARGE_VALUE);
 
-    constexpr MulBaseUnits<float, Energy<float>, Time<float>> planc_constant_f(static_cast<float>(PLANCK_CONSTANT_VALUE));
-    constexpr MulBaseUnits<double, Energy<double>, Time<double>> planc_constant_d(PLANCK_CONSTANT_VALUE);
+    constexpr MulBaseUnits<float, Energy<float>, Time<float>> planck_constant_f(static_cast<float>(PLANCK_CONSTANT_VALUE));
+    constexpr MulBaseUnits<double, Energy<double>, Time<double>> planck_constant_d(PLANCK_CONSTANT_VALUE);
+
+    [[deprecated("use planck_constant_f")]] constexpr auto planc_constant_f = planck_constant_f;
+    [[deprecated("use planck_constant_d")]] constexpr auto planc_constant_d = planck_constant_d;
 
     constexpr DivBaseUnits<float, Energy<float>, ThermodynamicTemperature<float>> boltzmann_constant_f(static_cast<float>(BOLTZMANN_CONSTANT_VALUE));
     constexpr DivBaseUnits<double, Energy<double>, ThermodynamicTemperature<double>> boltzmann_constant_d(
