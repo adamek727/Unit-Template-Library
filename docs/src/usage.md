@@ -104,7 +104,7 @@ variants:
 | `speed_of_light_f` / `_d` | Velocity |
 | `cesium_hyperfine_freq_f` / `_d` | Frequency |
 | `elementary_charge_f` / `_d` | ElectricCharge |
-| `planc_constant_f` / `_d` | Energy × Time |
+| `planck_constant_f` / `_d` | Energy × Time |
 | `boltzmann_constant_f` / `_d` | Energy / Temperature |
 | `avogadro_constant_f` / `_d` | 1 / AmountOfSubstance |
 | `luminous_efficacy_f` / `_d` | LuminousFlux / Power |

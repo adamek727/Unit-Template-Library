@@ -26,6 +26,9 @@ static_assert(120.0_km > 500.0_m);
 static_assert((2.0_h).s() == 7200.0);
 static_assert(50.0_kmph == Velocity<double>(50.0 / 3.6));
 
+static_assert(planck_constant_d.value() == PLANCK_CONSTANT_VALUE);
+static_assert(planck_constant_f.value() == static_cast<float>(PLANCK_CONSTANT_VALUE));
+
 static_assert(speed_of_light_d.mps() == SPEED_OF_LIGHT_IN_VACUUM_VALUE);
 
 constexpr auto rest_energy = Mass<double>(1) * speed_of_light_d * speed_of_light_d;
