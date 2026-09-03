@@ -101,7 +101,21 @@ namespace utl {
             return ThermodynamicTemperature(K() - delta.K());
         }
 
+        constexpr auto operator+=(const TemperatureDelta<T> &delta) -> ThermodynamicTemperature & {
+            this->set_value(K() + delta.K());
+            return *this;
+        }
+
+        constexpr auto operator-=(const TemperatureDelta<T> &delta) -> ThermodynamicTemperature & {
+            this->set_value(K() - delta.K());
+            return *this;
+        }
+
         auto operator+(const ThermodynamicTemperature &other) const -> ThermodynamicTemperature = delete;
+
+        auto operator+=(const ThermodynamicTemperature &other) -> ThermodynamicTemperature & = delete;
+
+        auto operator-=(const ThermodynamicTemperature &other) -> ThermodynamicTemperature & = delete;
     };
 
     template<typename T>
